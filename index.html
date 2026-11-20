@@ -1,15 +1,27 @@
 <!doctype html>
-<html lang="pt-BR" data-palette="papel">
+<html lang="pt-BR" data-palette="terra">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#E9E3D6">
+<meta name="theme-color" content="#E8E0D1">
 <meta name="color-scheme" content="light">
-<meta name="description" content="Laudo de campo sobre racismo ambiental no Brasil: em 3 perguntas, observe como desigualdade social e risco ambiental se cruzam no território.">
+<meta name="description" content="Laudo de campo sobre racismo ambiental no Brasil: em 10 perguntas e em um mapa de casos reais, observe como desigualdade social e risco ambiental se cruzam no território.">
 <title>Racismo Ambiental — laudo de campo | Made by Maths</title>
 <style>/* Dez paletas de leitura e o seletor de aparência.
    As cores são declaradas uma vez nas hospedeiras; o CSS do quiz deriva
    de --bg, --panel, --paper, --ink etc. com fallback para uso isolado. */
+:root[data-palette="terra"]{
+  --bg:#E8E0D1;--paper-2:#D6C9B2;--wash:#F2ECE1;
+  --ink:#292929;--ink-2:#49352B;--muted:#6A5B4C;
+  --line:rgba(73,53,43,.26);
+  --water:#244D38;--hazard:#A94F35;--hazard-ink:#8A3D26;--ochre:#D9A441
+}
+:root[data-palette="alerta"]{
+  --bg:#F1EBDD;--paper-2:#E1DAC9;--wash:#F8F3E8;
+  --ink:#30312D;--ink-2:#4A4B45;--muted:#5F6058;
+  --line:rgba(48,49,45,.24);
+  --water:#526447;--hazard:#B65335;--hazard-ink:#8F3D24;--ochre:#C99532
+}
 :root[data-palette="papel"]{
   --bg:#E9E3D6;--paper-2:#DDD3C1;--wash:#F3EEE3;
   --ink:#14140F;--ink-2:#3A382E;--muted:#5F5A4D;
@@ -125,10 +137,18 @@
 .palette-swatch{position:relative;display:grid;grid-template-columns:1.4fr 1fr 1fr .7fr;height:21px;border:1px solid var(--muted)}
 .palette-swatch i{display:block}
 .palette-option[aria-pressed="true"] .palette-swatch::after{
-  content:"✓";position:absolute;top:2px;right:2px;width:14px;height:14px;
+  content:"?";position:absolute;top:2px;right:2px;width:14px;height:14px;
   display:grid;place-items:center;background:var(--bg);border:1px solid var(--ink);
   color:var(--ink);font:9px/1 var(--mono)
 }
+[data-palette-option="terra"] .palette-swatch i:nth-child(1){background:#E8E0D1}
+[data-palette-option="terra"] .palette-swatch i:nth-child(2){background:#292929}
+[data-palette-option="terra"] .palette-swatch i:nth-child(3){background:#244D38}
+[data-palette-option="terra"] .palette-swatch i:nth-child(4){background:#A94F35}
+[data-palette-option="alerta"] .palette-swatch i:nth-child(1){background:#F1EBDD}
+[data-palette-option="alerta"] .palette-swatch i:nth-child(2){background:#30312D}
+[data-palette-option="alerta"] .palette-swatch i:nth-child(3){background:#526447}
+[data-palette-option="alerta"] .palette-swatch i:nth-child(4){background:#B65335}
 [data-palette-option="papel"] .palette-swatch i:nth-child(1){background:#E9E3D6}
 [data-palette-option="papel"] .palette-swatch i:nth-child(2){background:#14140F}
 [data-palette-option="papel"] .palette-swatch i:nth-child(3){background:#1E4B5A}
@@ -188,10 +208,10 @@
 }
 .palette-option-wide .palette-swatch{flex:1 1 auto;width:auto}
 .palette-option-wide[aria-pressed="true"]{padding:5px 6px}
-.palette-swatch-custom i:nth-child(1){background:var(--custom-bg,#E9E3D6)}
-.palette-swatch-custom i:nth-child(2){background:var(--custom-ink,#14140F)}
-.palette-swatch-custom i:nth-child(3){background:var(--custom-water,#1E4B5A)}
-.palette-swatch-custom i:nth-child(4){background:var(--custom-hazard,#B33A12)}
+.palette-swatch-custom i:nth-child(1){background:var(--custom-bg,#E8E0D1)}
+.palette-swatch-custom i:nth-child(2){background:var(--custom-ink,#292929)}
+.palette-swatch-custom i:nth-child(3){background:var(--custom-water,#244D38)}
+.palette-swatch-custom i:nth-child(4){background:var(--custom-hazard,#A94F35)}
 .palette-custom{margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
 .palette-custom summary{
   display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:32px;
@@ -200,7 +220,7 @@
 }
 .palette-custom summary::-webkit-details-marker{display:none}
 .palette-custom summary::after{content:"+";font-size:14px;line-height:1;color:var(--muted)}
-.palette-custom[open] summary::after{content:"−"}
+.palette-custom[open] summary::after{content:"-"}
 .palette-custom summary:focus-visible{outline:3px solid var(--hazard);outline-offset:3px}
 .palette-color{
   display:flex;align-items:center;gap:8px;min-height:40px;
@@ -306,11 +326,204 @@
 @media(max-width:560px){
   .hero-layer-reset{margin-left:0}
 }
+/* Mapa da desigualdade ambiental: seção, pinos, cartão e lista textual. */
+.map-sr{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0
+}
+.map-section{padding:64px 0 24px;border-top:1px solid var(--line)}
+.map-inner{width:min(var(--map-max,1160px),calc(100% - 40px));margin-inline:auto}
+.map-section .section-head h2{max-width:760px}
+.map-layout{
+  display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);
+  gap:28px;margin-top:30px;align-items:start
+}
+.map-panel{min-width:0}
+.map-toolbar{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:12px;margin-bottom:10px;flex-wrap:wrap
+}
+.map-instruction{
+  max-width:360px;margin:0;color:var(--muted);font-family:var(--mono);
+  font-size:10px;line-height:1.55
+}
+.map-controls{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.map-control{
+  min-width:38px;min-height:38px;padding:0 8px;border:1px solid var(--muted);
+  background:var(--wash);color:var(--ink);font:600 13px/1 var(--mono);
+  cursor:pointer;-webkit-tap-highlight-color:transparent
+}
+.map-control:hover{border-color:var(--ink)}
+.map-control:focus-visible{outline:3px solid var(--hazard);outline-offset:2px}
+.map-control[disabled]{opacity:.42;cursor:not-allowed}
+.map-control--reset{font-size:10px;letter-spacing:.02em}
+.map-zoom-level{
+  min-width:32px;color:var(--muted);font-family:var(--mono);font-size:10px;
+  text-align:center;font-variant-numeric:tabular-nums
+}
+.map-viewport{
+  position:relative;width:100%;max-width:560px;aspect-ratio:1/1;margin-inline:auto;
+  overflow:hidden;border:1px solid var(--line);background:var(--wash);
+  cursor:grab;touch-action:none;overscroll-behavior:contain
+}
+.map-viewport:focus-visible{outline:3px solid var(--hazard);outline-offset:3px}
+.map-viewport.is-dragging{cursor:grabbing}
+.map-canvas{position:absolute;inset:8px;transform-origin:center center;will-change:transform}
+.map-canvas.is-animating{transition:transform .22s cubic-bezier(.2,.7,.2,1)}
+.map-outline{position:absolute;inset:0;display:block;width:100%;height:100%}
+.map-grid{color:var(--line)}
+.map-shape{
+  fill:var(--paper-2);stroke:var(--ink);stroke-width:1.1;
+  stroke-linejoin:round;vector-effect:non-scaling-stroke
+}
+.map-pins{position:absolute;inset:0}
+.map-pin{
+  position:absolute;left:calc(var(--pin-x) + var(--nudge-x) * var(--nudge-scale,1));
+  top:calc(var(--pin-y) + var(--nudge-y) * var(--nudge-scale,1));
+  width:22px;height:22px;min-width:22px;min-height:22px;padding:0;
+  display:grid;place-items:center;border:1px solid var(--ink);border-radius:2px;
+  font:700 9.5px/1 var(--mono);letter-spacing:0;cursor:pointer;
+  transform:translate(-50%,-50%) scale(var(--pin-scale,1));
+  -webkit-tap-highlight-color:transparent;z-index:1;
+  transition:box-shadow .15s,outline-color .15s
+}
+.map-pin::before{content:"";position:absolute;inset:-6px;border-radius:inherit}
+.map-pin:hover,.map-pin:focus-visible{z-index:6}
+.map-pin:focus-visible{outline:3px solid var(--hazard);outline-offset:3px}
+.map-pin[aria-expanded="true"]{box-shadow:0 0 0 3px var(--ochre,var(--hazard))}
+.map-pin--barragens{background:var(--hazard);border-color:var(--hazard-ink,var(--ink));color:#fff;border-radius:50%}
+.map-pin--industria{background:var(--ink-2);border-color:var(--ink);color:var(--bg);border-radius:2px}
+.map-pin--energia{
+  width:20px;height:20px;min-width:20px;min-height:20px;
+  background:var(--water);border-color:var(--water);color:var(--bg);border-radius:2px;
+  transform:translate(-50%,-50%) rotate(45deg) scale(var(--pin-scale,1))
+}
+.map-pin--energia>span{display:block;transform:rotate(-45deg)}
+.map-pin--clima{
+  background:var(--wash);border:2px solid var(--hazard);border-radius:50%;
+  color:var(--hazard-ink,var(--hazard))
+}
+:root[data-palette="noite"] .map-pin--barragens{color:#151A1B}
+.map-caption{
+  max-width:560px;margin:8px auto 0;color:var(--muted);font-family:var(--mono);
+  font-size:9px;line-height:1.6;letter-spacing:.02em
+}
+.map-legend{
+  display:flex;flex-wrap:wrap;gap:8px 18px;max-width:560px;margin:12px auto 0;padding:0;
+  list-style:none;color:var(--muted);font-size:11px;line-height:1.4
+}
+.map-legend li{display:flex;align-items:center;gap:7px}
+.map-key{
+  width:20px;height:20px;display:grid;place-items:center;flex:none;
+  border:1px solid var(--ink);border-radius:2px;background:var(--ink);
+  color:var(--bg);font:700 9px/1 var(--mono)
+}
+.map-key--barragens{background:var(--hazard);border-color:var(--hazard-ink,var(--ink));color:#fff;border-radius:50%}
+.map-key--industria{background:var(--ink-2);color:var(--bg)}
+.map-key--energia{background:var(--water);border-color:var(--water);color:var(--bg);transform:rotate(45deg)}
+.map-key--energia>span{display:block;transform:rotate(-45deg)}
+.map-key--clima{background:var(--wash);border:2px solid var(--hazard);color:var(--hazard-ink,var(--hazard));border-radius:50%}
+:root[data-palette="noite"] .map-key--barragens{color:#151A1B}
+.map-card{
+  position:relative;min-height:280px;padding:18px;border:1px solid var(--line);
+  border-top:3px solid var(--ink);background:var(--wash)
+}
+.map-card-empty[hidden],.map-card-content[hidden]{display:none!important}
+.map-card-kicker{
+  margin:0 0 8px;color:var(--hazard-ink,var(--hazard));font-family:var(--mono);
+  font-size:9px;font-weight:600;letter-spacing:.05em;text-transform:uppercase
+}
+.map-card h3{
+  margin:0 0 8px;padding-right:34px;font-family:var(--sans);font-weight:700;
+  font-size:23px;line-height:1.14;letter-spacing:-.02em;color:var(--ink);
+  overflow-wrap:anywhere
+}
+.map-card h3:focus{outline:none}
+.map-card-empty h3{padding-right:0}
+.map-card p{margin:0 0 10px;color:var(--ink-2);font-size:13.5px;line-height:1.62;overflow-wrap:anywhere}
+.map-card-meta{
+  color:var(--muted)!important;font-family:var(--mono);font-size:9.5px!important;
+  letter-spacing:.03em;text-transform:uppercase
+}
+.map-card h4{
+  margin:14px 0 5px;color:var(--ink);font-family:var(--mono);font-size:9.5px;
+  font-weight:600;letter-spacing:.05em;text-transform:uppercase
+}
+.map-card-source{margin-top:14px!important;padding-top:10px;border-top:1px solid var(--line)}
+.map-card-source a{color:var(--water);font-weight:600}
+.map-card-source a:focus-visible{outline:3px solid var(--hazard);outline-offset:3px}
+.map-card-close{
+  position:absolute;top:10px;right:10px;width:36px;height:36px;padding:0;
+  border:1px solid var(--muted);background:transparent;color:var(--ink);
+  font:16px/1 var(--sans);cursor:pointer;-webkit-tap-highlight-color:transparent
+}
+.map-card-close:hover{border-color:var(--ink);background:var(--paper-2)}
+.map-card-close:focus-visible{outline:3px solid var(--hazard);outline-offset:2px}
+.map-card-close::before{content:"";position:absolute;inset:-5px}
+.map-list{margin-top:26px;border-top:1px solid var(--line);padding-top:12px}
+.map-list summary{
+  padding:6px 0;color:var(--ink);font-family:var(--mono);font-size:10px;
+  font-weight:600;letter-spacing:.05em;text-transform:uppercase;cursor:pointer
+}
+.map-list summary:focus-visible{outline:3px solid var(--hazard);outline-offset:3px}
+.map-list ol{display:grid;grid-template-columns:1fr 1fr;gap:20px 32px;margin:12px 0 0;padding-left:22px}
+.map-list li{color:var(--ink-2);font-size:13px;line-height:1.6}
+.map-list li::marker{color:var(--hazard);font-family:var(--mono);font-size:11px}
+.map-list h3{
+  margin:0 0 4px;color:var(--ink);font-family:var(--sans);font-size:17px;
+  line-height:1.2;letter-spacing:-.01em
+}
+.map-list .map-list-meta{
+  margin:0 0 6px;color:var(--muted);font-family:var(--mono);font-size:9px;
+  letter-spacing:.03em;text-transform:uppercase
+}
+.map-list p{margin:0 0 7px}
+.map-list-source a{color:var(--water);font-weight:600}
+.map-list-open{
+  min-height:32px;margin-top:2px;padding:5px 10px;border:1px solid var(--muted);
+  background:transparent;color:var(--ink);font-family:var(--mono);font-size:9.5px;
+  font-weight:600;letter-spacing:.04em;text-transform:uppercase;cursor:pointer
+}
+.map-list-open:hover{border-color:var(--ink);background:var(--paper-2)}
+.map-list-open:focus-visible{outline:3px solid var(--hazard);outline-offset:2px}
+@media(max-width:900px){
+  .map-layout{grid-template-columns:1fr}
+  .map-card{min-height:0}
+  .map-list ol{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .map-inner{width:calc(100% - 28px)}
+  .map-section{padding:40px 0 16px}
+  .map-layout{gap:18px;margin-top:22px}
+  .map-toolbar{gap:8px}
+  .map-instruction{font-size:9.5px}
+  .map-control{min-width:40px;min-height:40px}
+  .map-pin{font-size:10px;--nudge-scale:2.2}
+  .map-pin--energia{width:20px;height:20px;min-width:20px;min-height:20px}
+  .map-card{padding:16px}
+  .map-card h3{font-size:21px}
+  .map-legend{font-size:10.5px;gap:7px 14px}
+}
+@media(prefers-reduced-motion:reduce){
+  .map-canvas.is-animating{transition:none}
+}
+@media(forced-colors:active){
+  .map-shape{fill:Canvas;stroke:CanvasText}
+  .map-pin,.map-key,.map-control,.map-card,.map-card-close,.map-list-open{border-color:CanvasText}
+  .map-pin,.map-key{background:ButtonFace;color:ButtonText}
+  .map-card{background:Canvas}
+  .map-control:focus-visible,.map-pin:focus-visible,.map-card-close:focus-visible,
+  .map-list summary:focus-visible,.map-list-open:focus-visible{outline:3px solid Highlight;outline-offset:3px}
+}
+@media print{
+  .map-section{display:none!important}
+}
+body.is-quiz-focus .map-section{display:none!important}
 :root{
-  --bg:#E9E3D6;--paper-2:#DDD3C1;--wash:#F3EEE3;
-  --ink:#14140F;--ink-2:#3A382E;--muted:#5F5A4D;
-  --line:rgba(20,20,15,.22);
-  --water:#1E4B5A;--hazard:#B33A12;--hazard-ink:#9E2F0B;
+  --bg:#E8E0D1;--paper-2:#D6C9B2;--wash:#F2ECE1;
+  --ink:#292929;--ink-2:#49352B;--muted:#6A5B4C;
+  --line:rgba(73,53,43,.26);
+  --water:#244D38;--hazard:#A94F35;--hazard-ink:#8A3D26;--ochre:#D9A441;
   --sans:"Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,sans-serif;
   --mono:ui-monospace,"Cascadia Mono","SF Mono",Consolas,"Liberation Mono",monospace;
   --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",serif;
@@ -366,7 +579,8 @@ a:focus-visible{outline:3px solid var(--hazard);outline-offset:4px}
 }
 .kicker{
   display:inline-block;margin:0 0 18px;padding:4px 8px;border:1px solid var(--ink);
-  color:var(--ink);font-family:var(--mono);font-size:10px;font-weight:600;
+  background:var(--ochre,transparent);
+  color:#292929;font-family:var(--mono);font-size:10px;font-weight:600;
   letter-spacing:.05em;text-transform:uppercase;line-height:1.2
 }
 .hero h1{
@@ -400,7 +614,7 @@ a:focus-visible{outline:3px solid var(--hazard);outline-offset:4px}
 }
 .strip-item{display:flex;gap:12px;align-items:flex-start;padding:18px 18px 18px 0}
 .strip-item+.strip-item{border-left:1px solid var(--line);padding-left:18px}
-.strip-item b{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--hazard);line-height:1.4}
+.strip-item b{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--hazard-ink,var(--hazard));line-height:1.4}
 .strip-item strong{display:block;font-family:var(--sans);font-size:13px;font-weight:600;margin-bottom:3px;color:var(--ink)}
 .strip-item span{display:block;color:var(--muted);font-size:12.5px;line-height:1.5}
 .context{padding:64px 0 24px}
@@ -416,7 +630,7 @@ a:focus-visible{outline:3px solid var(--hazard);outline-offset:4px}
 }
 .context-card{padding:18px 22px 0 0;border:0;background:none}
 .context-card+.context-card{border-left:1px solid var(--line);padding-left:22px}
-.context-card .num{font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--hazard)}
+.context-card .num{font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--hazard-ink,var(--hazard))}
 .context-card h3{margin:10px 0 8px;font-family:var(--sans);font-weight:700;font-size:20px;line-height:1.15;letter-spacing:-.015em;color:var(--ink)}
 .context-card p{margin:0;color:var(--ink-2);font-size:14px;line-height:1.65}
 .sources{padding:64px 0 56px}
@@ -611,23 +825,23 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
    por #quiz. A paleta é espelhada nos hosts em host-*.css.
    ============================================================ */
 #quiz{
-  --quiz-bg:var(--bg,#E9E3D6);
-  --quiz-panel:var(--panel,#F3EEE3);
-  --quiz-paper:var(--paper,#14140F);
-  --quiz-muted:var(--muted,#5F5A4D);
-  --quiz-lime:var(--lime,#1E4B5A);
-  --quiz-clay:var(--clay,#B33A12);
-  --quiz-good:var(--good,#1E4B5A);
-  --quiz-bad:var(--bad,#9E2F0B);
-  --quiz-line:var(--line,rgba(20,20,15,.22));
+  --quiz-bg:var(--bg,#E8E0D1);
+  --quiz-panel:var(--panel,#F2ECE1);
+  --quiz-paper:var(--paper,#292929);
+  --quiz-muted:var(--muted,#6A5B4C);
+  --quiz-lime:var(--lime,#244D38);
+  --quiz-clay:var(--clay,#A94F35);
+  --quiz-good:var(--good,#244D38);
+  --quiz-bad:var(--bad,#8A3D26);
+  --quiz-line:var(--line,rgba(73,53,43,.26));
   --quiz-serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",serif;
   --quiz-sans:"Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,sans-serif;
   --quiz-mono:ui-monospace,"Cascadia Mono","SF Mono",Consolas,"Liberation Mono",monospace;
-  --quiz-ink:var(--ink,#14140F);
-  --quiz-ink-2:var(--ink-2,#3A382E);
-  --quiz-paper-2:var(--paper-2,#DDD3C1);
-  --quiz-hazard:var(--hazard,#B33A12);
-  --quiz-water:var(--water,#1E4B5A);
+  --quiz-ink:var(--ink,#292929);
+  --quiz-ink-2:var(--ink-2,#49352B);
+  --quiz-paper-2:var(--paper-2,#D6C9B2);
+  --quiz-hazard:var(--hazard,#A94F35);
+  --quiz-water:var(--water,#244D38);
   box-sizing:border-box;
   width:100%;max-width:100%;
   padding:76px 20px;
@@ -682,6 +896,13 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   35%{transform:scale(1.14);color:var(--quiz-hazard)}
   100%{transform:scale(1)}
 }
+#quiz .quiz-stat-combo strong.is-milestone{animation:quiz-combo .62s cubic-bezier(.2,.8,.2,1)}
+@keyframes quiz-combo{
+  0%{transform:scale(1)}
+  30%{transform:scale(1.32) rotate(-4deg);color:var(--quiz-water)}
+  68%{transform:scale(1.08) rotate(2deg);color:var(--quiz-hazard)}
+  100%{transform:scale(1)}
+}
 #quiz .quiz-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:6}
 #quiz .quiz-result-badge{
   display:inline-block;margin:0 auto 12px;padding:5px 9px;border:2px solid var(--quiz-hazard);
@@ -712,6 +933,36 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
 #quiz .quiz-time{
   margin:0 0 14px;color:var(--quiz-muted);font-family:var(--quiz-mono);font-size:10px;
   font-weight:600;letter-spacing:.05em;text-transform:uppercase
+}
+#quiz .quiz-level{margin:0 auto 20px;width:min(100%,470px);text-align:left}
+#quiz .quiz-level-title{
+  margin:0 0 7px;color:var(--quiz-muted);font-family:var(--quiz-mono);font-size:9px;
+  font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-align:center
+}
+#quiz .quiz-level-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+#quiz .quiz-level-btn{
+  display:grid;gap:3px;place-items:center;min-height:54px;padding:7px 4px;
+  border:1px solid var(--quiz-line);background:transparent;color:var(--quiz-ink);
+  font-family:var(--quiz-sans);font-size:13px;font-weight:600;line-height:1.1;
+  transition:background-color .18s,border-color .18s,color .18s
+}
+#quiz .quiz-level-btn span{
+  font-family:var(--quiz-mono);font-size:8px;font-weight:600;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--quiz-muted);overflow-wrap:anywhere
+}
+#quiz .quiz-level-btn:hover{border-color:var(--quiz-ink)}
+#quiz .quiz-level-btn[aria-pressed="true"]{
+  border-color:var(--quiz-ink);background:var(--quiz-ink);color:var(--quiz-bg)
+}
+#quiz .quiz-level-btn[aria-pressed="true"] span{color:var(--quiz-bg);opacity:.82}
+#quiz .quiz-level-btn:active{transform:translateY(1px)}
+#quiz .quiz-level-note{
+  margin:8px 0 0;color:var(--quiz-muted);font-size:11.5px;line-height:1.5;text-align:center
+}
+#quiz .quiz-level-chip{font-style:normal;font-weight:600;color:var(--quiz-ink)}
+#quiz .quiz-result-points{
+  margin:10px auto 0;color:var(--quiz-muted);font-family:var(--quiz-mono);font-size:10px;
+  letter-spacing:.04em;text-transform:uppercase
 }
 #quiz button{font:inherit;cursor:pointer;color:inherit}
 #quiz button,#quiz a,#quiz [role="button"]{touch-action:manipulation}
@@ -898,17 +1149,20 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   color:var(--quiz-ink-2);font-family:var(--quiz-mono);font-size:13px;line-height:1;
   background:var(--quiz-panel)
 }
-#quiz .quiz-answer.tone-teal,#quiz .quiz-answer.tone-violet,#quiz .quiz-answer.tone-amber{
+#quiz .quiz-answer.tone-a,#quiz .quiz-answer.tone-b,#quiz .quiz-answer.tone-c{
   --quiz-tone:var(--quiz-ink);--quiz-tone-bg:var(--quiz-paper-2);
   border-color:var(--quiz-line);background-color:transparent
 }
 #quiz .quiz-answer[class*="tone-"] .quiz-letter{border-color:var(--quiz-line);color:var(--quiz-ink-2)}
+#quiz .quiz-answer.tone-a .quiz-letter{background:#244D38;border-color:#244D38;color:#fff}
+#quiz .quiz-answer.tone-b .quiz-letter{background:#A94F35;border-color:#A94F35;color:#fff}
+#quiz .quiz-answer.tone-c .quiz-letter{background:#D9A441;border-color:#D9A441;color:#292929}
 #quiz .quiz-answer[class*="tone-"]:hover:not(:disabled){border-color:var(--quiz-line);background-color:var(--quiz-paper-2);transform:translateX(2px)}
 #quiz .quiz-answer[class*="tone-"]:active:not(:disabled){border-color:var(--quiz-line);background-color:var(--quiz-paper-2);transform:translateX(1px)}
 #quiz .quiz-answer.correct{border-color:var(--quiz-line);background-color:rgba(30,75,90,.08);background-color:color-mix(in srgb,var(--quiz-good) 12%,transparent);box-shadow:inset 4px 0 0 var(--quiz-good)}
 #quiz .quiz-answer.wrong{border-color:var(--quiz-line);background-color:rgba(158,47,11,.07);background-color:color-mix(in srgb,var(--quiz-bad) 10%,transparent);box-shadow:inset 4px 0 0 var(--quiz-bad)}
-#quiz .quiz-answer.correct .quiz-letter{border-color:var(--quiz-good);color:var(--quiz-good)}
-#quiz .quiz-answer.wrong .quiz-letter{border-color:var(--quiz-bad);color:var(--quiz-bad)}
+#quiz .quiz-answer.correct .quiz-letter{outline:2px solid var(--quiz-good);outline-offset:2px}
+#quiz .quiz-answer.wrong .quiz-letter{outline:2px solid var(--quiz-bad);outline-offset:2px}
 #quiz .quiz-answer:disabled{cursor:default;opacity:1}
 #quiz .quiz-mark{
   grid-column:1/-1;margin-top:2px;font-family:var(--quiz-mono);font-size:10px;
@@ -1059,6 +1313,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
 }
 @media (max-width:340px){
   #quiz .quiz-resultcell span{font-size:9px;letter-spacing:0}
+  #quiz .quiz-level-btn span{font-size:7px;letter-spacing:.02em}
 }
 @media (forced-colors:active){
   #quiz .quiz-panel,#quiz .quiz-answer,#quiz .quiz-review-item,#quiz .quiz-resultcell,#quiz .quiz-feedback,#quiz .quiz-window,#quiz .quiz-noscript,#quiz .quiz-session,#quiz .quiz-hand-face,#quiz .quiz-deck-card{border-color:CanvasText}
@@ -1178,6 +1433,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     <div class="head-end">
       <nav class="site-nav" aria-label="Navegação principal">
         <a href="#contexto">Contexto</a>
+        <a href="#mapa">Mapa</a>
         <a href="#quiz">Quiz</a>
         <a href="#fontes">Fontes</a>
       </nav>
@@ -1189,7 +1445,15 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   <div class="palette-panel" id="palette-panel" hidden>
     <p class="palette-title" id="palette-title">Paleta de leitura</p>
     <div class="palette-grid" role="group" aria-labelledby="palette-title">
-      <button type="button" class="palette-option" data-palette-option="papel" aria-pressed="true">
+      <button type="button" class="palette-option" data-palette-option="terra" aria-pressed="true">
+        <span class="palette-swatch" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>Terra e Resistência</span>
+      </button>
+      <button type="button" class="palette-option" data-palette-option="alerta" aria-pressed="false">
+        <span class="palette-swatch" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>Alerta e Justiça Ambiental</span>
+      </button>
+      <button type="button" class="palette-option" data-palette-option="papel" aria-pressed="false">
         <span class="palette-swatch" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
         <span>Papel</span>
       </button>
@@ -1245,28 +1509,28 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       <div class="palette-colors">
         <label class="palette-color" for="custom-bg">
           <span>Fundo</span>
-          <input type="color" id="custom-bg" data-custom-color="bg" value="#E9E3D6">
-          <span class="palette-hex" data-custom-value="bg">#E9E3D6</span>
+          <input type="color" id="custom-bg" data-custom-color="bg" value="#E8E0D1">
+          <span class="palette-hex" data-custom-value="bg">#E8E0D1</span>
         </label>
         <label class="palette-color" for="custom-paper2">
           <span>Papel 2</span>
-          <input type="color" id="custom-paper2" data-custom-color="paper2" value="#DDD3C1">
-          <span class="palette-hex" data-custom-value="paper2">#DDD3C1</span>
+          <input type="color" id="custom-paper2" data-custom-color="paper2" value="#D6C9B2">
+          <span class="palette-hex" data-custom-value="paper2">#D6C9B2</span>
         </label>
         <label class="palette-color" for="custom-ink">
           <span>Tinta</span>
-          <input type="color" id="custom-ink" data-custom-color="ink" value="#14140F">
-          <span class="palette-hex" data-custom-value="ink">#14140F</span>
+          <input type="color" id="custom-ink" data-custom-color="ink" value="#292929">
+          <span class="palette-hex" data-custom-value="ink">#292929</span>
         </label>
         <label class="palette-color" for="custom-water">
           <span>Água</span>
-          <input type="color" id="custom-water" data-custom-color="water" value="#1E4B5A">
-          <span class="palette-hex" data-custom-value="water">#1E4B5A</span>
+          <input type="color" id="custom-water" data-custom-color="water" value="#244D38">
+          <span class="palette-hex" data-custom-value="water">#244D38</span>
         </label>
         <label class="palette-color" for="custom-hazard">
           <span>Risco</span>
-          <input type="color" id="custom-hazard" data-custom-color="hazard" value="#B33A12">
-          <span class="palette-hex" data-custom-value="hazard">#B33A12</span>
+          <input type="color" id="custom-hazard" data-custom-color="hazard" value="#A94F35">
+          <span class="palette-hex" data-custom-value="hazard">#A94F35</span>
         </label>
       </div>
       <p class="palette-contrast" id="palette-contrast" role="status"></p>
@@ -1300,9 +1564,9 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       <div class="hero-actions">
         <a class="btn" id="cta-start" href="#quiz">Começar o quiz</a>
         <ul class="hero-data" aria-label="Resumo do percurso">
-          <li><strong>3</strong><span>perguntas</span></li>
+          <li><strong>10</strong><span>perguntas</span></li>
           <li><strong>35</strong><span>situações</span></li>
-          <li><strong>2 min</strong><span>leitura</span></li>
+          <li><strong>8 min</strong><span>percurso</span></li>
         </ul>
       </div>
     </div>
@@ -1574,7 +1838,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     </div>
   </section>
   <div class="wrap strip" aria-label="Como funciona">
-    <div class="strip-item"><b>01</b><div><strong>Sorteio</strong><span>A roleta escolhe três situações entre 35.</span></div></div>
+    <div class="strip-item"><b>01</b><div><strong>Sorteio</strong><span>A roleta sorteia as situações do percurso.</span></div></div>
     <div class="strip-item"><b>02</b><div><strong>Leitura</strong><span>Cada situação pede uma interpretação.</span></div></div>
     <div class="strip-item"><b>03</b><div><strong>Parecer</strong><span>O resultado reúne o que estava em jogo.</span></div></div>
   </div>
@@ -1602,6 +1866,73 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       </article>
     </div>
   </section>
+<section class="map-section" id="mapa" aria-labelledby="mapa-title">
+  <div class="map-inner">
+  <p class="kicker">Mapa da desigualdade</p>
+  <div class="section-head">
+    <h2 id="mapa-title">Mapa da Desigualdade Ambiental no Brasil</h2>
+    <p>Casos reais mostram como o risco ambiental se distribui de forma desigual. Selecione um ponto para ler o que aconteceu, os impactos e a fonte.</p>
+  </div>
+  <div class="map-layout">
+    <div class="map-panel">
+      <div class="map-toolbar">
+        <p class="map-instruction" id="mapa-instrucao">Arraste para mover. Use os botões para ampliar. Toque em um pino para abrir o caso.</p>
+        <div class="map-controls" role="group" aria-label="Controles de zoom do mapa">
+          <button type="button" class="map-control" data-map-zoom="out" aria-label="Diminuir zoom (−)">−</button>
+          <button type="button" class="map-control" data-map-zoom="in" aria-label="Aumentar zoom (+)">+</button>
+          <button type="button" class="map-control map-control--reset" data-map-zoom="reset" aria-label="Voltar ao tamanho original (1:1)">1:1</button>
+          <span class="map-zoom-level" data-map-zoom-level aria-live="polite">1×</span>
+        </div>
+      </div>
+      <div class="map-viewport" data-map-viewport tabindex="0" role="group"
+        aria-label="Mapa do Brasil com casos de desigualdade ambiental"
+        aria-describedby="mapa-instrucao"
+        aria-keyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight">
+        <div class="map-canvas" data-map-canvas>
+          <svg class="map-outline" viewBox="-4 -4 108 108" aria-hidden="true" focusable="false">
+            <defs>
+              <pattern id="mapa-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M10 0H0V10" fill="none" stroke="currentColor" stroke-width=".12"></path>
+              </pattern>
+            </defs>
+            <rect x="-4" y="-4" width="108" height="108" fill="url(#mapa-grid)" class="map-grid"></rect>
+            <path class="map-shape" d="M52.51 100.00 L51.80 98.55 L52.93 97.33 L51.45 95.59 L49.46 94.17 L46.83 92.53 L45.89 92.60 L43.33 90.62 L41.68 90.90 L45.08 87.40 L47.95 84.91 L49.66 83.87 L51.81 82.45 L51.86 80.41 L50.58 78.93 L49.32 79.42 L49.82 77.94 L50.17 76.42 L50.17 75.02 L49.25 74.55 L48.30 74.96 L47.35 74.85 L47.05 73.86 L46.81 71.52 L46.33 70.75 L44.61 70.06 L43.57 70.56 L40.88 70.07 L41.05 66.59 L40.30 65.16 L41.10 64.63 L40.85 63.17 L41.55 62.05 L42.00 60.03 L41.40 58.43 L40.01 57.71 L39.74 56.70 L40.11 55.22 L35.23 55.12 L34.25 52.13 L34.99 52.09 L34.96 50.98 L34.46 50.24 L34.35 48.75 L32.87 47.99 L31.27 48.02 L30.21 47.27 L28.49 46.77 L27.49 45.81 L24.63 45.39 L21.87 43.09 L22.07 41.37 L21.76 40.39 L22.03 38.47 L18.70 38.90 L17.36 39.86 L15.13 40.90 L14.56 41.68 L13.25 41.73 L11.35 41.52 L9.92 41.96 L8.76 41.66 L8.93 37.77 L6.84 39.28 L4.59 39.21 L3.63 37.85 L1.94 37.70 L2.48 36.60 L1.06 35.04 L0.00 32.73 L0.67 32.26 L0.67 31.18 L2.21 30.44 L1.96 29.05 L2.61 28.16 L2.79 26.96 L5.70 25.22 L7.79 24.73 L8.13 24.34 L10.43 24.46 L11.57 17.43 L11.63 16.32 L11.23 14.85 L10.10 13.92 L10.12 12.06 L11.55 11.63 L12.06 11.90 L12.15 10.92 L10.65 10.65 L10.62 9.05 L15.59 9.10 L16.43 8.22 L17.14 9.03 L17.63 10.55 L18.11 10.23 L19.52 11.59 L21.50 11.42 L21.99 10.64 L23.88 10.04 L24.93 9.62 L25.23 8.53 L27.05 7.80 L26.91 7.26 L24.75 7.04 L24.40 5.43 L24.50 3.71 L23.36 3.05 L23.84 2.81 L25.72 3.14 L27.75 3.78 L28.49 3.17 L30.32 2.77 L33.17 1.81 L34.10 0.84 L33.76 0.11 L35.09 0.00 L35.68 0.59 L35.35 1.72 L36.22 2.10 L36.81 3.30 L36.10 4.20 L35.69 6.38 L36.35 7.68 L36.53 8.86 L38.10 10.07 L39.35 10.19 L39.63 9.69 L40.44 9.58 L41.59 9.13 L42.42 8.45 L43.83 8.67 L44.44 8.57 L45.83 8.78 L46.06 8.26 L45.63 7.75 L45.89 7.01 L46.91 7.24 L48.12 6.97 L49.58 7.52 L50.69 8.05 L51.48 7.35 L52.05 7.46 L52.39 8.18 L53.61 8.00 L54.59 7.02 L55.37 5.14 L56.88 2.79 L57.75 2.67 L58.38 4.09 L59.81 8.57 L61.17 8.99 L61.24 10.76 L59.32 12.87 L60.11 13.64 L64.62 14.05 L64.71 16.62 L66.64 14.93 L69.85 15.86 L74.08 17.42 L75.32 18.92 L74.91 20.34 L77.87 19.55 L82.82 20.91 L86.63 20.81 L90.40 22.93 L93.65 25.80 L95.61 26.54 L97.79 26.64 L98.71 27.45 L99.58 30.71 L100.00 32.27 L98.99 36.50 L97.69 38.18 L94.10 41.74 L92.48 44.64 L90.59 46.86 L89.95 46.91 L89.24 48.80 L89.42 53.60 L88.71 57.55 L88.44 59.24 L87.64 60.25 L87.18 63.68 L84.60 67.03 L84.17 69.67 L82.11 70.78 L81.51 72.32 L78.74 72.32 L74.74 73.30 L72.94 74.44 L70.09 75.19 L67.09 77.23 L64.94 79.77 L64.56 81.69 L64.99 83.10 L64.51 85.69 L63.93 86.94 L62.15 88.35 L59.33 92.86 L57.09 94.90 L55.36 96.10 L54.19 98.53 Z"></path>
+          </svg>
+          <div class="map-pins" data-map-pins></div>
+        </div>
+      </div>
+      <p class="map-caption">Contorno: Natural Earth 1:110m, domínio público. Posições aproximadas; pequenos deslocamentos facilitam a leitura.</p>
+      <ul class="map-legend" aria-label="Legenda do mapa">
+        <li><span class="map-key map-key--barragens" aria-hidden="true">B</span>Barragens e mineração</li>
+        <li><span class="map-key map-key--industria" aria-hidden="true">I</span>Indústria e resíduos</li>
+        <li><span class="map-key map-key--energia" aria-hidden="true"><span>E</span></span>Energia e território</li>
+        <li><span class="map-key map-key--clima" aria-hidden="true">C</span>Clima e desastres</li>
+      </ul>
+    </div>
+    <aside class="map-card" id="mapa-card" data-map-card aria-label="Detalhes do caso selecionado">
+      <div class="map-card-empty" data-map-empty>
+        <p class="map-card-kicker">Leitura do mapa</p>
+        <h3 id="mapa-card-title">Selecione um ponto</h3>
+        <p>Cada pino abre um caso documentado, com o problema, os impactos e a fonte. A lista completa também está disponível em texto.</p>
+      </div>
+      <div class="map-card-content" data-map-content hidden>
+        <button type="button" class="map-card-close" data-map-close aria-label="Fechar detalhes do caso">×</button>
+        <p class="map-card-kicker" data-map-evidence></p>
+        <h3 data-map-title tabindex="-1"></h3>
+        <p class="map-card-meta" data-map-meta></p>
+        <p class="map-card-text" data-map-description></p>
+        <h4>Impactos</h4>
+        <p class="map-card-text" data-map-impacts></p>
+        <p class="map-card-source">Fonte: <a data-map-source></a></p>
+      </div>
+    </aside>
+  </div>
+  <details class="map-list">
+    <summary>Ver todos os casos em texto</summary>
+    <ol data-map-list></ol>
+  </details>
+  </div>
+</section>
 <section id="quiz" aria-labelledby="quiz-title">
 
 
@@ -1636,7 +1967,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     </div>
 
     <div class="quiz-session" id="quiz-session" role="group" aria-label="Cartas da sessão">
-      <div class="quiz-session-head"><span>Sua mão</span><span id="quiz-session-status" role="status" aria-live="polite">3 cartas por sessão</span></div>
+      <div class="quiz-session-head"><span>Sua mão · <em class="quiz-level-chip" id="quiz-level-chip">Médio</em></span><span id="quiz-session-status" role="status" aria-live="polite">3 cartas por rodada</span></div>
       <div class="quiz-hand" id="quiz-hand" role="list" aria-label="Cartas sorteadas para esta sessão">
         <div class="quiz-hand-card" id="quiz-hand-card-0" role="listitem" aria-label="Carta 1 de 3: ainda não sorteada">
           <div class="quiz-hand-face" aria-hidden="true">
@@ -1661,9 +1992,18 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
 
     <div class="quiz-screen quiz-screen-center active" id="quiz-welcome">
       <div class="quiz-eyebrow">Antes de começar</div>
-      <h3>Três perguntas. <br>Trinta e cinco situações.</h3>
-      <p class="quiz-time" id="quiz-time">3 perguntas / 2 minutos</p>
+      <h3>Dez perguntas. <br>Trinta e cinco situações.</h3>
+      <p class="quiz-time" id="quiz-time">10 perguntas / 8 minutos</p>
       <p class="quiz-sub">A roleta define o percurso. Leia cada situação, escolha a interpretação mais consistente e veja o que ela revela sobre território, raça e risco.</p>
+      <div class="quiz-level" role="group" aria-labelledby="quiz-level-title">
+        <p class="quiz-level-title" id="quiz-level-title">Dificuldade</p>
+        <div class="quiz-level-options">
+          <button type="button" class="quiz-level-btn" data-level="facil" aria-pressed="false"><b>Fácil</b><span>Conceitos</span></button>
+          <button type="button" class="quiz-level-btn" data-level="medio" aria-pressed="true"><b>Médio</b><span>Interpretação</span></button>
+          <button type="button" class="quiz-level-btn" data-level="dificil" aria-pressed="false"><b>Difícil</b><span>Estrutura</span></button>
+        </div>
+        <p class="quiz-level-note" id="quiz-level-note" role="status">Situações reais que pedem análise de consequências.</p>
+      </div>
       <button type="button" class="quiz-primary" id="quiz-start" aria-describedby="quiz-time">Começar</button>
       <p class="quiz-motion-note" id="quiz-motion-note" hidden>Giro econômico ativo. <button type="button" class="quiz-textbtn" id="quiz-motion-welcome">Ativar giro completo</button></p>
     </div>
@@ -1677,7 +2017,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
         <span class="quiz-deck-label" id="quiz-deck-label">35 cartas</span>
       </div>
       <div class="quiz-roulette" role="group" aria-label="Roleta de sorteio das questões">
-        <p class="quiz-reel-label" aria-hidden="true">35 questões · 3 sorteadas</p>
+        <p class="quiz-reel-label" aria-hidden="true">35 questões · 10 sorteadas</p>
         <div class="quiz-pointer" aria-hidden="true"></div>
         <div class="quiz-window">
           <div class="quiz-track" id="quiz-track" aria-hidden="true"></div>
@@ -1704,8 +2044,8 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
 
     <div class="quiz-screen quiz-screen-center" id="quiz-result">
       <div class="quiz-eyebrow">Leitura concluída</div>
-      <p class="quiz-result-badge" id="quiz-result-badge" hidden>Sessão perfeita · 3 de 3</p>
-      <div class="quiz-scorebig" id="quiz-final-score">0/3</div>
+      <p class="quiz-result-badge" id="quiz-result-badge" hidden>Sessão perfeita · 10 de 10</p>
+      <div class="quiz-scorebig" id="quiz-final-score">0/10</div>
       <h3 id="quiz-result-title" tabindex="-1">Parecer da sessão.</h3>
       <div class="quiz-resultgrid">
         <div class="quiz-resultcell"><strong id="quiz-final-hits">0</strong><span>Acertos</span></div>
@@ -1713,6 +2053,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
         <div class="quiz-resultcell"><strong id="quiz-final-pct">0%</strong><span>Aproveitamento</span></div>
       </div>
       <p class="quiz-result-copy" id="quiz-result-message"></p>
+      <p class="quiz-result-points" id="quiz-result-points"></p>
       <div class="quiz-review" id="quiz-review" role="region" aria-label="Conferência das respostas" tabindex="0"></div>
       <div class="quiz-again-row">
         <button type="button" class="quiz-primary" id="quiz-again">Jogar novamente</button>
@@ -1731,48 +2072,67 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   if (!root) return;
 
   var Q = [
-    {"id":1,"topic":"Conceito","prompt":"Duas comunidades convivem com atividades industriais semelhantes. Em uma delas, formada majoritariamente por famílias negras e de baixa renda, os moradores relatam mais problemas de saúde e pouca fiscalização. O que precisa ser investigado para compreender se há racismo ambiental?","answers":["Como os riscos, a fiscalização e a proteção são distribuídos e quais decisões históricas produziram essa diferença.","Se as duas comunidades possuem exatamente o mesmo número de moradores e a mesma extensão territorial.","Se os moradores conhecem os procedimentos técnicos usados pela indústria para controlar suas emissões."],"correct":0,"explanation":"A questão central é a distribuição desigual dos danos e da proteção, junto às relações de poder que moldam decisões públicas e privadas. O conceito exige olhar para história, raça, território, participação e acesso a direitos — não apenas para a presença de uma indústria."},
-    {"id":2,"topic":"História","prompt":"Ao estudar protestos de comunidades negras contra depósitos de resíduos tóxicos nos Estados Unidos, nos anos 1980, uma turma percebe que o debate ultrapassa a poluição. Qual contribuição histórica essas mobilizações trouxeram?","answers":["Defenderam que conflitos ambientais fossem tratados apenas como problemas técnicos, separados das desigualdades sociais.","Evidenciaram a relação entre discriminação racial, localização de riscos ambientais e poder de influenciar decisões.","Propuseram que a responsabilidade por contaminações fosse transferida integralmente aos moradores dos territórios afetados."],"correct":1,"explanation":"Essas mobilizações ajudaram a consolidar a ideia de que os riscos ambientais não são distribuídos de forma neutra. A luta conectou racismo, território, saúde, participação política e justiça ambiental."},
-    {"id":3,"topic":"Racismo estrutural","prompt":"Uma prefeitura afirma aplicar os mesmos critérios em todos os bairros. Mesmo assim, áreas periféricas seguem sem drenagem, arborização e coleta adequada. Qual análise é mais cuidadosa?","answers":["Comparar apenas os valores totais investidos em cada região, sem considerar a população atendida ou as carências acumuladas.","A desigualdade pode ser atribuída às escolhas individuais, mesmo quando os bairros partem de condições muito diferentes.","Critérios aparentemente iguais podem manter desigualdades quando ignoram necessidades e desvantagens históricas."],"correct":2,"explanation":"Políticas aparentemente neutras podem reproduzir desigualdades se partirem de condições iniciais muito diferentes. É necessário observar quem recebe investimento, quem continua exposto e se a política corrige ou perpetua injustiças."},
-    {"id":4,"topic":"Povos indígenas e quilombolas","prompt":"Uma obra promete empregos, mas ameaça áreas de uso tradicional de uma comunidade quilombola. Por que uma avaliação baseada apenas em indenização financeira pode ser insuficiente?","answers":["Porque o território reúne memória, identidade, sustento, cultura e formas coletivas de organização que não se reduzem ao preço da terra.","Porque os impactos culturais só devem ser considerados depois que a obra estiver concluída e seus resultados forem conhecidos.","Porque o valor de mercado da área permite comparar com precisão os vínculos culturais, sociais e ambientais mantidos pela comunidade."],"correct":0,"explanation":"Território não é apenas um bem econômico. Ele pode sustentar ancestralidade, práticas culturais, autonomia, alimentação e vínculos comunitários. Uma avaliação justa precisa reconhecer essas dimensões e respeitar direitos coletivos."},
-    {"id":5,"topic":"Saneamento básico","prompt":"Em uma cidade, bairros valorizados recebem obras de esgoto e drenagem antes de comunidades que esperam há décadas. Que pergunta ajuda a revelar a dimensão política desse problema?","answers":["Como executar apenas obras emergenciais para reduzir os impactos imediatos, sem discutir por que alguns territórios esperam há décadas por atendimento?","Quais critérios orientam a distribuição de recursos e por que certos territórios continuam esperando por direitos básicos?","Como comparar o custo das obras, o crescimento dos bairros e a capacidade de cada região de atrair novos investimentos?"],"correct":1,"explanation":"A falta de saneamento não é apenas uma questão de infraestrutura: envolve prioridades, orçamento, decisões e direitos. Investigar quem espera e por quê ajuda a identificar padrões de exclusão territorial."},
-    {"id":6,"topic":"Poluição e saúde","prompt":"Uma empresa divulga que cumpre os limites legais de emissão. Moradores próximos, porém, relatam sintomas recorrentes e não conseguem acessar os dados de monitoramento. Qual caminho fortalece a justiça ambiental?","answers":["Encerrar a análise porque o cumprimento dos limites legais demonstra que a operação está adequada e dispensa novas verificações.","Tomar os relatos como prova definitiva da origem dos sintomas, sem comparar dados ambientais, clínicos e outras possíveis causas.","Garantir acesso aos dados, avaliação independente, acompanhamento de saúde e participação dos moradores nas decisões."],"correct":2,"explanation":"Cumprir uma regra é importante, mas não substitui a avaliação dos impactos reais nem a transparência. A população precisa acessar informações compreensíveis e participar da investigação e das decisões."},
-    {"id":7,"topic":"Enchentes e deslizamentos","prompt":"Duas regiões recebem chuva semelhante, mas em uma delas as perdas são muito maiores. Em vez de culpar quem mora ali, que fatores devem entrar na análise?","answers":["A qualidade das moradias, drenagem, ocupação do solo, alertas, prevenção e capacidade de resposta do poder público.","A quantidade de chuva registrada, considerada isoladamente como explicação suficiente para todas as perdas.","A decisão individual de cada família de permanecer no bairro, sem considerar renda ou alternativas habitacionais."],"correct":0,"explanation":"A chuva pode ser o gatilho, mas a dimensão do desastre depende de vulnerabilidades construídas ao longo do tempo. Moradia segura, infraestrutura, prevenção e resposta pública determinam quem está mais exposto e quem consegue se recuperar."},
-    {"id":8,"topic":"Cidades brasileiras","prompt":"Uma pesquisa encontra menos árvores, mais calor e alagamentos frequentes em bairros periféricos de população majoritariamente negra. Qual conclusão é responsável?","answers":["A diferença observada demonstra, por si só, que a composição racial é a causa direta de todos os problemas encontrados.","Os dados devem ser cruzados com renda, raça, infraestrutura e decisões públicas para investigar padrões e suas causas.","A presença de árvores e áreas verdes é uma questão estética, sem relação relevante com saúde, conforto térmico ou desigualdade."],"correct":1,"explanation":"Os dados indicam um padrão que merece investigação, não uma explicação automática. Cruzar indicadores e reconstruir decisões sobre uso do solo e infraestrutura ajuda a identificar como desigualdades são produzidas."},
-    {"id":9,"topic":"Mudanças climáticas","prompt":"Uma onda de calor atinge uma cidade inteira, mas trabalhadores ao ar livre e famílias em casas pouco ventiladas sofrem mais. O que essa situação revela?","answers":["Que a temperatura é igual e, por isso, os impactos e as possibilidades de proteção também são equivalentes.","Que a adaptação deve depender principalmente de escolhas individuais, sem mudanças na infraestrutura urbana.","Que uma ameaça ampla pode produzir danos desiguais conforme moradia, renda, trabalho, saúde e acesso à proteção."],"correct":2,"explanation":"A crise climática afeta a todos, mas não da mesma forma. Moradia adequada, áreas verdes, água, saúde e condições de trabalho influenciam a capacidade de enfrentar calor extremo e outros eventos."},
-    {"id":10,"topic":"Justiça ambiental","prompt":"Moradores são convidados para uma audiência sobre um empreendimento depois que o projeto já foi decidido. Por que isso não basta para caracterizar participação democrática?","answers":["Porque ouvir a comunidade depois da decisão não garante influência real; participação exige informação prévia e poder de alterar os rumos.","Porque os moradores só devem participar quando tiverem formação técnica equivalente à dos especialistas e dos responsáveis pelo projeto.","Porque decisões ambientais devem ficar sob responsabilidade exclusiva de especialistas, mesmo quando afetam diretamente a vida da comunidade."],"correct":0,"explanation":"Participação não pode ser uma formalidade para legitimar decisões prontas. Justiça ambiental exige informação antecipada, diálogo acessível e possibilidade concreta de influenciar decisões que afetam a vida coletiva."},
-    {"id":11,"topic":"Justiça climática","prompt":"Uma cidade instala abrigos climáticos e áreas verdes, mas concentra os investimentos nos bairros centrais. Que critério tornaria a política mais justa?","answers":["Priorizar territórios com maior exposição ao calor e menor acesso a áreas verdes, ouvindo quem vive neles.","Distribuir a mesma quantidade de equipamentos por bairro, sem considerar diferenças de população ou vulnerabilidade.","Escolher primeiro os locais com maior potencial turístico e esperar que os benefícios cheguem aos demais bairros."],"correct":0,"explanation":"Uma política justa considera tanto a exposição ao risco quanto a capacidade desigual de se proteger. Mapear vulnerabilidades e incluir moradores na escolha dos locais ajuda a direcionar recursos a quem mais precisa."},
-    {"id":12,"topic":"Água e desigualdade","prompt":"Durante uma estiagem, bairros periféricos passam mais dias sem abastecimento regular. Qual investigação ajuda a entender a desigualdade?","answers":["Comparar apenas o volume total de água disponível no município e concluir que a distribuição é equivalente.","Analisar redes, perdas, prioridades de abastecimento, renda e canais de reclamação em cada território.","Atribuir a diferença somente ao consumo doméstico, sem examinar a infraestrutura e a gestão do serviço."],"correct":1,"explanation":"A escassez pode ser agravada por decisões e desigualdades na infraestrutura. É importante observar como a água é distribuída, quais áreas têm redes mais frágeis e como as prioridades são definidas."},
-    {"id":13,"topic":"Resíduos e trabalho","prompt":"Cooperativas de catadores atuam na reciclagem, mas trabalham em locais precários e com pouco reconhecimento. O que uma política pública deveria considerar?","answers":["Tratar a atividade apenas como iniciativa individual, sem relação com a gestão municipal de resíduos.","Substituir as cooperativas por soluções privadas sem diálogo, mesmo quando isso elimina renda local.","Reconhecer o serviço ambiental prestado e garantir condições dignas, participação e inclusão na gestão de resíduos."],"correct":2,"explanation":"Catadores e cooperativas contribuem para a recuperação de materiais e a redução de resíduos. Justiça ambiental também envolve trabalho digno, infraestrutura, remuneração e participação nas decisões sobre a política de resíduos."},
-    {"id":14,"topic":"Grandes empreendimentos","prompt":"Antes de aprovar um empreendimento com possíveis impactos locais, qual prática fortalece uma avaliação ambiental democrática?","answers":["Disponibilizar informações compreensíveis com antecedência e criar condições para que comunidades influenciem a avaliação.","Realizar uma reunião única após a licença, para registrar dúvidas e comunicar medidas que já foram escolhidas.","Restringir os documentos a especialistas, pois a linguagem técnica torna desnecessária a participação comunitária."],"correct":0,"explanation":"A participação precisa ocorrer enquanto alternativas ainda podem ser consideradas. Informação acessível, tempo para análise e escuta efetiva tornam a avaliação mais transparente e responsiva."},
-    {"id":15,"topic":"Moradia e risco","prompt":"Uma área sujeita a deslizamentos recebe ordem de remoção, mas não há oferta de moradia adequada. Qual princípio deve orientar a resposta pública?","answers":["Retirar rapidamente as famílias e encaminhá-las a serviços gerais, sem garantir onde poderão morar depois.","Reduzir o risco com segurança, transparência e alternativas habitacionais dignas construídas com as famílias afetadas.","Manter todas as casas no local e adiar intervenções, mesmo sem avaliar riscos ou medidas preventivas."],"correct":1,"explanation":"Reduzir riscos é essencial, mas a proteção não pode produzir nova violação de direitos. A resposta deve combinar prevenção, informação, participação e alternativas habitacionais seguras e acessíveis."},
-    {"id":16,"topic":"Áreas verdes","prompt":"Um parque novo valoriza uma região, mas o aumento dos aluguéis ameaça moradores antigos. Que questão deve acompanhar o projeto?","answers":["Se a valorização imobiliária é suficiente para demonstrar que todos os moradores serão beneficiados.","Se o parque pode ser mantido fechado à comunidade para preservar o investimento realizado.","Como garantir acesso ao espaço e evitar que a valorização expulse justamente quem vivia ali."],"correct":2,"explanation":"Áreas verdes melhoram a qualidade urbana, mas seus benefícios podem ser distribuídos de forma desigual. Planejamento deve considerar permanência, habitação acessível e participação dos moradores."},
-    {"id":17,"topic":"Mineração e território","prompt":"Após um acidente envolvendo rejeitos de mineração, uma comunidade recebe propostas de compensação. O que precisa ser considerado além dos danos materiais imediatos?","answers":["Efeitos duradouros sobre água, saúde, modos de vida, vínculos territoriais e participação nas decisões de reparação.","Somente o valor dos imóveis atingidos, sem considerar efeitos sociais, ambientais e culturais que não aparecem no preço.","Priorizar a retomada econômica, mesmo sem acompanhamento independente da água, da saúde e dos riscos persistentes."],"correct":0,"explanation":"A reparação precisa considerar impactos ambientais, sociais, culturais e de saúde ao longo do tempo. Monitoramento independente, transparência e participação das pessoas atingidas são fundamentais."},
-    {"id":18,"topic":"Orçamento público","prompt":"Uma prefeitura afirma não ter recursos para obras em bairros vulneráveis, mas amplia investimentos em áreas já bem atendidas. Que análise é mais adequada?","answers":["Aceitar a justificativa apresentada sem examinar como foram definidos os critérios de prioridade do orçamento municipal.","Investigar como o orçamento é distribuído, quais necessidades são consideradas e quem participa das decisões.","Comparar apenas o gasto por habitante, ignorando a infraestrutura existente e os déficits acumulados em cada bairro."],"correct":1,"explanation":"O orçamento revela escolhas públicas. Para avaliar justiça territorial, é preciso comparar necessidades, déficits históricos, critérios de investimento e participação social — não apenas totais gerais."},
-    {"id":19,"topic":"Dados e desigualdade","prompt":"Um mapa mostra maior concentração de riscos ambientais em determinados bairros. Como usar essa informação com responsabilidade?","answers":["Tratar o mapa como prova definitiva das causas locais e dispensar a escuta de moradores e outras evidências.","Evitar divulgar os dados para não gerar debate público nem questionamentos sobre decisões de planejamento.","Cruzar o mapa com informações sociais, históricas e territoriais e ouvir as comunidades antes de concluir."],"correct":2,"explanation":"Mapas ajudam a identificar padrões, mas não explicam sozinhos suas causas. A análise deve combinar diferentes fontes, reconhecer limites dos dados e incorporar o conhecimento de quem vive nos territórios."},
-    {"id":20,"topic":"Responsabilidade coletiva","prompt":"Uma escola quer desenvolver uma ação sobre racismo ambiental. Qual proposta vai além de uma campanha pontual?","answers":["Investigar um problema do território, consultar fontes confiáveis, ouvir moradores e dialogar com responsáveis públicos.","Produzir cartazes e ações gerais, sem relacionar o tema aos problemas locais ou às decisões públicas.","Atribuir a solução aos hábitos individuais, sem discutir infraestrutura ou responsabilidade institucional."],"correct":0,"explanation":"A aprendizagem ganha força quando conecta conhecimento, território e participação. Investigar problemas reais, respeitar as pessoas afetadas e dialogar com instituições transforma informação em ação cidadã."},
-    {"id":21,"topic":"Licenciamento ambiental","prompt":"Uma licença avalia o impacto de uma fábrica isoladamente. No mesmo vale, porém, já existem rodovias, mineração e outras indústrias. O que pode estar faltando nessa análise?","answers":["Examinar os efeitos cumulativos sobre água, ar, saúde e modos de vida, considerando o conjunto de atividades no território.","Verificar apenas se a nova fábrica cumpre os limites técnicos definidos para sua própria operação, sem ampliar o recorte.","Somar os empregos prometidos pelos empreendimentos e usar esse total como principal medida de benefício coletivo."],"correct":0,"explanation":"Impactos se acumulam e podem ultrapassar o que cada projeto revela quando analisado sozinho. Uma avaliação consistente considera o território, a capacidade ambiental, os efeitos combinados e a distribuição dos benefícios e danos."},
-    {"id":22,"topic":"Participação em emergências","prompt":"Depois de enchentes recorrentes, a prefeitura planeja novos abrigos e rotas de evacuação. Qual procedimento tende a produzir uma resposta mais eficaz e justa?","answers":["Definir os locais apenas com mapas técnicos e apresentar o plano aos moradores após concluir as escolhas.","Cruzar mapas de risco com saber local, acessibilidade e rotas de alerta construídas junto aos moradores.","Escolher abrigos perto do centro administrativo para facilitar a coordenação das equipes durante a emergência."],"correct":1,"explanation":"Mapas técnicos são essenciais, mas não capturam sozinhos barreiras de mobilidade, redes de cuidado e caminhos usados no cotidiano. A participação local ajuda a tornar alertas, abrigos e rotas utilizáveis por quem mais precisa."},
-    {"id":23,"topic":"Consulta e direitos territoriais","prompt":"Uma obra pode afetar recursos usados tradicionalmente por um povo indígena. Qual atitude respeita melhor seus direitos e sua autonomia?","answers":["Informar previamente e assegurar consulta adequada, respeitando direitos e formas próprias de representação.","Realizar uma audiência depois da autorização, para registrar dúvidas e explicar as medidas de compensação já definidas.","Negociar apenas com representantes externos escolhidos pelo empreendedor, para acelerar o cronograma da obra."],"correct":0,"explanation":"Quando direitos territoriais e coletivos podem ser afetados, a consulta não deve ser uma formalidade posterior. Informação prévia, diálogo culturalmente adequado e respeito às formas próprias de representação são elementos centrais."},
-    {"id":24,"topic":"Indicadores de saneamento","prompt":"Um relatório municipal informa que a cobertura média de saneamento aumentou. Mesmo assim, algumas comunidades continuam sem coleta e tratamento adequados. Como interpretar o resultado?","answers":["Concluir que o problema foi resolvido, pois a média municipal representa de forma suficiente a situação de todos os bairros.","Comparar somente o número de novas ligações, sem observar continuidade do serviço, tratamento e distribuição territorial.","Desagregar os dados por território e grupo social e verificar quais etapas do serviço ainda não chegam a cada comunidade."],"correct":2,"explanation":"Uma média pode esconder bolsões de privação. É necessário observar cobertura, qualidade, continuidade e tratamento, além de identificar quem permanece sem atendimento e por quais razões."},
-    {"id":25,"topic":"Clima e desigualdade","prompt":"Uma cidade anuncia um plano contra ondas de calor com alertas por aplicativo e centros climatizados. Parte dos trabalhadores informais e idosos, porém, não consegue acessar esses recursos. Qual ajuste é mais importante?","answers":["Manter o plano como está, pois disponibilizar o serviço em canais digitais garante igualdade de acesso.","Ampliar o atendimento presencial e acessível, articulando saúde, assistência e territórios mais expostos.","Priorizar campanhas gerais de conscientização, deixando a adaptação da infraestrutura para uma etapa futura."],"correct":1,"explanation":"Uma política climática só protege de fato quando alcança quem enfrenta maior exposição e tem menos meios de resposta. Comunicação multicanal, busca ativa e infraestrutura territorial são tão importantes quanto a tecnologia."},
-    {"id":26,"topic":"Localização de resíduos","prompt":"Um município precisa escolher onde instalar uma unidade de tratamento de resíduos. Qual critério evita reproduzir injustiças já existentes?","answers":["Cruzar riscos e impactos existentes com opções de localização e escuta dos moradores dos territórios afetados.","Escolher o terreno mais barato e distante do centro, desde que a área esteja disponível para compra imediata.","Distribuir o tráfego de caminhões entre bairros, sem considerar proximidade de moradias, escolas ou outras fontes de poluição."],"correct":0,"explanation":"A decisão não deve transformar menor custo de implantação em maior exposição para comunidades com menos poder político. Comparar alternativas, impactos acumulados e participação pública ajuda a evitar a concentração de danos."},
-    {"id":27,"topic":"Drenagem urbana","prompt":"Após uma obra de canalização, um bairro deixa de alagar, mas a água passa a atingir com mais força a comunidade situada rio abaixo. O que a prefeitura deveria fazer?","answers":["Considerar a obra bem-sucedida, pois o indicador de alagamento melhorou no trecho que recebeu investimento.","Recomendar que a comunidade a jusante evite ocupar as margens, sem reavaliar o desenho da intervenção.","Avaliar a bacia hidrográfica como um sistema, medir efeitos transferidos e rever a solução com os territórios afetados."],"correct":2,"explanation":"Intervenções urbanas podem deslocar riscos em vez de eliminá-los. A drenagem precisa ser planejada na escala da bacia, considerando impactos a montante e a jusante e evitando que a proteção de uma área produza danos em outra."},
-    {"id":28,"topic":"Reparação ambiental","prompt":"Uma comunidade convive por anos com contaminação. A empresa oferece indenização individual, mas os moradores também relatam perda de atividades coletivas e desconfiança sobre a água. O que uma reparação abrangente deve incluir?","answers":["Encerrar o caso após o pagamento, desde que cada família tenha recebido um valor calculado por imóvel.","Combinar indenização, recuperação ambiental, monitoramento independente e atenção contínua à saúde.","Priorizar a retomada econômica e deixar impactos culturais e sociais para iniciativas voluntárias da comunidade."],"correct":1,"explanation":"Danos ambientais podem afetar saúde, vínculos, renda, cultura e confiança nas instituições. Reparação adequada precisa ser contínua, transparente, coletiva quando necessário e acompanhada por monitoramento verificável."},
-    {"id":29,"topic":"Gentrificação verde","prompt":"Um projeto de parque melhora a qualidade ambiental de uma área popular, mas os aluguéis sobem rapidamente. Qual política pode proteger os benefícios do projeto sem expulsar moradores?","answers":["Associar o parque a medidas de permanência, habitação acessível e proteção contra deslocamento involuntário.","Restringir o acesso ao parque aos moradores cadastrados antes da obra, evitando a chegada de novos visitantes.","Aguardar a estabilização do mercado imobiliário para avaliar se a valorização afetou a composição da vizinhança."],"correct":0,"explanation":"A melhoria ambiental não deve resultar na expulsão de quem vivia em condições mais precárias. Habitação acessível, segurança da posse e participação local ajudam a distribuir os benefícios sem deslocar a população."},
-    {"id":30,"topic":"Qualidade do ar","prompt":"Moradores de dois bairros contestam dados oficiais de qualidade do ar porque há poucas estações de monitoramento perto de suas casas. Qual resposta fortalece a confiança pública?","answers":["Publicar apenas a média da cidade, pois uma série única facilita a comparação anual dos indicadores.","Substituir as medições por relatos comunitários, que dispensam critérios técnicos de coleta e validação.","Ampliar medições, explicar métodos e incertezas e integrar observações comunitárias verificáveis."],"correct":2,"explanation":"Dados confiáveis exigem cobertura espacial adequada, transparência sobre métodos e explicação de incertezas. O conhecimento comunitário pode apontar lacunas e orientar a coleta, sem substituir critérios de qualidade."},
-    {"id":31,"topic":"Agrotóxicos e alimentação","prompt":"Pequenos agricultores relatam dificuldade de proteger lavouras e famílias da deriva de pulverizações realizadas em áreas próximas. Qual abordagem pública é mais completa?","answers":["Tratar o tema como conflito entre vizinhos e recomendar acordos privados, sem ampliar a fiscalização.","Investigar a exposição, fiscalizar aplicações e oferecer informação e assistência às comunidades afetadas.","Medir apenas a produtividade regional, supondo que ganhos econômicos representem benefício para todos."],"correct":1,"explanation":"A análise deve considerar saúde, ambiente, fiscalização, condições de trabalho e segurança alimentar. Informação acessível e acompanhamento público são necessários para que os custos da produção não recaiam desproporcionalmente sobre comunidades próximas."},
-    {"id":32,"topic":"Deslocamento climático","prompt":"Famílias deixam uma comunidade costeira após erosão e avanço do mar. Qual resposta pública reconhece melhor a dimensão do problema?","answers":["Planejar proteção ou reassentamento com moradia segura, participação e continuidade dos vínculos locais.","Tratar a mudança como decisão privada e oferecer orientações gerais para buscar moradia em outra região.","Priorizar a reconstrução física no mesmo local, mesmo quando estudos indicam risco persistente e crescente."],"correct":0,"explanation":"Deslocamentos relacionados ao clima envolvem moradia, trabalho, cultura e redes de apoio. A resposta deve avaliar riscos com transparência e construir alternativas dignas com as famílias, sem impor soluções que ampliem vulnerabilidades."},
-    {"id":33,"topic":"Acesso à justiça","prompt":"Moradores querem contestar uma licença ambiental, mas enfrentam documentos técnicos complexos e custos para obter orientação. O que pode tornar o acesso à justiça mais efetivo?","answers":["Exigir que cada morador produza um laudo próprio antes de receber qualquer informação do órgão licenciador.","Limitar o acesso aos autos a representantes com formação jurídica, para preservar a precisão dos debates.","Garantir informação pública compreensível, assistência adequada e canais acessíveis para participação e contestação."],"correct":2,"explanation":"Direitos formais podem ser difíceis de exercer sem informação, tempo e apoio. Transparência ativa, linguagem acessível e mecanismos de assistência reduzem barreiras para que comunidades participem e contestem decisões."},
-    {"id":34,"topic":"Acessibilidade em desastres","prompt":"Um sistema de alerta de enchentes usa sirenes e mensagens de texto, mas não alcança adequadamente pessoas surdas, cegas ou com mobilidade reduzida. Qual melhoria é necessária?","answers":["Concentrar os avisos em redes sociais oficiais, que permitem atualizar rapidamente o conteúdo da emergência.","Combinar alertas visuais, sonoros e acessíveis com rotas, transporte e apoio definidos com as pessoas afetadas.","Manter o sistema atual e orientar cada família a criar seu próprio plano sem apoio dos serviços públicos."],"correct":1,"explanation":"A proteção em emergências precisa considerar diferentes formas de perceber alertas e se deslocar. Planejamento inclusivo, testes com os usuários e apoio organizado evitam que pessoas com deficiência sejam deixadas para trás."},
-    {"id":35,"topic":"Transição energética","prompt":"Uma região dependente de atividades poluentes recebe um projeto de energia renovável, mas trabalhadores e moradores não participam do planejamento. O que caracteriza uma transição mais justa?","answers":["Combinar redução de impactos com diálogo, formação profissional, proteção de renda e participação das comunidades na definição dos benefícios.","Medir o sucesso apenas pela quantidade de energia limpa instalada, pois os efeitos sociais podem ser tratados separadamente.","Priorizar investidores e metas de produção, deixando a adaptação dos trabalhadores para quando as novas vagas estiverem disponíveis."],"correct":0,"explanation":"Uma transição energética justa considera quem ganha, quem perde e como os custos são distribuídos. Formação, proteção social, participação e benefícios locais precisam acompanhar a mudança tecnológica."}
+    {"id":1,"topic":"Conceito","level":"facil","prompt":"Em duas comunidades com indústrias parecidas, a de maioria negra relata mais doenças e menos fiscalização. O que investigar para identificar racismo ambiental?","answers":["Como os riscos, a fiscalização e a proteção são distribuídos e quais decisões históricas produziram essa diferença.","Se as duas comunidades possuem exatamente o mesmo número de moradores e a mesma extensão territorial.","Se os moradores conhecem os procedimentos técnicos usados pela indústria para controlar suas emissões."],"correct":0,"explanation":"A questão central é a distribuição desigual dos danos e da proteção, junto às relações de poder que moldam decisões públicas e privadas. O conceito exige olhar para história, raça, território, participação e acesso a direitos — não apenas para a presença de uma indústria."},
+    {"id":2,"topic":"História","level":"medio","prompt":"Protestos de comunidades negras contra depósitos tóxicos nos EUA, nos anos 1980, ampliaram o debate ambiental. Qual foi a contribuição histórica dessas mobilizações?","answers":["Defenderam que conflitos ambientais fossem tratados apenas como problemas técnicos, separados das desigualdades sociais.","Evidenciaram a relação entre discriminação racial, localização de riscos ambientais e poder de influenciar decisões.","Propuseram que a responsabilidade por contaminações fosse transferida integralmente aos moradores dos territórios afetados."],"correct":1,"explanation":"Essas mobilizações ajudaram a consolidar a ideia de que os riscos ambientais não são distribuídos de forma neutra. A luta conectou racismo, território, saúde, participação política e justiça ambiental."},
+    {"id":3,"topic":"Racismo estrutural","level":"dificil","prompt":"Uma prefeitura diz aplicar os mesmos critérios em todos os bairros, mas as periferias seguem sem drenagem e arborização. Qual análise é mais cuidadosa?","answers":["Comparar apenas os valores totais investidos em cada região, sem considerar a população atendida ou as carências acumuladas.","A desigualdade pode ser atribuída às escolhas individuais, mesmo quando os bairros partem de condições muito diferentes.","Critérios aparentemente iguais podem manter desigualdades quando ignoram necessidades e desvantagens históricas."],"correct":2,"explanation":"Políticas aparentemente neutras podem reproduzir desigualdades se partirem de condições iniciais muito diferentes. É necessário observar quem recebe investimento, quem continua exposto e se a política corrige ou perpetua injustiças."},
+    {"id":4,"topic":"Povos indígenas e quilombolas","level":"medio","prompt":"Uma obra promete empregos, mas ameaça áreas de uso tradicional de uma comunidade quilombola. Por que uma avaliação baseada apenas em indenização financeira pode ser insuficiente?","answers":["Porque o território reúne memória, identidade, sustento, cultura e formas coletivas de organização que não se reduzem ao preço da terra.","Porque os impactos culturais só devem ser considerados depois que a obra estiver concluída e seus resultados forem conhecidos.","Porque o valor de mercado da área permite comparar com precisão os vínculos culturais, sociais e ambientais mantidos pela comunidade."],"correct":0,"explanation":"Território não é apenas um bem econômico. Ele pode sustentar ancestralidade, práticas culturais, autonomia, alimentação e vínculos comunitários. Uma avaliação justa precisa reconhecer essas dimensões e respeitar direitos coletivos."},
+    {"id":5,"topic":"Saneamento básico","level":"medio","prompt":"Em uma cidade, bairros valorizados recebem obras de esgoto e drenagem antes de comunidades que esperam há décadas. Que pergunta ajuda a revelar a dimensão política desse problema?","answers":["Executar apenas obras emergenciais para reduzir impactos imediatos, sem discutir por que alguns bairros esperam há décadas.","Quais critérios orientam a distribuição de recursos e por que certos territórios continuam esperando por direitos básicos?","Como comparar o custo das obras, o crescimento dos bairros e a capacidade de cada região de atrair novos investimentos?"],"correct":1,"explanation":"A falta de saneamento não é apenas uma questão de infraestrutura: envolve prioridades, orçamento, decisões e direitos. Investigar quem espera e por quê ajuda a identificar padrões de exclusão territorial."},
+    {"id":6,"topic":"Poluição e saúde","level":"medio","prompt":"Uma empresa cumpre os limites legais de emissão, mas moradores adoecem e não acessam os dados de monitoramento. O que fortalece a justiça ambiental?","answers":["Encerrar a análise porque o cumprimento dos limites legais demonstra que a operação está adequada e dispensa novas verificações.","Tomar os relatos como prova definitiva da origem dos sintomas, sem comparar dados ambientais, clínicos e outras possíveis causas.","Garantir acesso aos dados, avaliação independente, acompanhamento de saúde e participação dos moradores nas decisões."],"correct":2,"explanation":"Cumprir uma regra é importante, mas não substitui a avaliação dos impactos reais nem a transparência. A população precisa acessar informações compreensíveis e participar da investigação e das decisões."},
+    {"id":7,"topic":"Enchentes e deslizamentos","level":"facil","prompt":"Duas regiões recebem chuva semelhante, mas em uma delas as perdas são muito maiores. Em vez de culpar quem mora ali, que fatores devem entrar na análise?","answers":["A qualidade das moradias, drenagem, ocupação do solo, alertas, prevenção e capacidade de resposta do poder público.","A quantidade de chuva registrada, considerada isoladamente como explicação suficiente para todas as perdas.","A decisão individual de cada família de permanecer no bairro, sem considerar renda ou alternativas habitacionais."],"correct":0,"explanation":"A chuva pode ser o gatilho, mas a dimensão do desastre depende de vulnerabilidades construídas ao longo do tempo. Moradia segura, infraestrutura, prevenção e resposta pública determinam quem está mais exposto e quem consegue se recuperar."},
+    {"id":8,"topic":"Cidades brasileiras","level":"medio","prompt":"Uma pesquisa encontra menos árvores, mais calor e alagamentos frequentes em bairros periféricos de população majoritariamente negra. Qual conclusão é responsável?","answers":["A diferença observada demonstra, por si só, que a composição racial é a causa direta de todos os problemas encontrados.","Os dados devem ser cruzados com renda, raça, infraestrutura e decisões públicas para investigar padrões e suas causas.","A presença de árvores e áreas verdes é uma questão estética, sem relação relevante com saúde, conforto térmico ou desigualdade."],"correct":1,"explanation":"Os dados indicam um padrão que merece investigação, não uma explicação automática. Cruzar indicadores e reconstruir decisões sobre uso do solo e infraestrutura ajuda a identificar como desigualdades são produzidas."},
+    {"id":9,"topic":"Mudanças climáticas","level":"facil","prompt":"Uma onda de calor atinge uma cidade inteira, mas trabalhadores ao ar livre e famílias em casas pouco ventiladas sofrem mais. O que essa situação revela?","answers":["Que a temperatura é igual e, por isso, os impactos e as possibilidades de proteção também são equivalentes.","Que a adaptação deve depender principalmente de escolhas individuais, sem mudanças na infraestrutura urbana.","Que uma ameaça ampla pode produzir danos desiguais conforme moradia, renda, trabalho, saúde e acesso à proteção."],"correct":2,"explanation":"A crise climática afeta a todos, mas não da mesma forma. Moradia adequada, áreas verdes, água, saúde e condições de trabalho influenciam a capacidade de enfrentar calor extremo e outros eventos."},
+    {"id":10,"topic":"Justiça ambiental","level":"dificil","prompt":"Moradores são convidados para uma audiência sobre um empreendimento depois que o projeto já foi decidido. Por que isso não basta para caracterizar participação democrática?","answers":["Porque ouvir a comunidade depois da decisão não garante influência real; participação exige informação prévia e poder de alterar os rumos.","Porque os moradores só devem participar quando tiverem formação técnica equivalente à dos especialistas e dos responsáveis pelo projeto.","Porque decisões ambientais devem ficar sob responsabilidade exclusiva de especialistas, mesmo quando afetam diretamente a vida da comunidade."],"correct":0,"explanation":"Participação não pode ser uma formalidade para legitimar decisões prontas. Justiça ambiental exige informação antecipada, diálogo acessível e possibilidade concreta de influenciar decisões que afetam a vida coletiva."},
+    {"id":11,"topic":"Justiça climática","level":"medio","prompt":"Uma cidade instala abrigos climáticos e áreas verdes, mas concentra os investimentos nos bairros centrais. Que critério tornaria a política mais justa?","answers":["Priorizar territórios com maior exposição ao calor e menor acesso a áreas verdes, ouvindo quem vive neles.","Distribuir a mesma quantidade de equipamentos por bairro, sem considerar diferenças de população ou vulnerabilidade.","Escolher primeiro os locais com maior potencial turístico e esperar que os benefícios cheguem aos demais bairros."],"correct":0,"explanation":"Uma política justa considera tanto a exposição ao risco quanto a capacidade desigual de se proteger. Mapear vulnerabilidades e incluir moradores na escolha dos locais ajuda a direcionar recursos a quem mais precisa."},
+    {"id":12,"topic":"Água e desigualdade","level":"facil","prompt":"Durante uma estiagem, bairros periféricos passam mais dias sem abastecimento regular. Qual investigação ajuda a entender a desigualdade?","answers":["Comparar apenas o volume total de água disponível no município e concluir que a distribuição é equivalente.","Analisar redes, perdas, prioridades de abastecimento, renda e canais de reclamação em cada território.","Atribuir a diferença somente ao consumo doméstico, sem examinar a infraestrutura e a gestão do serviço."],"correct":1,"explanation":"A escassez pode ser agravada por decisões e desigualdades na infraestrutura. É importante observar como a água é distribuída, quais áreas têm redes mais frágeis e como as prioridades são definidas."},
+    {"id":13,"topic":"Resíduos e trabalho","level":"facil","prompt":"Cooperativas de catadores atuam na reciclagem, mas trabalham em locais precários e com pouco reconhecimento. O que uma política pública deveria considerar?","answers":["Tratar a atividade apenas como iniciativa individual, sem relação com a gestão municipal de resíduos.","Substituir as cooperativas por soluções privadas sem diálogo, mesmo quando isso elimina renda local.","Reconhecer o serviço ambiental prestado e garantir condições dignas, participação e inclusão na gestão de resíduos."],"correct":2,"explanation":"Catadores e cooperativas contribuem para a recuperação de materiais e a redução de resíduos. Justiça ambiental também envolve trabalho digno, infraestrutura, remuneração e participação nas decisões sobre a política de resíduos."},
+    {"id":14,"topic":"Grandes empreendimentos","level":"medio","prompt":"Antes de aprovar um empreendimento com possíveis impactos locais, qual prática fortalece uma avaliação ambiental democrática?","answers":["Disponibilizar informações compreensíveis com antecedência e criar condições para que comunidades influenciem a avaliação.","Realizar uma reunião única após a licença, para registrar dúvidas e comunicar medidas que já foram escolhidas.","Restringir os documentos a especialistas, pois a linguagem técnica torna desnecessária a participação comunitária."],"correct":0,"explanation":"A participação precisa ocorrer enquanto alternativas ainda podem ser consideradas. Informação acessível, tempo para análise e escuta efetiva tornam a avaliação mais transparente e responsiva."},
+    {"id":15,"topic":"Moradia e risco","level":"medio","prompt":"Uma área sujeita a deslizamentos recebe ordem de remoção, mas não há oferta de moradia adequada. Qual princípio deve orientar a resposta pública?","answers":["Retirar rapidamente as famílias e encaminhá-las a serviços gerais, sem garantir onde poderão morar depois.","Reduzir o risco com segurança, transparência e alternativas habitacionais dignas construídas com as famílias afetadas.","Manter todas as casas no local e adiar intervenções, mesmo sem avaliar riscos ou medidas preventivas."],"correct":1,"explanation":"Reduzir riscos é essencial, mas a proteção não pode produzir nova violação de direitos. A resposta deve combinar prevenção, informação, participação e alternativas habitacionais seguras e acessíveis."},
+    {"id":16,"topic":"Áreas verdes","level":"facil","prompt":"Um parque novo valoriza uma região, mas o aumento dos aluguéis ameaça moradores antigos. Que questão deve acompanhar o projeto?","answers":["Se a valorização imobiliária é suficiente para demonstrar que todos os moradores serão beneficiados.","Se o parque pode ser mantido fechado à comunidade para preservar o investimento realizado.","Como garantir acesso ao espaço e evitar que a valorização expulse justamente quem vivia ali."],"correct":2,"explanation":"Áreas verdes melhoram a qualidade urbana, mas seus benefícios podem ser distribuídos de forma desigual. Planejamento deve considerar permanência, habitação acessível e participação dos moradores."},
+    {"id":17,"topic":"Mineração e território","level":"medio","prompt":"Após um acidente envolvendo rejeitos de mineração, uma comunidade recebe propostas de compensação. O que precisa ser considerado além dos danos materiais imediatos?","answers":["Efeitos duradouros sobre água, saúde, modos de vida, vínculos territoriais e participação nas decisões de reparação.","Somente o valor dos imóveis atingidos, sem considerar efeitos sociais, ambientais e culturais que não aparecem no preço.","Priorizar a retomada econômica, mesmo sem acompanhamento independente da água, da saúde e dos riscos persistentes."],"correct":0,"explanation":"A reparação precisa considerar impactos ambientais, sociais, culturais e de saúde ao longo do tempo. Monitoramento independente, transparência e participação das pessoas atingidas são fundamentais."},
+    {"id":18,"topic":"Orçamento público","level":"dificil","prompt":"Uma prefeitura afirma não ter recursos para obras em bairros vulneráveis, mas amplia investimentos em áreas já bem atendidas. Que análise é mais adequada?","answers":["Aceitar a justificativa apresentada sem examinar como foram definidos os critérios de prioridade do orçamento municipal.","Investigar como o orçamento é distribuído, quais necessidades são consideradas e quem participa das decisões.","Comparar apenas o gasto por habitante, ignorando a infraestrutura existente e os déficits acumulados em cada bairro."],"correct":1,"explanation":"O orçamento revela escolhas públicas. Para avaliar justiça territorial, é preciso comparar necessidades, déficits históricos, critérios de investimento e participação social — não apenas totais gerais."},
+    {"id":19,"topic":"Dados e desigualdade","level":"facil","prompt":"Um mapa mostra maior concentração de riscos ambientais em determinados bairros. Como usar essa informação com responsabilidade?","answers":["Tratar o mapa como prova definitiva das causas locais e dispensar a escuta de moradores e outras evidências.","Evitar divulgar os dados para não gerar debate público nem questionamentos sobre decisões de planejamento.","Cruzar o mapa com informações sociais, históricas e territoriais e ouvir as comunidades antes de concluir."],"correct":2,"explanation":"Mapas ajudam a identificar padrões, mas não explicam sozinhos suas causas. A análise deve combinar diferentes fontes, reconhecer limites dos dados e incorporar o conhecimento de quem vive nos territórios."},
+    {"id":20,"topic":"Responsabilidade coletiva","level":"facil","prompt":"Uma escola quer desenvolver uma ação sobre racismo ambiental. Qual proposta vai além de uma campanha pontual?","answers":["Investigar um problema do território, consultar fontes confiáveis, ouvir moradores e dialogar com responsáveis públicos.","Produzir cartazes e ações gerais, sem relacionar o tema aos problemas locais ou às decisões públicas.","Atribuir a solução aos hábitos individuais, sem discutir infraestrutura ou responsabilidade institucional."],"correct":0,"explanation":"A aprendizagem ganha força quando conecta conhecimento, território e participação. Investigar problemas reais, respeitar as pessoas afetadas e dialogar com instituições transforma informação em ação cidadã."},
+    {"id":21,"topic":"Licenciamento ambiental","level":"dificil","prompt":"Uma licença avalia o impacto de uma fábrica isoladamente. No mesmo vale, porém, já existem rodovias, mineração e outras indústrias. O que pode estar faltando nessa análise?","answers":["Examinar os efeitos cumulativos sobre água, ar, saúde e modos de vida, considerando o conjunto de atividades no território.","Verificar apenas se a nova fábrica cumpre os limites técnicos definidos para sua própria operação, sem ampliar o recorte.","Somar os empregos prometidos pelos empreendimentos e usar esse total como principal medida de benefício coletivo."],"correct":0,"explanation":"Impactos se acumulam e podem ultrapassar o que cada projeto revela quando analisado sozinho. Uma avaliação consistente considera o território, a capacidade ambiental, os efeitos combinados e a distribuição dos benefícios e danos."},
+    {"id":22,"topic":"Participação em emergências","level":"medio","prompt":"Depois de enchentes recorrentes, a prefeitura planeja novos abrigos e rotas de evacuação. Qual procedimento tende a produzir uma resposta mais eficaz e justa?","answers":["Definir os locais apenas com mapas técnicos e apresentar o plano aos moradores após concluir as escolhas.","Cruzar mapas de risco com saber local, acessibilidade e rotas de alerta construídas junto aos moradores.","Escolher abrigos perto do centro administrativo para facilitar a coordenação das equipes durante a emergência."],"correct":1,"explanation":"Mapas técnicos são essenciais, mas não capturam sozinhos barreiras de mobilidade, redes de cuidado e caminhos usados no cotidiano. A participação local ajuda a tornar alertas, abrigos e rotas utilizáveis por quem mais precisa."},
+    {"id":23,"topic":"Consulta e direitos territoriais","level":"dificil","prompt":"Uma obra pode afetar recursos usados tradicionalmente por um povo indígena. Qual atitude respeita melhor seus direitos e sua autonomia?","answers":["Informar previamente e assegurar consulta adequada, respeitando direitos e formas próprias de representação.","Realizar uma audiência depois da autorização, para registrar dúvidas e explicar as medidas de compensação já definidas.","Negociar apenas com representantes externos escolhidos pelo empreendedor, para acelerar o cronograma da obra."],"correct":0,"explanation":"Quando direitos territoriais e coletivos podem ser afetados, a consulta não deve ser uma formalidade posterior. Informação prévia, diálogo culturalmente adequado e respeito às formas próprias de representação são elementos centrais."},
+    {"id":24,"topic":"Indicadores de saneamento","level":"dificil","prompt":"A cobertura média de saneamento de um município aumentou, mas algumas comunidades seguem sem coleta e tratamento. Como interpretar esse resultado?","answers":["Concluir que o problema foi resolvido, pois a média municipal representa de forma suficiente a situação de todos os bairros.","Comparar somente o número de novas ligações, sem observar continuidade do serviço, tratamento e distribuição territorial.","Desagregar os dados por território e grupo social e verificar quais etapas do serviço ainda não chegam a cada comunidade."],"correct":2,"explanation":"Uma média pode esconder bolsões de privação. É necessário observar cobertura, qualidade, continuidade e tratamento, além de identificar quem permanece sem atendimento e por quais razões."},
+    {"id":25,"topic":"Clima e desigualdade","level":"dificil","prompt":"Um plano contra o calor usa aplicativo e centros climatizados, mas parte dos trabalhadores informais e idosos não consegue acessar. Qual ajuste é mais importante?","answers":["Manter o plano como está, pois disponibilizar o serviço em canais digitais garante igualdade de acesso.","Ampliar o atendimento presencial e acessível, articulando saúde, assistência e territórios mais expostos.","Priorizar campanhas gerais de conscientização, deixando a adaptação da infraestrutura para uma etapa futura."],"correct":1,"explanation":"Uma política climática só protege de fato quando alcança quem enfrenta maior exposição e tem menos meios de resposta. Comunicação multicanal, busca ativa e infraestrutura territorial são tão importantes quanto a tecnologia."},
+    {"id":26,"topic":"Localização de resíduos","level":"facil","prompt":"Um município precisa escolher onde instalar uma unidade de tratamento de resíduos. Qual critério evita reproduzir injustiças já existentes?","answers":["Cruzar riscos e impactos existentes com opções de localização e escuta dos moradores dos territórios afetados.","Escolher o terreno mais barato e distante do centro, desde que a área esteja disponível para compra imediata.","Distribuir o tráfego de caminhões entre bairros, sem considerar proximidade de moradias, escolas ou outras fontes de poluição."],"correct":0,"explanation":"A decisão não deve transformar menor custo de implantação em maior exposição para comunidades com menos poder político. Comparar alternativas, impactos acumulados e participação pública ajuda a evitar a concentração de danos."},
+    {"id":27,"topic":"Drenagem urbana","level":"medio","prompt":"Após uma obra de canalização, um bairro deixa de alagar, mas a água passa a atingir com mais força a comunidade situada rio abaixo. O que a prefeitura deveria fazer?","answers":["Considerar a obra bem-sucedida, pois o indicador de alagamento melhorou no trecho que recebeu investimento.","Recomendar que a comunidade a jusante evite ocupar as margens, sem reavaliar o desenho da intervenção.","Avaliar a bacia hidrográfica como um sistema, medir efeitos transferidos e rever a solução com os territórios afetados."],"correct":2,"explanation":"Intervenções urbanas podem deslocar riscos em vez de eliminá-los. A drenagem precisa ser planejada na escala da bacia, considerando impactos a montante e a jusante e evitando que a proteção de uma área produza danos em outra."},
+    {"id":28,"topic":"Reparação ambiental","level":"dificil","prompt":"Após anos de contaminação, a empresa oferece só indenização individual. Moradores perderam atividades coletivas e desconfiam da água. O que uma reparação ampla deve incluir?","answers":["Encerrar o caso após o pagamento, desde que cada família tenha recebido um valor calculado por imóvel.","Combinar indenização, recuperação ambiental, monitoramento independente e atenção contínua à saúde.","Priorizar a retomada econômica e deixar impactos culturais e sociais para iniciativas voluntárias da comunidade."],"correct":1,"explanation":"Danos ambientais podem afetar saúde, vínculos, renda, cultura e confiança nas instituições. Reparação adequada precisa ser contínua, transparente, coletiva quando necessário e acompanhada por monitoramento verificável."},
+    {"id":29,"topic":"Gentrificação verde","level":"dificil","prompt":"Um parque melhora o ambiente de uma área popular, mas os aluguéis sobem. Que política protege os benefícios sem expulsar os moradores?","answers":["Associar o parque a medidas de permanência, habitação acessível e proteção contra deslocamento involuntário.","Restringir o acesso ao parque aos moradores cadastrados antes da obra, evitando a chegada de novos visitantes.","Aguardar a estabilização do mercado imobiliário para avaliar se a valorização afetou a composição da vizinhança."],"correct":0,"explanation":"A melhoria ambiental não deve resultar na expulsão de quem vivia em condições mais precárias. Habitação acessível, segurança da posse e participação local ajudam a distribuir os benefícios sem deslocar a população."},
+    {"id":30,"topic":"Qualidade do ar","level":"facil","prompt":"Moradores de dois bairros contestam dados oficiais de qualidade do ar porque há poucas estações de monitoramento perto de suas casas. Qual resposta fortalece a confiança pública?","answers":["Publicar apenas a média da cidade, pois uma série única facilita a comparação anual dos indicadores.","Substituir as medições por relatos comunitários, que dispensam critérios técnicos de coleta e validação.","Ampliar medições, explicar métodos e incertezas e integrar observações comunitárias verificáveis."],"correct":2,"explanation":"Dados confiáveis exigem cobertura espacial adequada, transparência sobre métodos e explicação de incertezas. O conhecimento comunitário pode apontar lacunas e orientar a coleta, sem substituir critérios de qualidade."},
+    {"id":31,"topic":"Agrotóxicos e alimentação","level":"medio","prompt":"Pequenos agricultores relatam dificuldade de proteger lavouras e famílias da deriva de pulverizações realizadas em áreas próximas. Qual abordagem pública é mais completa?","answers":["Tratar o tema como conflito entre vizinhos e recomendar acordos privados, sem ampliar a fiscalização.","Investigar a exposição, fiscalizar aplicações e oferecer informação e assistência às comunidades afetadas.","Medir apenas a produtividade regional, supondo que ganhos econômicos representem benefício para todos."],"correct":1,"explanation":"A análise deve considerar saúde, ambiente, fiscalização, condições de trabalho e segurança alimentar. Informação acessível e acompanhamento público são necessários para que os custos da produção não recaiam desproporcionalmente sobre comunidades próximas."},
+    {"id":32,"topic":"Deslocamento climático","level":"facil","prompt":"Famílias deixam uma comunidade costeira após erosão e avanço do mar. Qual resposta pública reconhece melhor a dimensão do problema?","answers":["Planejar proteção ou reassentamento com moradia segura, participação e continuidade dos vínculos locais.","Tratar a mudança como decisão privada e oferecer orientações gerais para buscar moradia em outra região.","Priorizar a reconstrução física no mesmo local, mesmo quando estudos indicam risco persistente e crescente."],"correct":0,"explanation":"Deslocamentos relacionados ao clima envolvem moradia, trabalho, cultura e redes de apoio. A resposta deve avaliar riscos com transparência e construir alternativas dignas com as famílias, sem impor soluções que ampliem vulnerabilidades."},
+    {"id":33,"topic":"Acesso à justiça","level":"dificil","prompt":"Moradores querem contestar uma licença ambiental, mas enfrentam documentos técnicos complexos e custos para obter orientação. O que pode tornar o acesso à justiça mais efetivo?","answers":["Exigir que cada morador produza um laudo próprio antes de receber qualquer informação do órgão licenciador.","Limitar o acesso aos autos a representantes com formação jurídica, para preservar a precisão dos debates.","Garantir informação pública compreensível, assistência adequada e canais acessíveis para participação e contestação."],"correct":2,"explanation":"Direitos formais podem ser difíceis de exercer sem informação, tempo e apoio. Transparência ativa, linguagem acessível e mecanismos de assistência reduzem barreiras para que comunidades participem e contestem decisões."},
+    {"id":34,"topic":"Acessibilidade em desastres","level":"facil","prompt":"Um sistema de alerta de enchentes usa sirenes e mensagens de texto, mas não alcança adequadamente pessoas surdas, cegas ou com mobilidade reduzida. Qual melhoria é necessária?","answers":["Concentrar os avisos em redes sociais oficiais, que permitem atualizar rapidamente o conteúdo da emergência.","Combinar alertas visuais, sonoros e acessíveis com rotas, transporte e apoio definidos com as pessoas afetadas.","Manter o sistema atual e orientar cada família a criar seu próprio plano sem apoio dos serviços públicos."],"correct":1,"explanation":"A proteção em emergências precisa considerar diferentes formas de perceber alertas e se deslocar. Planejamento inclusivo, testes com os usuários e apoio organizado evitam que pessoas com deficiência sejam deixadas para trás."},
+    {"id":35,"topic":"Transição energética","level":"dificil","prompt":"Uma região poluente recebe um projeto de energia renovável, mas trabalhadores e moradores ficam fora do planejamento. O que torna a transição mais justa?","answers":["Combinar redução de impactos com diálogo, formação profissional, proteção de renda e participação das comunidades na definição dos benefícios.","Medir o sucesso apenas pela quantidade de energia limpa instalada, pois os efeitos sociais podem ser tratados separadamente.","Priorizar investidores e metas de produção, deixando a adaptação dos trabalhadores para quando as novas vagas estiverem disponíveis."],"correct":0,"explanation":"Uma transição energética justa considera quem ganha, quem perde e como os custos são distribuídos. Formação, proteção social, participação e benefícios locais precisam acompanhar a mudança tecnológica."}
   ];
+
+  var SESSION_SIZE = 10;
+  var HAND_SIZE = 3;
+  var LEVEL_LABEL = { facil: "Fácil", medio: "Médio", dificil: "Difícil" };
+  var LEVEL_NOTE = {
+    facil: "Perguntas diretas sobre conceitos e situações do cotidiano.",
+    medio: "Situações reais que pedem análise de consequências.",
+    dificil: "Casos complexos de racismo estrutural, território e políticas públicas."
+  };
+  var BONUS = { 2: 2, 3: 3, 5: 5, 10: 10 };
+  var BONUS_NOTE = {
+    2: "Boa sequência!",
+    3: "Você está no caminho certo!",
+    5: "Excelente conhecimento!",
+    10: "Domínio ambiental!"
+  };
 
   var screens = ["quiz-welcome", "quiz-draw", "quiz-question", "quiz-result"];
   var state = {
     pool: [],
+    total: 0,
+    level: "medio",
     round: 0,
     score: 0,
+    bonus: 0,
     hits: 0,
     misses: 0,
     streak: 0,
@@ -1792,6 +2152,9 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     misses: byId("quiz-misses"),
     comboWrap: byId("quiz-combo-wrap"),
     combo: byId("quiz-combo"),
+    levelChip: byId("quiz-level-chip"),
+    levelNote: byId("quiz-level-note"),
+    resultPoints: byId("quiz-result-points"),
     sound: byId("quiz-sound"),
     fx: byId("quiz-fx"),
     progressText: byId("quiz-progress-text"),
@@ -1833,6 +2196,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     copyStatus: byId("quiz-copy-status"),
     review: byId("quiz-review")
   };
+  var levelButtons = Array.prototype.slice.call(root.querySelectorAll("[data-level]"));
 
   /* A roleta sempre gira. Sem preferência salva, o sistema decide entre giro
      completo e econômico; o controle "Animações" guarda a escolha do usuário. */
@@ -2021,11 +2385,29 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     }
   }
 
-  function updateCombo() {
+  function updateCombo(milestone) {
     if (!el.comboWrap) return;
     el.combo.textContent = "×" + state.streak;
     el.combo.setAttribute("aria-label", "Acertos consecutivos: " + state.streak);
     el.comboWrap.hidden = state.streak < 2;
+    if (milestone && motionOn() && el.combo) {
+      el.combo.classList.remove("is-milestone");
+      void el.combo.offsetWidth;
+      el.combo.classList.add("is-milestone");
+      window.setTimeout(function () {
+        el.combo.classList.remove("is-milestone");
+      }, 660);
+    }
+  }
+
+  function setLevel(value) {
+    if (!LEVEL_NOTE[value]) return;
+    state.level = value;
+    levelButtons.forEach(function (button) {
+      button.setAttribute("aria-pressed", button.getAttribute("data-level") === value ? "true" : "false");
+    });
+    if (el.levelNote) el.levelNote.textContent = LEVEL_NOTE[value];
+    if (el.levelChip) el.levelChip.textContent = LEVEL_LABEL[value];
   }
 
   function bumpScore() {
@@ -2070,11 +2452,11 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     if (!fx.ctx && !sizeFx()) return;
     var palette = getComputedStyle(root);
     var colors = [
-      palette.getPropertyValue("--quiz-ink").trim() || "#14140F",
-      palette.getPropertyValue("--quiz-water").trim() || "#1E4B5A",
-      palette.getPropertyValue("--quiz-hazard").trim() || "#B33A12",
-      palette.getPropertyValue("--quiz-ink-2").trim() || "#3A382E",
-      palette.getPropertyValue("--quiz-muted").trim() || "#5F5A4D"
+      palette.getPropertyValue("--quiz-ink").trim() || "#292929",
+      palette.getPropertyValue("--quiz-water").trim() || "#244D38",
+      palette.getPropertyValue("--quiz-hazard").trim() || "#A94F35",
+      palette.getPropertyValue("--quiz-ink-2").trim() || "#49352B",
+      palette.getPropertyValue("--quiz-muted").trim() || "#6A5B4C"
     ];
     for (var i = 0; i < count; i++) {
       var angle = Math.random() * Math.PI * 2;
@@ -2237,10 +2619,10 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       deckTimer = window.setTimeout(function () {
         deckTimer = 0;
         el.deck.classList.remove("is-shuffling");
-        el.deckLabel.textContent = "35 cartas · " + (3 - state.round) + (state.round === 2 ? " sorteio restante" : " sorteios restantes");
+        el.deckLabel.textContent = Q.length + " cartas · " + (state.total - state.round) + (state.total - state.round === 1 ? " sorteio restante" : " sorteios restantes");
       }, 500);
     } else {
-      el.deckLabel.textContent = "35 cartas · " + (3 - state.round) + (state.round === 2 ? " sorteio restante" : " sorteios restantes");
+      el.deckLabel.textContent = Q.length + " cartas · " + (state.total - state.round) + (state.total - state.round === 1 ? " sorteio restante" : " sorteios restantes");
     }
   }
 
@@ -2249,11 +2631,15 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     clearHandTimer();
     if (el.hand) el.hand.classList.remove("is-shuffling");
     el.session.classList.add("is-active");
-    el.sessionStatus.textContent = "3 cartas por sessão";
+    el.sessionStatus.textContent = "3 cartas por rodada";
     el.handCards.forEach(function (card, index) {
       card.classList.remove("is-current", "is-complete");
       card.setAttribute("aria-label", "Carta " + (index + 1) + " de 3: ainda não sorteada");
     });
+  }
+
+  function handPos() {
+    return state.round % HAND_SIZE;
   }
 
   function markHandCurrent(index) {
@@ -2265,7 +2651,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
 
   function revealHand(index) {
     var card = el.handCards[index];
-    if (!card || !state.pool[index]) return;
+    if (!card || !state.pool[state.round]) return;
     card.classList.add("is-current");
     card.setAttribute("aria-label", "Carta " + (index + 1) + " de 3: sorteada");
     el.sessionStatus.textContent = "Carta " + (index + 1) + " de 3 sorteada";
@@ -2318,6 +2704,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     el.hits.textContent = String(state.hits);
     el.misses.textContent = String(state.misses);
 
+    var total = state.total || SESSION_SIZE;
     var label = "Aguardando início";
     var pct = 0;
 
@@ -2325,11 +2712,11 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       label = "Percurso concluído";
       pct = 100;
     } else if (state.phase === "question") {
-      label = "Questão " + (state.round + 1) + " de 3";
-      pct = Math.round(((state.round + 1) / 3) * 100);
+      label = "Questão " + (state.round + 1) + " de " + total;
+      pct = Math.round(((state.round + 1) / total) * 100);
     } else if (state.phase === "draw") {
-      label = "Sorteando questão " + (state.round + 1) + " de 3";
-      pct = Math.round((state.round / 3) * 100);
+      label = "Sorteando questão " + (state.round + 1) + " de " + total;
+      pct = Math.round((state.round / total) * 100);
     }
 
     el.progressText.textContent = label;
@@ -2387,15 +2774,20 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   }
 
   function start() {
-    state.pool = shuffle(Q).slice(0, 3);
+    var levelPool = Q.filter(function (item) { return item.level === state.level; });
+    if (!levelPool.length) levelPool = Q;
+    state.pool = shuffle(levelPool).slice(0, SESSION_SIZE);
+    state.total = state.pool.length;
     state.round = 0;
     state.score = 0;
+    state.bonus = 0;
     state.hits = 0;
     state.misses = 0;
     state.streak = 0;
     state.locked = false;
     state.history = [];
     if (el.copyStatus) el.copyStatus.textContent = "";
+    if (el.resultPoints) el.resultPoints.textContent = "";
     if (el.result) el.result.classList.remove("is-revealing");
     if (el.resultBadge) el.resultBadge.classList.remove("is-stamping");
     resetPanel();
@@ -2416,7 +2808,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     updateStats();
     show("quiz-draw");
     reel = buildReel();
-    markHandCurrent(state.round);
+    markHandCurrent(handPos());
     shuffleDeck();
     el.note.textContent = motionOn() ? "Roleta pronta · girando em instantes" : "Roleta pronta · giro econômico em instantes";
     el.spin.disabled = false;
@@ -2443,8 +2835,11 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     track.replaceChildren();
 
     var distractors = shuffle(Q.filter(function (item) {
-      return item.id !== question.id;
+      return item.id !== question.id && item.level === question.level;
     }));
+    if (!distractors.length) {
+      distractors = shuffle(Q.filter(function (item) { return item.id !== question.id; }));
+    }
 
     for (var i = 0; i < total; i++) {
       var tile = document.createElement("div");
@@ -2520,7 +2915,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     active.place(active.centerX());
     active.targetCard.classList.add("winner");
     shuffleHand();
-    revealHand(state.round);
+    revealHand(handPos());
     recenter = function () {
       if (state.phase !== "draw") return;
       active.place(active.centerX());
@@ -2605,14 +3000,13 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     updateStats();
 
     el.topic.textContent = question.topic;
-    el.qNumber.textContent = "PERGUNTA " + (state.round + 1) + " DE 3";
+    el.qNumber.textContent = "PERGUNTA " + (state.round + 1) + " DE " + state.total;
     el.prompt.textContent = question.prompt;
-    el.prompt.setAttribute("aria-label", "Pergunta " + (state.round + 1) + " de 3. Tema: " + question.topic + ". " + question.prompt);
+    el.prompt.setAttribute("aria-label", "Pergunta " + (state.round + 1) + " de " + state.total + ". Tema: " + question.topic + ". " + question.prompt);
     clearFeedback();
     el.next.textContent = state.round === 2 ? "Ver resultado" : "Próxima etapa";
 
     var order = shuffle([0, 1, 2]);
-    var tones = shuffle(["tone-teal", "tone-violet", "tone-amber"]);
     var answers = order.map(function (index) { return question.answers[index]; });
     var correctIndex = order.indexOf(question.correct);
 
@@ -2621,7 +3015,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     answers.forEach(function (text, index) {
       var button = document.createElement("button");
       button.type = "button";
-      button.className = "quiz-answer " + tones[index];
+      button.className = "quiz-answer tone-" + "abc".charAt(index);
 
       var letter = document.createElement("span");
       letter.className = "quiz-letter";
@@ -2653,8 +3047,9 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   }
 
   function scoreLine() {
-    return "Placar: " + state.hits + (state.hits === 1 ? " acerto" : " acertos") +
-      ", " + state.misses + (state.misses === 1 ? " erro" : " erros") + ".";
+    return state.score + (state.score === 1 ? " ponto" : " pontos") + " · " +
+      state.hits + (state.hits === 1 ? " acerto" : " acertos") + " · " +
+      state.misses + (state.misses === 1 ? " erro" : " erros") + ".";
   }
 
   function choose(index, question, answers, correctIndex) {
@@ -2675,21 +3070,25 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     });
 
     var ok = index === correctIndex;
+    var bonus = 0;
     if (ok) {
-      state.score++;
       state.hits++;
       state.streak++;
+      bonus = BONUS[state.streak] || 0;
+      state.bonus += bonus;
+      state.score += 1 + bonus;
     } else {
       state.misses++;
       state.streak = 0;
     }
-    updateCombo();
+    updateCombo(bonus > 0);
 
     state.history.push({
       question: question,
       chosen: answers[index],
       correct: answers[correctIndex],
-      ok: ok
+      ok: ok,
+      bonus: bonus
     });
 
     updateStats();
@@ -2703,7 +3102,8 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       el.feedbackText.textContent = "A alternativa mais consistente era " + "ABC".charAt(correctIndex) +
         ": “" + correctText + "”" + closing + " " + question.explanation;
     }
-    el.feedbackScore.textContent = scoreLine();
+    el.feedbackScore.textContent = scoreLine() +
+      (bonus ? " Bônus +" + bonus + " · " + BONUS_NOTE[state.streak] : "");
     el.feedback.classList.add("show", ok ? "is-good" : "is-bad");
     el.next.disabled = false;
     el.feedback.focus({ preventScroll: true });
@@ -2758,12 +3158,17 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     show("quiz-result");
     completeHand();
 
-    var pct = Math.round((state.score / 3) * 100);
-    el.finalScore.textContent = state.score + "/3";
+    var total = state.total || SESSION_SIZE;
+    var pct = Math.round((state.hits / total) * 100);
+    el.finalScore.textContent = state.hits + "/" + total;
     el.finalHits.textContent = String(state.hits);
     el.finalMisses.textContent = String(state.misses);
     el.finalPct.textContent = pct + "%";
-    el.resultBadge.hidden = state.score !== 3;
+    el.resultBadge.textContent = "Sessão perfeita · " + total + " de " + total;
+    el.resultBadge.hidden = state.hits !== total;
+    if (el.resultPoints) {
+      el.resultPoints.textContent = "Pontuação: " + state.score + " pontos · bônus de sequência: " + state.bonus + " · nível " + LEVEL_LABEL[state.level];
+    }
     updateCombo();
     el.finalScore.classList.remove("is-pop");
     if (motionOn()) {
@@ -2775,26 +3180,26 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
         el.finalScore.classList.remove("is-pop");
       }, 760);
     }
-    playFinish(state.score);
-    if (state.score === 3) {
+    playFinish(state.hits);
+    if (state.hits === total) {
       window.requestAnimationFrame(celebrate);
     }
 
     var title;
     var message;
-    if (state.score === 3) {
+    if (state.hits === total) {
       title = "Leitura precisa do território.";
       message = "Você reconheceu como território, desigualdade e proteção se cruzam. Vale seguir perguntando quem decide, quem participa e quem arca com o risco.";
-    } else if (state.score === 2) {
-      title = "Leitura atenta, com uma lacuna.";
-      message = "Você identificou pontos centrais. Reveja a questão em que a leitura escapou e observe as causas históricas, as escolhas institucionais e as vozes ausentes da decisão.";
+    } else if (state.hits >= Math.ceil(total * 0.6)) {
+      title = "Leitura atenta, com lacunas.";
+      message = "Você identificou pontos centrais. Reveja as questões em que a leitura escapou e observe as causas históricas, as escolhas institucionais e as vozes ausentes da decisão.";
     } else {
       title = "O parecer fica em aberto.";
       message = "O tema exige olhar além do problema visível. Use as explicações como ponto de partida para observar como raça, renda, território e política pública se combinam.";
     }
 
     el.resultTitle.textContent = title;
-    el.resultTitle.setAttribute("aria-label", "Resultado: " + state.score + " de 3 acertos, " + pct + "% de aproveitamento. " + title);
+    el.resultTitle.setAttribute("aria-label", "Resultado: " + state.hits + " de " + total + " acertos, " + pct + "% de aproveitamento. " + title);
     el.resultMessage.textContent = message;
     el.review.replaceChildren();
 
@@ -2845,10 +3250,13 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   }
 
   function reportText() {
-    var pct = Math.round((state.score / 3) * 100);
+    var total = state.total || SESSION_SIZE;
+    var pct = Math.round((state.hits / total) * 100);
     var lines = [
       "PARECER DA SESSÃO — RACISMO AMBIENTAL",
-      "Placar: " + state.score + "/3 (" + pct + "%)",
+      "Dificuldade: " + LEVEL_LABEL[state.level],
+      "Placar: " + state.hits + "/" + total + " (" + pct + "%)",
+      "Pontos: " + state.score + " · bônus de sequência: " + state.bonus,
       "Acertos: " + state.hits + " · Erros: " + state.misses,
       ""
     ];
@@ -2856,6 +3264,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       lines.push((index + 1) + ". " + item.question.prompt);
       lines.push("Sua resposta: " + item.chosen);
       if (!item.ok) lines.push("Resposta correta: " + item.correct);
+      if (item.bonus) lines.push("Bônus de sequência: +" + item.bonus);
       lines.push(item.question.explanation);
       lines.push("");
     });
@@ -2890,8 +3299,40 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
 
   if (el.copy) el.copy.addEventListener("click", copyReport);
 
+  function showWelcome() {
+    resetPanel();
+    state.phase = "idle";
+    state.round = 0;
+    state.total = 0;
+    state.pool = [];
+    state.score = 0;
+    state.bonus = 0;
+    state.hits = 0;
+    state.misses = 0;
+    state.streak = 0;
+    state.history = [];
+    state.locked = false;
+    if (el.resultPoints) el.resultPoints.textContent = "";
+    show("quiz-welcome");
+    updateStats();
+    updateCombo();
+    requestAnimationFrame(function () {
+      el.start.focus({ preventScroll: true });
+    });
+  }
+
+  function selectLevel(value) {
+    setLevel(value);
+    if (state.phase === "idle") updateStats();
+  }
+
   el.start.addEventListener("click", start);
-  el.again.addEventListener("click", start);
+  el.again.addEventListener("click", showWelcome);
+  levelButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      selectLevel(button.getAttribute("data-level"));
+    });
+  });
   el.spin.addEventListener("click", spin);
   el.motion.addEventListener("click", function () {
     setMotion(!motionOn());
@@ -2907,14 +3348,18 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     if (state.phase !== "question" || !state.locked) return;
     el.next.disabled = true;
     state.round++;
-    if (state.round >= 3) {
+    if (state.round >= state.total) {
       finish();
     } else {
+      if (state.round % HAND_SIZE === 0) resetHand();
       prepareDraw();
     }
   });
 
-  root.addEventListener("quiz:start", start);
+  root.addEventListener("quiz:start", function () {
+    if (state.phase === "idle") showWelcome();
+    else start();
+  });
 
   window.addEventListener("resize", function () {
     stopFx();
@@ -2936,6 +3381,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     else if (reduceQuery.addListener) reduceQuery.addListener(onReduceChange);
   }
   applySoundUI();
+  setLevel(state.level);
   buildDeck();
   updateStats();
 })();
@@ -3068,12 +3514,12 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   var KEY = "quiz:palette:v1";
   var SPIN_KEY = "quiz:spin:v1";
   var CUSTOM_KEY = "quiz:custom:v1";
-  var PALETTES = ["papel", "mata", "cianotipo", "ocre", "verde", "mata-densa", "argila", "grafite", "indigo", "noite"];
+  var PALETTES = ["terra", "alerta", "papel", "mata", "cianotipo", "ocre", "verde", "mata-densa", "argila", "grafite", "indigo", "noite"];
   var SPEEDS = ["rapido", "normal", "longo"];
   var CUSTOM_FIELDS = ["bg", "paper2", "ink", "water", "hazard"];
   var CUSTOM_DEFAULT = {
-    bg: "#E9E3D6", paper2: "#DDD3C1", ink: "#14140F",
-    water: "#1E4B5A", hazard: "#B33A12"
+    bg: "#E8E0D1", paper2: "#D6C9B2", ink: "#292929",
+    water: "#244D38", hazard: "#A94F35"
   };
   var CUSTOM_VARS = ["--bg", "--paper-2", "--wash", "--ink", "--ink-2", "--muted", "--line", "--water", "--hazard", "--hazard-ink"];
   var root = document.documentElement;
@@ -3237,7 +3683,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     root.style.removeProperty("color-scheme");
   }
   function apply(value, persist) {
-    var palette = isPalette(value) ? value : "papel";
+    var palette = isPalette(value) ? value : "terra";
     root.setAttribute("data-palette", palette);
     clearCustomVars();
     pressPalette(palette);
@@ -3318,7 +3764,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   function currentConfig() {
     return {
       v: 1,
-      palette: root.getAttribute("data-palette") || "papel",
+      palette: root.getAttribute("data-palette") || "terra",
       spin: readSpeed(),
       custom: currentCustom()
     };
@@ -3363,7 +3809,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     syncInputs(custom);
     paintSwatch(custom);
   } else {
-    apply(stored() || root.getAttribute("data-palette") || "papel", false);
+    apply(stored() || root.getAttribute("data-palette") || "terra", false);
     syncInputs(computedColors());
     paintSwatch(custom || computedColors());
   }
@@ -3687,6 +4133,426 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   }, { rootMargin: "0px 0px -10% 0px", threshold: 0.01 });
 
   pending.forEach(function (node) { io.observe(node); });
+})();
+/* Casos reais do mapa. Coordenadas aproximadas do município ou da área citada.
+   nudge = pequeno deslocamento visual (em % do mapa) para separar pinos próximos.
+   Fontes verificadas em 19/11/2026. */
+var MAP_DATA = [
+  {
+    id: "mariana",
+    name: "Mariana",
+    uf: "MG",
+    lon: -43.47,
+    lat: -20.24,
+    nudge: [-3.0, -1.8],
+    category: "barragens",
+    evidence: "Caso documentado",
+    title: "Rompimento da barragem de Fundão",
+    description: "Em 5 de novembro de 2015, a barragem de Fundão, da Samarco, rompeu e lançou mais de 40 milhões de metros cúbicos de rejeitos na bacia do rio Doce.",
+    impacts: "Mortes, destruição de comunidades, interrupção do abastecimento de água e danos à pesca e à biodiversidade ao longo de 663 km.",
+    source: "MPF · Caso Samarco",
+    url: "https://www.mpf.mp.br/grandes-casos/caso-samarco"
+  },
+  {
+    id: "brumadinho",
+    name: "Brumadinho",
+    uf: "MG",
+    lon: -44.12,
+    lat: -20.12,
+    nudge: [3.0, 1.8],
+    category: "barragens",
+    evidence: "Caso documentado",
+    title: "Rompimento da barragem B1",
+    description: "Em 25 de janeiro de 2019, a barragem B1 da Mina Córrego do Feijão, da Vale, rompeu e atingiu a área administrativa e comunidades próximas.",
+    impacts: "270 mortes, destruição de moradias e contaminação da bacia do rio Paraopeba.",
+    source: "MPMG · Brumadinho",
+    url: "https://www.mpmg.mp.br/portal/menu/comunicacao/campanhas/brumadinho-2-anos.shtml"
+  },
+  {
+    id: "cubatao",
+    name: "Cubatão",
+    uf: "SP",
+    lon: -46.3887,
+    lat: -23.9578,
+    nudge: [0, 0],
+    category: "industria",
+    evidence: "Estudo de caso",
+    title: "Passivo químico da Rhodia",
+    description: "Até o início dos anos 1980, a Rhodia despejou resíduos tóxicos clandestinamente em áreas de Cubatão e São Vicente, na Baixada Santista.",
+    impacts: "Contaminação do solo, da água e do ar; moradores e trabalhadores convivem com um passivo ambiental que ainda não foi plenamente reparado.",
+    source: "Fiocruz · Mapa de Conflitos",
+    url: "https://mapadeconflitos.ensp.fiocruz.br/conflito/sp-cubatao-passivo-ambiental-devido-a-contaminacao-quimica-provocada-pela-rhodia-ainda-nao-foi-reparado/"
+  },
+  {
+    id: "piquia",
+    name: "Piquiá de Baixo",
+    uf: "MA",
+    lon: -47.5008,
+    lat: -4.9475,
+    nudge: [1.5, 0.5],
+    category: "industria",
+    evidence: "Estudo de caso",
+    title: "Poluição siderúrgica em Açailândia",
+    description: "A comunidade de Piquiá de Baixo, em Açailândia, convive com a poluição de indústrias de ferro-gusa e com o transporte de minério de ferro.",
+    impacts: "Poluição do ar, da água e do solo; doenças respiratórias e pressão para deixar o território.",
+    source: "Fiocruz · Mapa de Conflitos",
+    url: "https://mapadeconflitos.ensp.fiocruz.br/conflito/ma-industria-guseira-contaminacao-da-agua-falta-de-seguranca-e-condicoes-improprias-a-vida-e-a-saude-dos-moradores-do-distrito-industrial-de-pequia-acailandia/"
+  },
+  {
+    id: "belo-monte",
+    name: "Altamira",
+    uf: "PA",
+    lon: -52.0146,
+    lat: -2.8868,
+    nudge: [0, 0],
+    category: "energia",
+    evidence: "Estudo de caso",
+    title: "Complexo hidrelétrico de Belo Monte",
+    description: "A usina de Belo Monte, no rio Xingu, alterou o regime do rio e transformou o cotidiano de comunidades indígenas, ribeirinhas e urbanas em Altamira e Vitória do Xingu.",
+    impacts: "Redução da pesca, deslocamento de famílias, pressão sobre territórios indígenas e perda de modos de vida.",
+    source: "Fiocruz · Mapa de Conflitos",
+    url: "https://mapadeconflitos.ensp.fiocruz.br/conflito/pa-complexo-hidreletrico-de-belo-monte-ameaca-povos-indigenas-ribeirinhos-e-parte-da-populacao-de-altamira/"
+  },
+  {
+    id: "manaus",
+    name: "Manaus",
+    uf: "AM",
+    lon: -60.025,
+    lat: -3.1019,
+    nudge: [0, 0],
+    category: "clima",
+    evidence: "Evento climático",
+    title: "Seca histórica de 2023",
+    description: "Em 2023, os maiores rios da bacia amazônica atingiram marcas recordes de seca e os 62 municípios do Amazonas entraram em estado de emergência.",
+    impacts: "Comunidades isoladas, falta de alimentos e de água potável, dificuldade de acesso a serviços e piora da qualidade do ar com as queimadas.",
+    source: "ISA · 2023: o ano em que a Amazônia secou",
+    url: "https://www.socioambiental.org/noticias-socioambientais/2023-o-ano-em-que-amazonia-secou"
+  },
+  {
+    id: "rio-grande-do-sul",
+    name: "Porto Alegre e região",
+    uf: "RS",
+    lon: -51.2177,
+    lat: -30.0346,
+    nudge: [0, 0],
+    category: "clima",
+    evidence: "Evento climático",
+    title: "Enchentes de 2024",
+    description: "Chuvas intensas a partir de abril de 2024 provocaram enchentes que atingiram 94% dos municípios do Rio Grande do Sul.",
+    impacts: "Mais de 2 milhões de pessoas afetadas, mortes, desabrigados, perda de moradias e interrupção de serviços.",
+    source: "ONU Brasil · Enchentes no Rio Grande do Sul",
+    url: "https://brasil.un.org/pt-br/280722-enchentes-no-rio-grande-do-sul"
+  },
+  {
+    id: "igarassu",
+    name: "Igarassu",
+    uf: "PE",
+    lon: -34.9024,
+    lat: -7.8378,
+    nudge: [0, 0],
+    category: "industria",
+    evidence: "Estudo de caso",
+    title: "Aterro sanitário industrial no Grande Recife",
+    description: "A instalação de um aterro sanitário industrial na região metropolitana do Recife gerou preocupação com a contaminação de rios, mananciais e da pesca.",
+    impacts: "Risco à saúde pública, à atividade pesqueira e ao abastecimento de água de municípios do Grande Recife.",
+    source: "Fiocruz · Mapa de Conflitos",
+    url: "https://mapadeconflitos.ensp.fiocruz.br/conflito/pe-aterro-sanitario-industrial-ameaca-pesca-e-a-saude-publica-na-principal-regiao-pesqueira-de-pernambuco-situada-no-grande-recife-pescadores-protestam/"
+  }
+];
+var MAP_CATEGORIES = {
+  barragens: { label: "Barragens e mineração", letter: "B" },
+  industria: { label: "Indústria e resíduos", letter: "I" },
+  energia: { label: "Energia e território", letter: "E" },
+  clima: { label: "Clima e desastres", letter: "C" }
+};
+/* Interações do mapa: pinos, cartão de detalhe, zoom, arraste e lista textual. */
+(function () {
+  "use strict";
+  var root = document.getElementById("mapa");
+  if (!root || typeof MAP_DATA === "undefined" || !MAP_DATA.length) return;
+
+  var viewport = root.querySelector("[data-map-viewport]");
+  var canvas = root.querySelector("[data-map-canvas]");
+  var pinsBox = root.querySelector("[data-map-pins]");
+  var card = root.querySelector("[data-map-card]");
+  var empty = root.querySelector("[data-map-empty]");
+  var content = root.querySelector("[data-map-content]");
+  var closeButton = root.querySelector("[data-map-close]");
+  var list = root.querySelector("[data-map-list]");
+  var zoomLevel = root.querySelector("[data-map-zoom-level]");
+  var zoomIn = root.querySelector('[data-map-zoom="in"]');
+  var zoomOut = root.querySelector('[data-map-zoom="out"]');
+  var zoomReset = root.querySelector('[data-map-zoom="reset"]');
+  if (!viewport || !canvas || !pinsBox || !card || !empty || !content || !list) return;
+
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var pins = {};
+  var lastPin = null;
+  var view = { scale: 1, x: 0, y: 0 };
+  var drag = null;
+  var animationTimer = 0;
+  var MIN_SCALE = 1;
+  var MAX_SCALE = 3;
+  var STEP = 0.5;
+
+  function addHiddenWarning(link) {
+    var warning = document.createElement("span");
+    warning.className = "map-sr";
+    warning.textContent = " (abre em nova aba)";
+    link.appendChild(warning);
+  }
+
+  function project(item) {
+    var x = ((item.lon + 73.987235) / 39.257242) * 100;
+    var y = ((5.244486 - item.lat) / 39.012864) * 100;
+    return { x: (x + 4) / 108 * 100, y: (y + 4) / 108 * 100 };
+  }
+
+  function buildPin(item) {
+    var point = project(item);
+    var pin = document.createElement("button");
+    var letter = document.createElement("span");
+    pin.type = "button";
+    pin.className = "map-pin map-pin--" + item.category;
+    pin.style.setProperty("--pin-x", point.x + "%");
+    pin.style.setProperty("--pin-y", point.y + "%");
+    pin.style.setProperty("--nudge-x", item.nudge[0] + "%");
+    pin.style.setProperty("--nudge-y", item.nudge[1] + "%");
+    pin.setAttribute("aria-label", item.name + " (" + item.uf + "): " + item.title);
+    pin.setAttribute("aria-expanded", "false");
+    pin.setAttribute("aria-controls", "mapa-card");
+    letter.setAttribute("aria-hidden", "true");
+    letter.textContent = MAP_CATEGORIES[item.category].letter;
+    pin.appendChild(letter);
+    pin.addEventListener("click", function () {
+      openCase(item, pin);
+    });
+    pinsBox.appendChild(pin);
+    pins[item.id] = pin;
+  }
+
+  function buildList(item, index) {
+    var node = document.createElement("li");
+    var title = document.createElement("h3");
+    var meta = document.createElement("p");
+    var description = document.createElement("p");
+    var impacts = document.createElement("p");
+    var source = document.createElement("p");
+    var link = document.createElement("a");
+    var actions = document.createElement("button");
+    title.textContent = (index + 1) + ". " + item.title;
+    meta.className = "map-list-meta";
+    meta.textContent = item.evidence + " · " + item.name + " (" + item.uf + ")";
+    description.textContent = item.description;
+    impacts.textContent = "Impactos: " + item.impacts;
+    source.className = "map-list-source";
+    source.appendChild(document.createTextNode("Fonte: "));
+    link.href = item.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = item.source;
+    addHiddenWarning(link);
+    source.appendChild(link);
+    actions.type = "button";
+    actions.className = "map-list-open";
+    actions.textContent = "Ver no mapa";
+    actions.addEventListener("click", function () {
+      openCase(item, pins[item.id]);
+    });
+    node.appendChild(title);
+    node.appendChild(meta);
+    node.appendChild(description);
+    node.appendChild(impacts);
+    node.appendChild(source);
+    node.appendChild(actions);
+    list.appendChild(node);
+  }
+
+  function openCase(item, pin) {
+    lastPin = pin || null;
+    var evidence = root.querySelector("[data-map-evidence]");
+    var title = root.querySelector("[data-map-title]");
+    var meta = root.querySelector("[data-map-meta]");
+    var description = root.querySelector("[data-map-description]");
+    var impacts = root.querySelector("[data-map-impacts]");
+    var source = root.querySelector("[data-map-source]");
+    evidence.textContent = MAP_CATEGORIES[item.category].label + " · " + item.evidence;
+    title.textContent = item.title;
+    meta.textContent = item.name + " (" + item.uf + ") · posição aproximada";
+    description.textContent = item.description;
+    impacts.textContent = item.impacts;
+    source.href = item.url;
+    source.target = "_blank";
+    source.rel = "noopener noreferrer";
+    source.textContent = item.source;
+    addHiddenWarning(source);
+    empty.hidden = true;
+    content.hidden = false;
+    card.setAttribute("data-open", "true");
+    Object.keys(pins).forEach(function (id) {
+      pins[id].setAttribute("aria-expanded", id === item.id ? "true" : "false");
+    });
+    title.focus({ preventScroll: true });
+    if (window.matchMedia("(max-width: 900px)").matches) {
+      card.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" });
+    }
+  }
+
+  function closeCase() {
+    content.hidden = true;
+    empty.hidden = false;
+    card.removeAttribute("data-open");
+    Object.keys(pins).forEach(function (id) {
+      pins[id].setAttribute("aria-expanded", "false");
+    });
+    if (lastPin && document.contains(lastPin)) lastPin.focus({ preventScroll: true });
+  }
+
+  function clampView() {
+    var maxX = (view.scale - 1) * canvas.clientWidth / 2;
+    var maxY = (view.scale - 1) * canvas.clientHeight / 2;
+    view.x = Math.max(-maxX, Math.min(maxX, view.x));
+    view.y = Math.max(-maxY, Math.min(maxY, view.y));
+  }
+
+  function updateZoomButtons() {
+    if (zoomIn) zoomIn.disabled = view.scale >= MAX_SCALE;
+    if (zoomOut) zoomOut.disabled = view.scale <= MIN_SCALE;
+    if (zoomReset) zoomReset.disabled = view.scale === MIN_SCALE && view.x === 0 && view.y === 0;
+    if (zoomLevel) {
+      var value = Math.round(view.scale * 10) / 10;
+      zoomLevel.textContent = (value % 1 === 0 ? value.toFixed(0) : value.toFixed(1).replace(".", ",")) + "×";
+    }
+  }
+
+  function applyView(animate) {
+    canvas.style.transform = "translate(" + view.x + "px," + view.y + "px) scale(" + view.scale + ")";
+    canvas.style.setProperty("--pin-scale", (1 / view.scale).toFixed(4));
+    updateZoomButtons();
+    if (!animate || reduceMotion) {
+      canvas.classList.remove("is-animating");
+      return;
+    }
+    canvas.classList.add("is-animating");
+    window.clearTimeout(animationTimer);
+    animationTimer = window.setTimeout(function () {
+      canvas.classList.remove("is-animating");
+    }, 260);
+  }
+
+  function setZoom(next) {
+    var scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, next));
+    if (scale === view.scale) return;
+    view.scale = scale;
+    if (scale === MIN_SCALE) {
+      view.x = 0;
+      view.y = 0;
+    }
+    clampView();
+    applyView(true);
+  }
+
+  function resetView() {
+    view.scale = MIN_SCALE;
+    view.x = 0;
+    view.y = 0;
+    applyView(true);
+  }
+
+  function onPointerDown(event) {
+    if (event.button !== 0 && event.pointerType === "mouse") return;
+    if (event.target.closest && event.target.closest(".map-pin")) return;
+    drag = { id: event.pointerId, x: event.clientX, y: event.clientY, startX: view.x, startY: view.y };
+    viewport.classList.add("is-dragging");
+    canvas.classList.remove("is-animating");
+    if (viewport.setPointerCapture) {
+      try { viewport.setPointerCapture(event.pointerId); } catch (error) {}
+    }
+  }
+
+  function onPointerMove(event) {
+    if (!drag || event.pointerId !== drag.id) return;
+    view.x = drag.startX + (event.clientX - drag.x);
+    view.y = drag.startY + (event.clientY - drag.y);
+    clampView();
+    applyView(false);
+    event.preventDefault();
+  }
+
+  function onPointerUp(event) {
+    if (!drag || event.pointerId !== drag.id) return;
+    drag = null;
+    viewport.classList.remove("is-dragging");
+  }
+
+  function onKeydown(event) {
+    var handled = true;
+    if (event.key === "+" || event.key === "=") {
+      setZoom(view.scale + STEP);
+    } else if (event.key === "-" || event.key === "_") {
+      setZoom(view.scale - STEP);
+    } else if (event.key === "0") {
+      resetView();
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowRight" ||
+      event.key === "ArrowUp" || event.key === "ArrowDown") {
+      if (view.scale === MIN_SCALE) return;
+      var amount = 28;
+      if (event.key === "ArrowLeft") view.x -= amount;
+      if (event.key === "ArrowRight") view.x += amount;
+      if (event.key === "ArrowUp") view.y -= amount;
+      if (event.key === "ArrowDown") view.y += amount;
+      clampView();
+      applyView(true);
+    } else {
+      handled = false;
+    }
+    if (handled) event.preventDefault();
+  }
+
+  MAP_DATA.forEach(function (item) {
+    if (!MAP_CATEGORIES[item.category]) return;
+    buildPin(item);
+    buildList(item, MAP_DATA.indexOf(item));
+  });
+
+  root.querySelectorAll("[data-map-zoom]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      var action = button.getAttribute("data-map-zoom");
+      if (action === "in") setZoom(view.scale + STEP);
+      else if (action === "out") setZoom(view.scale - STEP);
+      else resetView();
+    });
+  });
+
+  if (closeButton) closeButton.addEventListener("click", closeCase);
+  viewport.addEventListener("pointerdown", onPointerDown);
+  viewport.addEventListener("pointermove", onPointerMove);
+  viewport.addEventListener("pointerup", onPointerUp);
+  viewport.addEventListener("pointercancel", onPointerUp);
+  viewport.addEventListener("dblclick", function (event) {
+    if (event.target.closest && event.target.closest(".map-pin")) return;
+    setZoom(view.scale + STEP);
+  });
+  viewport.addEventListener("keydown", onKeydown);
+  root.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && card.getAttribute("data-open") === "true") {
+      closeCase();
+    }
+  });
+
+  if (window.ResizeObserver) {
+    new ResizeObserver(function () {
+      clampView();
+      applyView(false);
+    }).observe(viewport);
+  } else {
+    window.addEventListener("resize", function () {
+      clampView();
+      applyView(false);
+    });
+  }
+
+  applyView(false);
 })();
 </script>
 </body>
