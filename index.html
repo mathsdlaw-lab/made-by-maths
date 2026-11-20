@@ -3237,8 +3237,11 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   }
 
   function markPassingAt(x, pitch) {
-    if (!reel || !reel.win || !pitch) return;
-    var index = Math.round((reel.win.clientWidth / 2 - x) / pitch);
+    if (!reel || !reel.win || !pitch || !reel.cards || !reel.cards.length) return;
+    var first = reel.cards[0];
+    var cardWidth = first.offsetWidth || pitch;
+    var firstCenter = first.offsetLeft + cardWidth / 2;
+    var index = Math.round((reel.win.clientWidth / 2 - x - firstCenter) / pitch);
     markPassing(Math.max(0, Math.min(reel.cards.length - 1, index)));
   }
 
