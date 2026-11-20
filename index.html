@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#E8E0D1">
+<meta name="theme-color" content="#EADFC6">
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="Laudo de campo sobre racismo ambiental no Brasil: em 3 perguntas e em um mapa de casos reais, observe como desigualdade social e risco ambiental se cruzam no território.">
 <link rel="canonical" href="https://mathsdlaw-lab.github.io/made-by-maths/">
@@ -451,6 +451,7 @@
   overflow-wrap:anywhere
 }
 .map-card h3:focus{outline:none}
+.map-card h3:focus-visible{outline:3px solid var(--hazard);outline-offset:4px}
 .map-card-empty h3{padding-right:0}
 .map-card p{margin:0 0 10px;color:var(--ink-2);font-size:13.5px;line-height:1.62;overflow-wrap:anywhere}
 .map-card-meta{
@@ -514,6 +515,14 @@
 }
 .map-list-open:hover{border-color:var(--ink);background:var(--paper-2)}
 .map-list-open:focus-visible{outline:3px solid var(--hazard);outline-offset:2px}
+@media(max-width:820px){
+  .brand,.site-nav a,.settings-toggle,body #quiz .quiz-control{min-height:44px}
+  .site-nav a{display:inline-flex;align-items:center}
+  .hero-layer,.hero-layer-reset,.map-control,.map-list-open{min-height:44px}
+  .map-control{min-width:44px}
+  .map-card-close{width:44px;height:44px}
+  .map-pin::before{inset:-11px}
+}
 @media(max-width:900px){
   .map-layout{grid-template-columns:1fr}
   .map-card{min-height:0}
@@ -525,7 +534,7 @@
   .map-layout{gap:18px;margin-top:22px}
   .map-toolbar{gap:8px}
   .map-instruction{font-size:9.5px}
-  .map-control{min-width:40px;min-height:40px}
+  .map-control{min-width:44px;min-height:44px}
   .map-pin{font-size:10px;--nudge-scale:2.2}
   .map-pin--energia{width:20px;height:20px;min-width:20px;min-height:20px}
   .map-card{padding:16px}
@@ -561,16 +570,18 @@ body.is-quiz-focus .map-section{display:none!important}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{
-  margin:0;background:transparent;color:var(--ink);font-family:var(--sans);
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
   font-size:16px;line-height:1.5;min-height:100vh
 }
 ::selection{background:var(--water);color:var(--bg)}
+a,button{touch-action:manipulation}
 a{color:inherit;text-underline-offset:3px;text-decoration-thickness:1px}
 a:hover{text-decoration-thickness:2px}
 a:focus-visible{outline:3px solid var(--hazard);outline-offset:4px}
 .wrap{width:min(1160px,calc(100% - 40px));margin-inline:auto}
 .skip{
-  position:absolute;left:12px;top:-60px;z-index:100;padding:10px 16px;
+  position:absolute;left:12px;top:-60px;z-index:100;min-height:44px;padding:10px 16px;
+  display:inline-flex;align-items:center;
   background:var(--ink);color:var(--bg);font-family:var(--mono);font-size:11px;
   text-decoration:none
 }
@@ -691,8 +702,12 @@ a:focus-visible{outline:3px solid var(--hazard);outline-offset:4px}
 }
 @media (max-width:560px){
   .wrap{width:calc(100% - 28px)}
-  .site-head-in{height:58px}
-  .site-nav{display:none}
+  .site-head-in{height:58px;gap:6px}
+  .brand{font-size:0;gap:0;min-height:44px}
+  .brand-mark{font-size:14px}
+  .head-end{flex:1;gap:2px;justify-content:flex-end}
+  .site-nav{display:flex;gap:0;font-size:9.5px;letter-spacing:.02em}
+  .site-nav a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:0 5px;white-space:nowrap}
   .hero{padding:32px 0 28px}
   .hero-sign{top:6px;font-size:8.5px}
   .hero h1{font-size:clamp(44px,13vw,64px)}
@@ -1640,27 +1655,27 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       <div class="palette-colors">
         <label class="palette-color" for="custom-bg">
           <span>Fundo</span>
-          <input type="color" id="custom-bg" data-custom-color="bg" value="#E8E0D1">
+          <input type="color" id="custom-bg" name="custom-bg" autocomplete="off" data-custom-color="bg" value="#E8E0D1">
           <span class="palette-hex" data-custom-value="bg">#E8E0D1</span>
         </label>
         <label class="palette-color" for="custom-paper2">
           <span>Papel 2</span>
-          <input type="color" id="custom-paper2" data-custom-color="paper2" value="#D6C9B2">
+          <input type="color" id="custom-paper2" name="custom-paper2" autocomplete="off" data-custom-color="paper2" value="#D6C9B2">
           <span class="palette-hex" data-custom-value="paper2">#D6C9B2</span>
         </label>
         <label class="palette-color" for="custom-ink">
           <span>Tinta</span>
-          <input type="color" id="custom-ink" data-custom-color="ink" value="#292929">
+          <input type="color" id="custom-ink" name="custom-ink" autocomplete="off" data-custom-color="ink" value="#292929">
           <span class="palette-hex" data-custom-value="ink">#292929</span>
         </label>
         <label class="palette-color" for="custom-water">
           <span>Água</span>
-          <input type="color" id="custom-water" data-custom-color="water" value="#244D38">
+          <input type="color" id="custom-water" name="custom-water" autocomplete="off" data-custom-color="water" value="#244D38">
           <span class="palette-hex" data-custom-value="water">#244D38</span>
         </label>
         <label class="palette-color" for="custom-hazard">
           <span>Risco</span>
-          <input type="color" id="custom-hazard" data-custom-color="hazard" value="#A94F35">
+          <input type="color" id="custom-hazard" name="custom-hazard" autocomplete="off" data-custom-color="hazard" value="#A94F35">
           <span class="palette-hex" data-custom-value="hazard">#A94F35</span>
         </label>
       </div>
@@ -1700,23 +1715,23 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       </div>
       <div class="bgfx-group">
         <h4>Cores</h4>
-        <div class="bgfx-row"><label for="bgfx-pat-color">Cor do padrão</label><input id="bgfx-pat-color" type="color" value="#3F4D2A"></div>
-        <div class="bgfx-row"><label for="bgfx-base-color">Cor do fundo</label><input id="bgfx-base-color" type="color" value="#EADFC6"></div>
+        <div class="bgfx-row"><label for="bgfx-pat-color">Cor do padrão</label><input id="bgfx-pat-color" name="bgfx-pat-color" autocomplete="off" type="color" value="#3F4D2A"></div>
+        <div class="bgfx-row"><label for="bgfx-base-color">Cor do fundo</label><input id="bgfx-base-color" name="bgfx-base-color" autocomplete="off" type="color" value="#EADFC6"></div>
         <div class="bgfx-row-actions"><button type="button" class="bgfx-chip" id="bgfx-use-theme" aria-pressed="true">Usar cores do tema</button></div>
       </div>
       <div class="bgfx-group">
         <h4>Ajustes</h4>
-        <div class="bgfx-row"><label for="bgfx-intensity">Intensidade</label><output id="bgfx-intensity-val">50</output><input id="bgfx-intensity" type="range" min="2" max="50" value="50"></div>
-        <div class="bgfx-row"><label for="bgfx-size">Tamanho</label><output id="bgfx-size-val">1100</output><input id="bgfx-size" type="range" min="200" max="1400" step="20" value="1100"></div>
-        <div class="bgfx-row"><label for="bgfx-rot">Rotação</label><output id="bgfx-rot-val">0</output><input id="bgfx-rot" type="range" min="-45" max="45" value="0"></div>
-        <div class="bgfx-row"><label for="bgfx-repeat">Repetição</label><select id="bgfx-repeat"><option value="repeat" selected>Repetir (azulejo)</option><option value="no-repeat">Único</option></select></div>
+        <div class="bgfx-row"><label for="bgfx-intensity">Intensidade</label><output id="bgfx-intensity-val">50</output><input id="bgfx-intensity" name="bgfx-intensity" type="range" min="2" max="50" value="50"></div>
+        <div class="bgfx-row"><label for="bgfx-size">Tamanho</label><output id="bgfx-size-val">1100</output><input id="bgfx-size" name="bgfx-size" type="range" min="200" max="1400" step="20" value="1100"></div>
+        <div class="bgfx-row"><label for="bgfx-rot">Rotação</label><output id="bgfx-rot-val">0</output><input id="bgfx-rot" name="bgfx-rot" type="range" min="-45" max="45" value="0"></div>
+        <div class="bgfx-row"><label for="bgfx-repeat">Repetição</label><select id="bgfx-repeat" name="bgfx-repeat"><option value="repeat" selected>Repetir (azulejo)</option><option value="no-repeat">Único</option></select></div>
         <div class="bgfx-row-actions"><button type="button" class="bgfx-chip" id="bgfx-interact" aria-pressed="true">Interação (mouse/rolagem)</button><button type="button" class="bgfx-chip" id="bgfx-reset-colors" aria-pressed="false">Reset cores</button></div>
       </div>
       </div>
     </section>
     <details class="palette-custom">
       <summary>Copiar ou colar configuração</summary>
-      <textarea class="palette-config" id="palette-config" rows="5" spellcheck="false" aria-label="Configuração de aparência em JSON" placeholder="Cole aqui a configuração copiada"></textarea>
+      <textarea class="palette-config" id="palette-config" name="palette-config" rows="5" spellcheck="false" autocomplete="off" aria-label="Configuração de aparência em JSON" placeholder="Cole aqui a configuração copiada"></textarea>
       <div class="palette-config-actions">
         <button type="button" class="palette-action" id="palette-copy">Copiar atual</button>
         <button type="button" class="palette-action" id="palette-config-apply">Aplicar</button>
@@ -1738,9 +1753,9 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       <div class="hero-actions">
         <a class="btn" id="cta-start" href="#quiz">Começar o quiz</a>
         <ul class="hero-data" aria-label="Resumo do percurso">
-          <li><strong>10</strong><span>perguntas</span></li>
+          <li><strong>3</strong><span>perguntas</span></li>
           <li><strong>35</strong><span>situações</span></li>
-          <li><strong>8 min</strong><span>percurso</span></li>
+          <li><strong>2 min</strong><span>percurso</span></li>
         </ul>
       </div>
     </div>
@@ -2027,10 +2042,9 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   <button type="button" class="hero-layer-reset" data-hero-layer-reset>Ver tudo</button>
   <p class="hero-layer-caption" id="hero-layer-caption" role="status" aria-live="polite">As três camadas estão visíveis. Desligue uma para comparar.</p>
 </div>
-      <p class="hero-caption">Prancha 01 · território, água, ocupação e risco industrial</p>
     </div>
   </section>
-  <div class="wrap strip" aria-label="Como funciona">
+  <div class="wrap strip" role="group" aria-label="Como funciona">
     <div class="strip-item"><b>01</b><div><strong>Sorteio</strong><span>A roleta sorteia as situações do percurso.</span></div></div>
     <div class="strip-item"><b>02</b><div><strong>Leitura</strong><span>Cada situação pede uma interpretação.</span></div></div>
     <div class="strip-item"><b>03</b><div><strong>Parecer</strong><span>O resultado reúne o que estava em jogo.</span></div></div>
@@ -2073,7 +2087,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
         <div class="map-controls" role="group" aria-label="Controles de zoom do mapa">
           <button type="button" class="map-control" data-map-zoom="out" aria-label="Diminuir zoom (−)">−</button>
           <button type="button" class="map-control" data-map-zoom="in" aria-label="Aumentar zoom (+)">+</button>
-          <button type="button" class="map-control map-control--reset" data-map-zoom="reset" aria-label="Voltar ao tamanho original (1:1)">1:1</button>
+          <button type="button" class="map-control map-control--reset" data-map-zoom="reset" aria-label="1:1 · voltar ao tamanho original">1:1</button>
           <span class="map-zoom-level" data-map-zoom-level aria-live="polite">1×</span>
         </div>
       </div>
@@ -2111,7 +2125,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       <div class="map-card-content" data-map-content hidden>
         <button type="button" class="map-card-close" data-map-close aria-label="Fechar detalhes do caso">×</button>
         <p class="map-card-kicker" data-map-evidence></p>
-        <h3 data-map-title tabindex="-1"></h3>
+        <h3 data-map-title tabindex="-1">Detalhes do caso</h3>
         <p class="map-card-meta" data-map-meta></p>
         <p class="map-card-text" data-map-description></p>
         <h4>Impactos</h4>
@@ -2152,7 +2166,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       <div class="quiz-stat"><strong id="quiz-score">0</strong><span>Pontos</span></div>
       <div class="quiz-stat"><strong id="quiz-hits">0</strong><span>Acertos</span></div>
       <div class="quiz-stat"><strong id="quiz-misses">0</strong><span>Erros</span></div>
-      <div class="quiz-stat quiz-stat-combo" id="quiz-combo-wrap" hidden><strong id="quiz-combo" aria-label="Sequência de acertos">×2</strong><span>Combo</span></div>
+      <div class="quiz-stat quiz-stat-combo" id="quiz-combo-wrap" hidden><strong id="quiz-combo">×2</strong><span>Combo</span></div>
       <div class="quiz-progress-wrap">
         <div class="quiz-progress-label"><span id="quiz-progress-text">Aguardando início</span><span id="quiz-progress-pct">0%</span></div>
         <div class="quiz-progress" id="quiz-progress" role="progressbar" aria-label="Progresso do quiz" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Aguardando início"><i id="quiz-progress-bar"></i></div>
@@ -2216,7 +2230,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
 
     <div class="quiz-screen" id="quiz-question">
       <div class="quiz-qtop"><span id="quiz-topic"></span><span id="quiz-qnumber"></span></div>
-      <h3 class="quiz-prompt" id="quiz-prompt" tabindex="-1"></h3>
+      <h3 class="quiz-prompt" id="quiz-prompt" tabindex="-1">Pergunta</h3>
       <div class="quiz-answers" id="quiz-answers" role="group" aria-labelledby="quiz-prompt"></div>
       <div class="quiz-feedback" id="quiz-feedback" role="status" aria-live="polite" aria-atomic="true" tabindex="-1">
         <strong id="quiz-feedback-title"></strong>
@@ -2641,7 +2655,6 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   function updateCombo(milestone) {
     if (!el.comboWrap) return;
     el.combo.textContent = "×" + state.streak;
-    el.combo.setAttribute("aria-label", "Acertos consecutivos: " + state.streak);
     el.comboWrap.hidden = state.streak < 2;
     if (milestone && motionOn() && el.combo) {
       el.combo.classList.remove("is-milestone");
@@ -3287,7 +3300,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     active.stage.classList.add("is-spinning");
     state.spinning = true;
     el.spin.disabled = true;
-    el.spin.textContent = "Girando...";
+    el.spin.textContent = "Girando…";
     el.note.textContent = "A roleta está girando. Aguarde o sorteio.";
     active.place(start);
     clearPassing();
@@ -5308,7 +5321,7 @@ if(body){
   var SL=[['Padrões vivos',[['dev','Desvio do padrão',0,100],['spd','Velocidade',0,100],['react','Reação ao cursor',0,100],['sway','Balanço',0,100],['wave','Ondulação orgânica',0,100],['pulse','Pulso',0,100],['bpm','Ritmo do pulso (bpm)',20,140],['depth','Camadas',1,3]]],['Partículas',[['pd','Desvio das partículas',0,100],['pp','Pulso das partículas',0,100],['d','Densidade',20,180],['f','Força do cursor',0,100]]]];
   var nm={calmo:'Calmo',vivo:'Vivo',pulsante:'Pulsante',caos:'Caos',estatico:'Estático'},tg=[['pat','Padrões'],['parts','Partículas'],['force','Animar mesmo com “reduzir movimento” do sistema']];
   var h='<div class="bgfx-group"><h4>Vida do fundo</h4><div class="bgfx-row-actions" role="radiogroup" aria-label="Preset">'+Object.keys(PRE).map(function(n){return '<button type="button" class="bgfx-chip" data-fx="'+n+'" aria-pressed="false">'+nm[n]+'</button>';}).join('')+'<button type="button" class="bgfx-chip" data-fx="rnd" aria-pressed="false">Surpreender</button></div><div class="bgfx-row-actions">'+tg.map(function(x){return '<button type="button" class="bgfx-chip" data-t="'+x[0]+'" aria-pressed="false">'+x[1]+'</button>';}).join('')+'</div><p class="bgfx-hint" id="fx-note"></p></div>';
-  SL.forEach(function(g){h+='<div class="bgfx-group"><h4>'+g[0]+'</h4>'+g[1].map(function(r){return '<div class="bgfx-row"><label for="fx-'+r[0]+'">'+r[1]+'</label><output id="fx-'+r[0]+'-o"></output><input id="fx-'+r[0]+'" data-k="'+r[0]+'" type="range" min="'+r[2]+'" max="'+r[3]+'"></div>';}).join('')+'</div>';});
+  SL.forEach(function(g){h+='<div class="bgfx-group"><h4>'+g[0]+'</h4>'+g[1].map(function(r){return '<div class="bgfx-row"><label for="fx-'+r[0]+'">'+r[1]+'</label><output id="fx-'+r[0]+'-o"></output><input id="fx-'+r[0]+'" name="fx-'+r[0]+'" data-k="'+r[0]+'" type="range" min="'+r[2]+'" max="'+r[3]+'"></div>';}).join('')+'</div>';});
   var box=D.createElement('div');box.innerHTML=h;body.appendChild(box);
   sync=function(){
     box.querySelectorAll('[data-fx]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.fx===S.preset?'true':'false');});
