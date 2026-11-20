@@ -4296,6 +4296,7 @@ var MAP_CATEGORIES = {
   var STEP = 0.5;
 
   function addHiddenWarning(link) {
+    if (link.querySelector(".map-sr")) return;
     var warning = document.createElement("span");
     warning.className = "map-sr";
     warning.textContent = " (abre em nova aba)";
