@@ -2452,9 +2452,23 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   function playTick() {
     if (!soundOverride) return;
     var ctx = ensureAudio();
-    if (!ctx || ctx.currentTime - lastTick < 0.05) return;
+    if (!ctx || ctx.currentTime - lastTick < 0.035) return;
     lastTick = ctx.currentTime;
-    clickSound(1600, 7, 0.028, 0.03);
+    try {
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      var start = ctx.currentTime;
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(2300, start);
+      osc.frequency.exponentialRampToValueAtTime(1500, start + 0.028);
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(0.06, start + 0.004);
+      gain.gain.exponentialRampToValueAtTime(0.001, start + 0.048);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(start);
+      osc.stop(start + 0.06);
+    } catch (error) {}
+    clickSound(3200, 5, 0.012, 0.035);
   }
 
   function playSpin() {
