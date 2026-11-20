@@ -4,8 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#E8E0D1">
-<meta name="color-scheme" content="light">
+<meta name="color-scheme" content="light dark">
 <meta name="description" content="Laudo de campo sobre racismo ambiental no Brasil: em 3 perguntas e em um mapa de casos reais, observe como desigualdade social e risco ambiental se cruzam no território.">
+<link rel="canonical" href="https://mathsdlaw-lab.github.io/made-by-maths/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Made by Maths">
+<meta property="og:title" content="Racismo Ambiental — Território em Debate">
+<meta property="og:description" content="Laudo de campo sobre racismo ambiental no Brasil: em 3 perguntas e em um mapa de casos reais, observe como desigualdade social e risco ambiental se cruzam no território.">
+<meta property="og:url" content="https://mathsdlaw-lab.github.io/made-by-maths/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Racismo Ambiental — Território em Debate">
+<meta name="twitter:description" content="Laudo de campo sobre racismo ambiental no Brasil: em 3 perguntas e em um mapa de casos reais, observe como desigualdade social e risco ambiental se cruzam no território.">
+<meta name="theme-color" content="#1C1A17" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C2410C'/%3E%3Cpath d='M32 12 16 52h8l2.8-7.5h10.4L40 52h8L32 12zm-2.8 25.5L32 29.8l2.8 7.7h-5.6z' fill='%23F7F3EA'/%3E%3C/svg%3E">
 <title>Racismo Ambiental — Território em Debate</title>
 <style>/* Dez paletas de leitura e o seletor de aparência.
    As cores são declaradas uma vez nas hospedeiras; o CSS do quiz deriva
@@ -1031,32 +1043,36 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   margin:0 0 14px;color:var(--quiz-muted);font-family:var(--quiz-mono);font-size:10px;
   font-weight:600;letter-spacing:.05em;text-transform:uppercase
 }
-#quiz .quiz-level{margin:0 auto 20px;width:min(100%,470px);text-align:left}
-#quiz .quiz-level-title{
+.quiz-level{margin:0 auto 20px;width:min(100%,470px);text-align:left}
+.quiz-level-title{
   margin:0 0 7px;color:var(--quiz-muted);font-family:var(--quiz-mono);font-size:9px;
   font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-align:center
 }
-#quiz .quiz-level-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
-#quiz .quiz-level-btn{
+.quiz-level-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.quiz-level-btn{
   display:grid;gap:3px;place-items:center;min-height:54px;padding:7px 4px;
   border:1px solid var(--quiz-line);background:transparent;color:var(--quiz-ink);
   font-family:var(--quiz-sans);font-size:13px;font-weight:600;line-height:1.1;
   transition:background-color .18s,border-color .18s,color .18s
 }
-#quiz .quiz-level-btn span{
+.quiz-level-btn span{
   font-family:var(--quiz-mono);font-size:8px;font-weight:600;letter-spacing:.05em;
   text-transform:uppercase;color:var(--quiz-muted);overflow-wrap:anywhere
 }
-#quiz .quiz-level-btn:hover{border-color:var(--quiz-ink)}
-#quiz .quiz-level-btn[aria-pressed="true"]{
+.quiz-level-btn:hover{border-color:var(--quiz-ink)}
+.quiz-level-btn[aria-pressed="true"]{
   border-color:var(--quiz-ink);background:var(--quiz-ink);color:var(--quiz-bg)
 }
-#quiz .quiz-level-btn[aria-pressed="true"] span{color:var(--quiz-bg);opacity:.82}
-#quiz .quiz-level-btn:active{transform:translateY(1px)}
-#quiz .quiz-level-note{
+.quiz-level-btn[aria-pressed="true"] span{color:var(--quiz-bg);opacity:.82}
+.quiz-level-btn:active{transform:translateY(1px)}
+.quiz-level-note{
   margin:8px 0 0;color:var(--quiz-muted);font-size:11.5px;line-height:1.5;text-align:center
 }
-#quiz .quiz-level-chip{font-style:normal;font-weight:600;color:var(--quiz-ink)}
+.palette-panel .quiz-level{margin:0;width:100%;text-align:left}
+.palette-panel .quiz-difficulty-settings .quiz-level-title{margin-bottom:8px}
+.palette-panel .bgfx-body{overflow:visible;max-height:none;padding:0;display:grid;gap:10px}
+.palette-panel .bgfx-settings-section .bgfx-hint{margin:0}
+.quiz-level-chip{font-style:normal;font-weight:600;color:var(--quiz-ink)}
 #quiz .quiz-result-points{
   margin:10px auto 0;color:var(--quiz-muted);font-family:var(--quiz-mono);font-size:10px;
   letter-spacing:.04em;text-transform:uppercase
@@ -1426,7 +1442,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
 }
 @media (max-width:340px){
   #quiz .quiz-resultcell span{font-size:9px;letter-spacing:0}
-  #quiz .quiz-level-btn span{font-size:7px;letter-spacing:.02em}
+  .quiz-level-btn span{font-size:7px;letter-spacing:.02em}
 }
 @media (forced-colors:active){
   #quiz .quiz-panel,#quiz .quiz-answer,#quiz .quiz-review-item,#quiz .quiz-resultcell,#quiz .quiz-feedback,#quiz .quiz-window,#quiz .quiz-noscript,#quiz .quiz-session,#quiz .quiz-hand-face,#quiz .quiz-deck-card{border-color:CanvasText}
@@ -1655,6 +1671,49 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       </div>
       <p class="palette-status" id="palette-custom-status" role="status"></p>
     </details>
+    <section class="palette-custom-section quiz-difficulty-settings">
+      <h3>Dificuldade do quiz</h3>
+      <div class="quiz-level" role="group" aria-labelledby="quiz-level-title-panel">
+        <p class="quiz-level-title" id="quiz-level-title-panel">Nível das perguntas</p>
+        <div class="quiz-level-btns">
+          <button type="button" class="quiz-level-btn active" data-level="facil" aria-pressed="true">Fácil</button>
+          <button type="button" class="quiz-level-btn" data-level="medio" aria-pressed="false">Médio</button>
+          <button type="button" class="quiz-level-btn" data-level="dificil" aria-pressed="false">Difícil</button>
+        </div>
+        <p class="quiz-level-chip" id="quiz-level-chip-setting" aria-live="polite">Fácil · 3 cartas</p>
+        <p class="quiz-level-note" id="quiz-level-note">Rodadas curtas, para jogar sem pressa.</p>
+      </div>
+    </section>
+    <section class="palette-custom-section bgfx-settings-section">
+      <h3>Fundo do site</h3>
+      <div class="bgfx-body" id="bgfx-body">
+      <p class="bgfx-hint">Um padrão por vez, aplicado ao site todo. Cores e ajustes salvos neste navegador.</p>
+      <div class="bgfx-group">
+        <h4>Padrão</h4>
+        <div class="bgfx-row-actions" id="bgfx-choices" role="radiogroup" aria-label="Padrão de fundo">
+          <button type="button" class="bgfx-chip" data-bgfx-choice="none" aria-pressed="false">Nenhum</button>
+          <button type="button" class="bgfx-chip" data-bgfx-choice="clay-relief" aria-pressed="false">Maciço</button>
+          <button type="button" class="bgfx-chip" data-bgfx-choice="archival-grid" aria-pressed="false">Carta</button>
+          <button type="button" class="bgfx-chip" data-bgfx-choice="contour-field" aria-pressed="true">Curvas</button>
+          <button type="button" class="bgfx-chip" data-bgfx-choice="watershed-network" aria-pressed="false">Rede</button>
+        </div>
+      </div>
+      <div class="bgfx-group">
+        <h4>Cores</h4>
+        <div class="bgfx-row"><label for="bgfx-pat-color">Cor do padrão</label><input id="bgfx-pat-color" type="color" value="#3F4D2A"></div>
+        <div class="bgfx-row"><label for="bgfx-base-color">Cor do fundo</label><input id="bgfx-base-color" type="color" value="#EADFC6"></div>
+        <div class="bgfx-row-actions"><button type="button" class="bgfx-chip" id="bgfx-use-theme" aria-pressed="true">Usar cores do tema</button></div>
+      </div>
+      <div class="bgfx-group">
+        <h4>Ajustes</h4>
+        <div class="bgfx-row"><label for="bgfx-intensity">Intensidade</label><output id="bgfx-intensity-val">50</output><input id="bgfx-intensity" type="range" min="2" max="50" value="50"></div>
+        <div class="bgfx-row"><label for="bgfx-size">Tamanho</label><output id="bgfx-size-val">1100</output><input id="bgfx-size" type="range" min="200" max="1400" step="20" value="1100"></div>
+        <div class="bgfx-row"><label for="bgfx-rot">Rotação</label><output id="bgfx-rot-val">0</output><input id="bgfx-rot" type="range" min="-45" max="45" value="0"></div>
+        <div class="bgfx-row"><label for="bgfx-repeat">Repetição</label><select id="bgfx-repeat"><option value="repeat" selected>Repetir (azulejo)</option><option value="no-repeat">Único</option></select></div>
+        <div class="bgfx-row-actions"><button type="button" class="bgfx-chip" id="bgfx-interact" aria-pressed="true">Interação (mouse/rolagem)</button><button type="button" class="bgfx-chip" id="bgfx-reset-colors" aria-pressed="false">Reset cores</button></div>
+      </div>
+      </div>
+    </section>
     <details class="palette-custom">
       <summary>Copiar ou colar configuração</summary>
       <textarea class="palette-config" id="palette-config" rows="5" spellcheck="false" aria-label="Configuração de aparência em JSON" placeholder="Cole aqui a configuração copiada"></textarea>
@@ -2076,7 +2135,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
 
 <div class="quiz-shell">
   <header class="quiz-head">
-    <div class="quiz-eyebrow">Question�rio</div>
+    <div class="quiz-eyebrow">Questionário</div>
     <div class="quiz-head-row">
       <h2 id="quiz-title">A roleta escolhe. <br>Você interpreta.</h2>
       <p class="quiz-lede">Três perguntas sorteadas entre trinta e cinco situações sobre racismo ambiental no Brasil. Leia, escolha e veja o que cada leitura revela.</p>
@@ -2101,7 +2160,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     </div>
 
     <div class="quiz-session" id="quiz-session" role="group" aria-label="Cartas da sessão">
-      <div class="quiz-session-head"><span>Sua mão · <em class="quiz-level-chip" id="quiz-level-chip">Médio</em></span><span id="quiz-session-status" role="status" aria-live="polite">3 cartas por rodada</span></div>
+      <div class="quiz-session-head"><span>Sua mão · <em class="quiz-level-chip" id="quiz-level-chip-session">Fácil</em></span><span id="quiz-session-status" role="status" aria-live="polite">3 cartas por rodada</span></div>
       <div class="quiz-hand" id="quiz-hand" role="list" aria-label="Cartas sorteadas para esta sessão">
         <div class="quiz-hand-card" id="quiz-hand-card-0" role="listitem" aria-label="Carta 1 de 3: ainda não sorteada">
           <div class="quiz-hand-face" aria-hidden="true">
@@ -2129,15 +2188,6 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       <h3>Três perguntas. <br>Trinta e cinco situações.</h3>
       <p class="quiz-time" id="quiz-time">3 perguntas / 2 minutos</p>
       <p class="quiz-sub">A roleta define o percurso. Leia cada situação, escolha a interpretação mais consistente e veja o que ela revela sobre território, raça e risco.</p>
-      <div class="quiz-level" role="group" aria-labelledby="quiz-level-title">
-        <p class="quiz-level-title" id="quiz-level-title">Dificuldade</p>
-        <div class="quiz-level-options">
-          <button type="button" class="quiz-level-btn" data-level="facil" aria-pressed="false"><b>Fácil</b><span>Conceitos</span></button>
-          <button type="button" class="quiz-level-btn" data-level="medio" aria-pressed="true"><b>Médio</b><span>Interpretação</span></button>
-          <button type="button" class="quiz-level-btn" data-level="dificil" aria-pressed="false"><b>Difícil</b><span>Estrutura</span></button>
-        </div>
-        <p class="quiz-level-note" id="quiz-level-note" role="status">Situações reais que pedem análise de consequências.</p>
-      </div>
       <button type="button" class="quiz-primary" id="quiz-start" aria-describedby="quiz-time">Começar</button>
       <p class="quiz-motion-note" id="quiz-motion-note" hidden>Giro econômico ativo. <button type="button" class="quiz-textbtn" id="quiz-motion-welcome">Ativar giro completo</button></p>
     </div>
@@ -2286,7 +2336,8 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     misses: byId("quiz-misses"),
     comboWrap: byId("quiz-combo-wrap"),
     combo: byId("quiz-combo"),
-    levelChip: byId("quiz-level-chip"),
+    levelChipSetting: byId("quiz-level-chip-setting"),
+    levelChipSession: byId("quiz-level-chip-session"),
     levelNote: byId("quiz-level-note"),
     resultPoints: byId("quiz-result-points"),
     sound: byId("quiz-sound"),
@@ -2330,7 +2381,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     copyStatus: byId("quiz-copy-status"),
     review: byId("quiz-review")
   };
-  var levelButtons = Array.prototype.slice.call(root.querySelectorAll("[data-level]"));
+  var levelButtons = Array.prototype.slice.call(document.querySelectorAll(".quiz-level-btn[data-level]"));
 
   /* A roleta sempre gira. Sem preferência salva, o sistema decide entre giro
      completo e econômico; o controle "Animações" guarda a escolha do usuário. */
@@ -2383,6 +2434,10 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   }
 
   function motionOn() {
+    try {
+      var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced && motionOverride !== true) return false;
+    } catch (e) {}
     return true;
   }
 
@@ -2431,13 +2486,13 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   function setMotion() {
     motionOverride = true;
     writePreference(MOTION_KEY, true);
-    root.classList.add(""motion-on"");
+    root.classList.add("motion-on");
     applyMotionUI();
     if (el.motionNote) el.motionNote.hidden = true;
     if (el.motionHint) el.motionHint.hidden = true;
-    if (state.phase === ""draw"" && !state.spinning && !advanceTimer) {
+    if (state.phase === "draw" && !state.spinning && !advanceTimer) {
       if (reel) reel = buildReel();
-      if (el.note) el.note.textContent = ""Roleta pronta \u2014 girando em instantes"";
+      if (el.note) el.note.textContent = "Roleta pronta \u2014 girando em instantes";
       scheduleAutoSpin(400);
     }
   }
@@ -2461,154 +2516,116 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     }
   }
 
-  /* Vozes de UI: ruído filtrado para percussão, oscilador para corpo tonal. */
-  function noiseBurst(ctx, seconds) {
-    var length = Math.max(1, Math.round(ctx.sampleRate * seconds));
+  /* Efeitos sonoros (Web Audio): envelopes exponenciais, sem cliques de DC, ganho conservador. */
+  function sfxNow(ctx) {
+    return ctx.currentTime;
+  }
+
+  function sfxNoiseBuffer(ctx, seconds) {
+    var length = Math.max(1, Math.floor(ctx.sampleRate * seconds));
     var buffer = ctx.createBuffer(1, length, ctx.sampleRate);
     var data = buffer.getChannelData(0);
     for (var i = 0; i < length; i++) data[i] = Math.random() * 2 - 1;
-    var source = ctx.createBufferSource();
-    source.buffer = buffer;
-    return source;
+    return buffer;
   }
 
-  function clickSound(freq, q, seconds, volume, delay) {
+  function sfxTone(freq, opts) {
     var ctx = ensureAudio();
     if (!ctx) return;
-    try {
-      var start = ctx.currentTime + (delay || 0);
-      var source = noiseBurst(ctx, seconds);
-      var filter = ctx.createBiquadFilter();
-      var gain = ctx.createGain();
-      filter.type = "bandpass";
-      filter.frequency.value = freq;
-      filter.Q.value = q;
-      gain.gain.setValueAtTime(Math.max(0.001, volume), start);
-      gain.gain.exponentialRampToValueAtTime(0.001, start + seconds);
-      source.connect(filter);
-      filter.connect(gain);
-      gain.connect(ctx.destination);
-      source.start(start, 0, seconds);
-    } catch (error) {}
+    opts = opts || {};
+    var start = sfxNow(ctx) + (opts.delay || 0);
+    var dur = opts.dur || 0.12;
+    var vol = Math.min(0.5, opts.vol == null ? 0.08 : opts.vol);
+    var type = opts.type || "sine";
+    var endFreq = opts.endFreq || freq;
+    var attack = Math.max(0.004, opts.attack || 0.008);
+    var osc = ctx.createOscillator();
+    var gain = ctx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(Math.max(40, freq), start);
+    if (endFreq !== freq) {
+      osc.frequency.exponentialRampToValueAtTime(Math.max(40, endFreq), start + dur);
+    }
+    gain.gain.setValueAtTime(0.0001, start);
+    gain.gain.exponentialRampToValueAtTime(vol, start + attack);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(start);
+    osc.stop(start + dur + 0.03);
   }
 
-  function whooshSound(from, to, seconds, volume) {
+  function sfxNoise(opts) {
     var ctx = ensureAudio();
     if (!ctx) return;
-    try {
-      var start = ctx.currentTime;
-      var source = noiseBurst(ctx, seconds);
-      var filter = ctx.createBiquadFilter();
-      var gain = ctx.createGain();
-      filter.type = "bandpass";
-      filter.Q.value = 1.1;
-      filter.frequency.setValueAtTime(from, start);
-      filter.frequency.exponentialRampToValueAtTime(to, start + seconds);
-      gain.gain.setValueAtTime(0.001, start);
-      gain.gain.exponentialRampToValueAtTime(volume, start + seconds * 0.32);
-      gain.gain.exponentialRampToValueAtTime(0.001, start + seconds);
-      source.connect(filter);
-      filter.connect(gain);
-      gain.connect(ctx.destination);
-      source.start(start, 0, seconds);
-    } catch (error) {}
-  }
-
-  function tone(freq, delay, duration, volume, type) {
-    var ctx = ensureAudio();
-    if (!ctx) return;
-    try {
-      var osc = ctx.createOscillator();
-      var gain = ctx.createGain();
-      var start = ctx.currentTime + delay;
-      osc.type = type || "sine";
-      osc.frequency.setValueAtTime(freq, start);
-      gain.gain.setValueAtTime(0.0001, start);
-      gain.gain.exponentialRampToValueAtTime(volume || 0.05, start + 0.015);
-      gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-      osc.connect(gain).connect(ctx.destination);
-      osc.start(start);
-      osc.stop(start + duration + 0.03);
-    } catch (error) {}
+    opts = opts || {};
+    var start = sfxNow(ctx) + (opts.delay || 0);
+    var dur = opts.dur || 0.08;
+    var vol = Math.min(0.45, opts.vol == null ? 0.08 : opts.vol);
+    var attack = Math.max(0.002, opts.attack || 0.004);
+    var src = ctx.createBufferSource();
+    src.buffer = sfxNoiseBuffer(ctx, dur + 0.04);
+    var filter = ctx.createBiquadFilter();
+    filter.type = opts.filter || "bandpass";
+    filter.frequency.setValueAtTime(Math.max(80, opts.freq || 1200), start);
+    filter.Q.value = opts.q == null ? 1.2 : opts.q;
+    if (opts.endFreq) {
+      filter.frequency.exponentialRampToValueAtTime(Math.max(80, opts.endFreq), start + dur);
+    }
+    var gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.0001, start);
+    gain.gain.exponentialRampToValueAtTime(vol, start + attack);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+    src.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+    src.start(start);
+    src.stop(start + dur + 0.04);
   }
 
   function playClick() {
-    if (!soundOverride) return;
-    clickSound(2400, 3.2, 0.045, 0.05);
-    tone(1180, 0, 0.032, 0.016, "sine");
-  }
-
-  var lastTick = 0;
-
-  function playTick() {
-    if (!soundOverride) return;
-    var ctx = ensureAudio();
-    if (!ctx || ctx.currentTime - lastTick < 0.05) return;
-    lastTick = ctx.currentTime;
-    try {
-      var start = ctx.currentTime;
-      var body = ctx.createOscillator();
-      var sub = ctx.createOscillator();
-      var bodyGain = ctx.createGain();
-      var subGain = ctx.createGain();
-      body.type = "triangle";
-      body.frequency.setValueAtTime(880, start);
-      body.frequency.exponentialRampToValueAtTime(390, start + 0.07);
-      bodyGain.gain.setValueAtTime(0.0001, start);
-      bodyGain.gain.exponentialRampToValueAtTime(0.075, start + 0.006);
-      bodyGain.gain.exponentialRampToValueAtTime(0.001, start + 0.1);
-      body.connect(bodyGain);
-      bodyGain.connect(ctx.destination);
-      body.start(start);
-      body.stop(start + 0.11);
-      sub.type = "sine";
-      sub.frequency.setValueAtTime(210, start);
-      sub.frequency.exponentialRampToValueAtTime(150, start + 0.09);
-      subGain.gain.setValueAtTime(0.0001, start);
-      subGain.gain.exponentialRampToValueAtTime(0.05, start + 0.008);
-      subGain.gain.exponentialRampToValueAtTime(0.001, start + 0.13);
-      sub.connect(subGain);
-      subGain.connect(ctx.destination);
-      sub.start(start);
-      sub.stop(start + 0.14);
-    } catch (error) {}
-    clickSound(1400, 1.6, 0.02, 0.028);
+    sfxNoise({ dur: 0.028, vol: 0.045, freq: 3200, endFreq: 1800, q: 1.8, filter: "bandpass" });
+    sfxTone(1400, { dur: 0.035, vol: 0.022, endFreq: 520, type: "sine", attack: 0.003 });
   }
 
   function playSpin() {
-    if (!soundOverride) return;
-    whooshSound(300, 2400, 0.4, 0.09);
-    tone(146.83, 0.02, 0.38, 0.025, "triangle");
+    sfxNoise({ dur: 0.38, vol: 0.085, freq: 420, endFreq: 3200, q: 0.9, filter: "bandpass", attack: 0.02 });
+    sfxTone(180, { dur: 0.34, vol: 0.028, endFreq: 260, type: "triangle", attack: 0.03 });
+    sfxTone(520, { dur: 0.22, vol: 0.012, endFreq: 980, type: "sine", delay: 0.04, attack: 0.02 });
   }
 
   function playLand() {
-    if (!soundOverride) return;
-    tone(392, 0, 0.12, 0.045, "triangle");
-    tone(587.33, 0.06, 0.22, 0.038, "triangle");
-    clickSound(900, 2, 0.05, 0.05);
+    sfxTone(150, { dur: 0.16, vol: 0.09, endFreq: 90, type: "sine", attack: 0.004 });
+    sfxNoise({ dur: 0.055, vol: 0.06, freq: 2200, endFreq: 900, q: 1.1, filter: "bandpass", delay: 0.01 });
+    sfxTone(523.25, { dur: 0.18, vol: 0.03, endFreq: 520, type: "triangle", delay: 0.03, attack: 0.006 });
+    sfxTone(659.25, { dur: 0.22, vol: 0.024, endFreq: 655, type: "triangle", delay: 0.07, attack: 0.008 });
   }
 
   function playCorrect(streak) {
-    if (!soundOverride) return;
-    var notes = [523.25, 659.25, 783.99, 1046.5];
-    var count = Math.min(notes.length, 2 + Math.min(Math.max(streak - 1, 0), 2));
-    for (var i = 0; i < count; i++) {
-      tone(notes[i], i * 0.055, 0.16, 0.035, "triangle");
-    }
+    var level = Math.max(1, streak || 1);
+    var base = level >= 3 ? [523.25, 659.25, 783.99, 1046.5] : [523.25, 659.25, 783.99];
+    if (level >= 5) base = [523.25, 659.25, 783.99, 1046.5, 1318.5];
+    base.forEach(function (freq, i) {
+      sfxTone(freq, { dur: 0.18 + i * 0.015, vol: 0.032 + Math.min(i, 3) * 0.003, delay: i * 0.07, type: "triangle", attack: 0.006 });
+    });
+    sfxNoise({ dur: 0.09, vol: 0.018, freq: 4200, endFreq: 2600, q: 2.2, filter: "highpass", delay: 0.02 });
   }
 
   function playWrong() {
-    if (!soundOverride) return;
-    tone(196, 0, 0.18, 0.035, "sine");
-    tone(164.81, 0.1, 0.24, 0.03, "sine");
+    sfxTone(330, { dur: 0.22, vol: 0.04, endFreq: 220, type: "sine", attack: 0.01 });
+    sfxTone(247, { dur: 0.28, vol: 0.032, endFreq: 165, type: "triangle", delay: 0.09, attack: 0.012 });
+    sfxNoise({ dur: 0.12, vol: 0.012, freq: 700, endFreq: 320, q: 0.8, filter: "lowpass", delay: 0.02 });
   }
 
   function playFinish(score) {
-    if (!soundOverride) return;
-    var chord = score >= 2 ? [392, 523.25, 659.25] : [329.63, 392, 493.88];
-    chord.forEach(function (freq, index) {
-      tone(freq, index * 0.12, 0.5, 0.03, "triangle");
+    var strong = score >= 2;
+    var chord = strong ? [392, 523.25, 659.25, 783.99, 1046.5] : [349.23, 440, 523.25, 659.25];
+    chord.forEach(function (freq, i) {
+      sfxTone(freq, { dur: 0.42, vol: strong ? 0.028 : 0.024, delay: i * 0.1, type: i < 2 ? "triangle" : "sine", attack: 0.01 });
     });
+    if (strong) {
+      sfxNoise({ dur: 0.16, vol: 0.02, freq: 5000, endFreq: 2800, q: 1.5, filter: "bandpass", delay: 0.05 });
+    }
   }
 
   function setSound(on) {
@@ -2616,9 +2633,8 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     writePreference(SOUND_KEY, on);
     applySoundUI();
     if (on) {
-      clickSound(2400, 3, 0.04, 0.05);
-      tone(660, 0.05, 0.09, 0.028, "sine");
-      tone(880, 0.13, 0.12, 0.026, "sine");
+      sfxTone(523.25, { dur: 0.1, vol: 0.03, type: "sine", attack: 0.006 });
+      sfxTone(783.99, { dur: 0.14, vol: 0.026, delay: 0.07, type: "triangle", attack: 0.008 });
     }
   }
 
@@ -2644,7 +2660,8 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       button.setAttribute("aria-pressed", button.getAttribute("data-level") === value ? "true" : "false");
     });
     if (el.levelNote) el.levelNote.textContent = LEVEL_NOTE[value];
-    if (el.levelChip) el.levelChip.textContent = LEVEL_LABEL[value];
+    if (el.levelChipSetting) el.levelChipSetting.textContent = LEVEL_LABEL[value] + " · 3 cartas";
+    if (el.levelChipSession) el.levelChipSession.textContent = LEVEL_LABEL[value];
   }
 
   function bumpScore() {
@@ -3071,25 +3088,46 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     el.spin.disabled = false;
     el.spin.textContent = "Girar roleta";
     applyMotionUI();
+    // Build the reel after layout so measurements and centering are accurate.
     requestAnimationFrame(function () {
-      el.drawTitle.focus({ preventScroll: true });
+      reel = buildReel();
+      if (el.drawTitle) el.drawTitle.focus({ preventScroll: true });
+      scheduleAutoSpin(AUTO_SPIN_DELAY);
     });
-    scheduleAutoSpin(AUTO_SPIN_DELAY);
+  }
+
+  function measureReelStep(cards, track) {
+    if (!cards || !cards.length) return 92;
+    if (cards.length > 1) {
+      var a = cards[0].getBoundingClientRect();
+      var b = cards[1].getBoundingClientRect();
+      var delta = b.left - a.left;
+      if (delta > 20) return delta;
+    }
+    var w = cards[0].getBoundingClientRect().width || cards[0].offsetWidth || 76;
+    var gap = 16;
+    if (track && window.getComputedStyle) {
+      var cs = window.getComputedStyle(track);
+      var g = parseFloat(cs.columnGap || cs.gap || "16");
+      if (!isNaN(g)) gap = g;
+    }
+    return Math.max(40, w + gap);
   }
 
   function buildReel() {
     var question = state.pool[state.round];
     var stage = root.querySelector(".quiz-roulette");
     var track = el.track;
-    var win = track.parentElement;
-    var pointer = stage.querySelector(".quiz-pointer");
+    var win = track ? track.parentElement : null;
     var total = REEL_TOTAL;
     var target = REEL_TARGET;
-    var runway = motionOn() ? spinSpeed().runway : SHORT_SPIN_RUNWAY;
+    var speed = spinSpeed();
+    var runway = motionOn() ? speed.runway : SHORT_SPIN_RUNWAY;
 
-    stage.classList.remove("is-spinning");
-    track.style.transform = "translate3d(0,0,0)";
+    if (!stage || !track || !win) return null;
     track.replaceChildren();
+
+    if (!question) return null;
 
     var distractors = shuffle(Q.filter(function (item) {
       return item.id !== question.id && item.level === question.level;
@@ -3098,29 +3136,53 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       distractors = shuffle(Q.filter(function (item) { return item.id !== question.id; }));
     }
 
-    for (var i = 0; i < total; i++) {
+    var seq = [];
+    var pick;
+    var i;
+    for (i = 0; i < total; i += 1) {
+      pick = i === target ? question.id : distractors[i % distractors.length].id;
+      seq.push(pick);
+
       var tile = document.createElement("div");
       tile.className = "quiz-tile";
-      tile.textContent = String(i === target ? question.id : distractors[i % distractors.length].id).padStart(2, "0");
+      tile.dataset.index = String(i);
+      tile.dataset.number = String(pick);
+      tile.textContent = String(pick);
       track.appendChild(tile);
     }
 
-    var cards = Array.prototype.slice.call(track.children);
+    var cards = Array.prototype.slice.call(track.querySelectorAll(".quiz-tile"));
     var targetCard = cards[target];
 
-    function pitch() {
-      var measured = cards[1].offsetLeft - cards[0].offsetLeft;
-      return measured || (cards[0].offsetWidth + 16);
-    }
+    // Force layout so measurements are reliable before animation.
+    void track.offsetHeight;
+    var step = measureReelStep(cards, track);
 
-    function centerX() {
-      return -(targetCard.offsetLeft + targetCard.offsetWidth / 2 - win.clientWidth / 2);
-    }
+    stage.style.setProperty("--quiz-reel-step", step + "px");
+    track.style.width = (Math.ceil(total * step) + 96) + "px";
 
-    function place(x) {
-      track.style.transform = "translate3d(" + x.toFixed(2) + "px,0,0)";
-    }
+    var pitch = function () {
+      return Math.max(step, measureReelStep(cards, track));
+    };
 
+    var centerX = function () {
+      var card = cards[target];
+      if (!card || !win) return 0;
+      var winWidth = win.clientWidth || win.getBoundingClientRect().width || 0;
+      var cardLeft = card.offsetLeft;
+      var cardWidth = card.offsetWidth || card.getBoundingClientRect().width || step;
+      if (!winWidth) return -cardLeft;
+      return -(cardLeft + cardWidth / 2 - winWidth / 2);
+    };
+
+    var place = function (px) {
+      track.style.transform = "translate3d(" + px + "px,0,0)";
+    };
+
+    var startX = centerX() + runway * pitch();
+    place(startX);
+
+    var pointer = root.querySelector(".quiz-pointer") || (stage ? stage.querySelector(".quiz-pointer") : null);
     var built = {
       question: question,
       stage: stage,
@@ -3132,14 +3194,30 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       runway: runway,
       cards: cards,
       targetCard: targetCard,
+      step: step,
       pitch: pitch,
       centerX: centerX,
       place: place,
       lastIndex: -1
     };
-
-    place(centerX() + runway * pitch());
+    reel = built;
     return built;
+  }
+
+  function clearPassing() {
+    if (!reel || !reel.cards) return;
+    for (var i = 0; i < reel.cards.length; i++) {
+      reel.cards[i].classList.remove("passing");
+    }
+    reel.lastIndex = -1;
+  }
+
+  function playTick(kind) {
+    if (kind === "win") {
+      playLand();
+      return;
+    }
+    playClick();
   }
 
   function markPassing(index) {
@@ -3147,41 +3225,41 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     if (reel.lastIndex >= 0 && reel.cards[reel.lastIndex]) {
       reel.cards[reel.lastIndex].classList.remove("passing");
     }
+    if (!reel.cards[index]) return;
     reel.cards[index].classList.add("passing");
-    reel.pointer.classList.remove("tick");
-    void reel.pointer.offsetWidth;
-    reel.pointer.classList.add("tick");
+    if (reel.pointer) {
+      reel.pointer.classList.remove("tick");
+      void reel.pointer.offsetWidth;
+      reel.pointer.classList.add("tick");
+    }
     reel.lastIndex = index;
     playTick();
   }
 
   function markPassingAt(x, pitch) {
-    if (!reel) return;
-    var index = Math.round((reel.win.clientWidth / 2 - x - reel.cards[0].offsetLeft - reel.cards[0].offsetWidth / 2) / pitch);
-    markPassing(Math.max(0, Math.min(reel.total - 1, index)));
+    if (!reel || !reel.win || !pitch) return;
+    var index = Math.round((reel.win.clientWidth / 2 - x) / pitch);
+    markPassing(Math.max(0, Math.min(reel.cards.length - 1, index)));
   }
 
-  function revealWinner() {
-    if (!reel) return;
-    var active = reel;
-    clearSpinFallback();
-    spinToken++;
+  function revealWinner(active) {
     state.spinning = false;
-    active.stage.classList.remove("is-spinning");
-    active.cards.forEach(function (card) { card.classList.remove("passing"); });
-    active.pointer.classList.remove("tick");
+    if (active.stage) active.stage.classList.remove("is-spinning");
+    if (active.cards) active.cards.forEach(function (card) { card.classList.remove("passing"); });
+    if (active.pointer) active.pointer.classList.remove("tick");
     active.place(active.centerX());
-    active.targetCard.classList.add("winner");
-    playLand();
-    shuffleHand();
-    revealHand(handPos());
+    if (active.targetCard) active.targetCard.classList.add("winner");
     recenter = function () {
       if (state.phase !== "draw") return;
       active.place(active.centerX());
     };
-    el.note.textContent = "Sorteio concluído · cartão " + active.targetCard.textContent.trim();
-    el.spin.disabled = true;
-    el.spin.textContent = "Girar roleta";
+    if (el.note && active.targetCard) {
+      el.note.textContent = "Sorteio concluído: cartão " + active.targetCard.textContent.trim();
+    }
+    if (el.spin) {
+      el.spin.disabled = true;
+      el.spin.textContent = "Girar roleta";
+    }
     clearAdvance();
     advanceTimer = window.setTimeout(function () {
       if (state.phase === "draw") render(active.question);
@@ -3189,66 +3267,60 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   }
 
   function spin() {
-    if (state.phase !== "draw" || state.spinning) return;
-    clearAutoSpin();
-    clearSpinFallback();
-    if (!reel || reel.question !== state.pool[state.round]) reel = buildReel();
-
     var active = reel;
+    if (!active || !active.track || !active.stage || !active.cards || !active.cards.length) return;
+
     var my = ++spinToken;
     var full = motionOn();
     var speed = spinSpeed();
-    var runway = full ? speed.runway : SHORT_SPIN_RUNWAY;
-    var duration = full ? speed.duration : SHORT_SPIN_DURATION;
-    var step = active.pitch();
+    var step = Math.max(active.step || 0, active.pitch(), 60);
     var end = active.centerX();
-    var start = end + runway * step;
+    var runway = full ? speed.runway : SHORT_SPIN_RUNWAY;
+    // Ensure a clearly visible travel distance so the reel never feels static.
+    var travelCards = Math.max(runway, 28);
+    var start = end + travelCards * step;
+    var duration = Math.max(400, full ? speed.duration : SHORT_SPIN_DURATION);
 
-    state.spinning = true;
-    playSpin();
-    el.spin.disabled = true;
-    el.spin.textContent = "Girando…";
-    el.note.textContent = "Sorteando questão…";
-    active.lastIndex = -1;
     active.stage.classList.add("is-spinning");
+    state.spinning = true;
+    el.spin.disabled = true;
+    el.spin.textContent = "Girando...";
+    el.note.textContent = "A roleta está girando. Aguarde o sorteio.";
     active.place(start);
-    void active.track.offsetWidth;
+    clearPassing();
 
-    recenter = function () {
-      if (my !== spinToken) return;
-      active.place(active.centerX());
+    var completed = false;
+    var finishSpin = function () {
+      if (completed || my !== spinToken) return;
+      completed = true;
+      clearSpinFallback();
+      revealWinner(active);
     };
 
-    var startedAt = 0;
-    var done = false;
-
-    function completeSpin() {
-      if (done) return;
-      done = true;
-      clearSpinFallback();
-      if (my !== spinToken) return;
-      if (state.phase !== "draw") return;
-      revealWinner();
+    if (!full) {
+      active.place(active.centerX());
+      clearPassing();
+      finishSpin();
+      return;
     }
 
-    function frame(now) {
-      if (my !== spinToken) return;
-      if (!startedAt) startedAt = now;
-      var p = Math.min(1, Math.max(0, (now - startedAt) / duration));
-      var eased = 1 - Math.pow(1 - p, 3.2);
+    var t0 = null;
+    var frame = function (now) {
+      if (my !== spinToken || state.phase !== "draw") return;
+      if (!t0) t0 = now;
+      var progress = Math.min(1, (now - t0) / duration);
+      var eased = 1 - Math.pow(1 - progress, 3);
       var x = start + (end - start) * eased;
       active.place(x);
       markPassingAt(x, step);
-
-      if (p < 1) {
+      if (progress < 1) {
         requestAnimationFrame(frame);
       } else {
-        completeSpin();
+        finishSpin();
       }
-    }
-
+    };
     requestAnimationFrame(frame);
-    spinFallback = window.setTimeout(completeSpin, duration + 1600);
+    spinFallback = window.setTimeout(finishSpin, duration + 1200);
   }
 
   function render(question) {
@@ -4724,8 +4796,8 @@ var MAP_CATEGORIES = {
     if (oldFigure) oldFigure.remove();
     var newFigure = buildFigure(item);
     if (newFigure) {
-      var description = content.querySelector("[data-map-description]");
-      content.insertBefore(newFigure, description);
+      var figureAnchor = content.querySelector("[data-map-description]");
+      content.insertBefore(newFigure, figureAnchor);
     }
     empty.hidden = true;
     content.hidden = false;
@@ -4897,37 +4969,6 @@ var MAP_CATEGORIES = {
 })();
 </script>
 
-<button type="button" class="bgfx-toggle" id="bgfx-toggle" aria-expanded="false" aria-controls="bgfx-panel" title="Fundos decorativos" aria-label="Fundos decorativos">◌</button>
-<section class="bgfx-panel" id="bgfx-panel" hidden aria-label="Configurar fundo do site">
-  <div class="bgfx-head"><h3>Fundo do site</h3><button type="button" class="bgfx-close" id="bgfx-close" aria-label="Fechar">×</button></div>
-  <div class="bgfx-body">
-    <p class="bgfx-hint">Um padrão por vez, aplicado ao site todo. Cores e ajustes salvos neste navegador.</p>
-    <div class="bgfx-group">
-      <h4>Padrão</h4>
-      <div class="bgfx-row-actions" id="bgfx-choices" role="radiogroup" aria-label="Padrão de fundo">
-        <button type="button" class="bgfx-chip" data-bgfx-choice="none" aria-pressed="false">Nenhum</button>
-        <button type="button" class="bgfx-chip" data-bgfx-choice="clay-relief" aria-pressed="false">Maciço</button>
-        <button type="button" class="bgfx-chip" data-bgfx-choice="archival-grid" aria-pressed="false">Carta</button>
-        <button type="button" class="bgfx-chip" data-bgfx-choice="contour-field" aria-pressed="true">Curvas</button>
-        <button type="button" class="bgfx-chip" data-bgfx-choice="watershed-network" aria-pressed="false">Rede</button>
-      </div>
-    </div>
-    <div class="bgfx-group">
-      <h4>Cores</h4>
-      <div class="bgfx-row"><label for="bgfx-pat-color">Cor do padrão</label><input id="bgfx-pat-color" type="color" value="#3F4D2A"></div>
-      <div class="bgfx-row"><label for="bgfx-base-color">Cor do fundo</label><input id="bgfx-base-color" type="color" value="#EADFC6"></div>
-      <div class="bgfx-row-actions"><button type="button" class="bgfx-chip" id="bgfx-use-theme" aria-pressed="true">Usar cores do tema</button></div>
-    </div>
-    <div class="bgfx-group">
-      <h4>Ajustes</h4>
-      <div class="bgfx-row"><label for="bgfx-intensity">Intensidade</label><output id="bgfx-intensity-val">50</output><input id="bgfx-intensity" type="range" min="2" max="50" value="50"></div>
-      <div class="bgfx-row"><label for="bgfx-size">Tamanho</label><output id="bgfx-size-val">1100</output><input id="bgfx-size" type="range" min="200" max="1400" step="20" value="1100"></div>
-      <div class="bgfx-row"><label for="bgfx-rot">Rotação</label><output id="bgfx-rot-val">0</output><input id="bgfx-rot" type="range" min="-45" max="45" value="0"></div>
-      <div class="bgfx-row"><label for="bgfx-repeat">Repetição</label><select id="bgfx-repeat"><option value="repeat" selected>Repetir (azulejo)</option><option value="no-repeat">Único</option></select></div>
-      <div class="bgfx-row-actions"><button type="button" class="bgfx-chip" id="bgfx-interact" aria-pressed="true">Interação (mouse/rolagem)</button><button type="button" class="bgfx-chip" id="bgfx-reset-colors" aria-pressed="false">Reset cores</button></div>
-    </div>
-  </div>
-</section>
 
 
 <script>
@@ -5259,7 +5300,7 @@ if('IntersectionObserver' in window){
     for(var i=0;i<SEC.length;i++)if(en.target.matches(SEC[i][0])&&secVar!==SEC[i][1]){secVar=SEC[i][1];retarget();if(moving())kick();}});},{rootMargin:'-45% 0px -45% 0px'});
   SEC.forEach(function(s){var el=D.querySelector(s[0]);if(el)io.observe(el);});}
 /* painel */
-var sync=null,body=D.querySelector('#bgfx-panel .bgfx-body');
+var sync=null,body=D.querySelector('#bgfx-body')||D.querySelector('#bgfx-panel .bgfx-body');
 if(body){
   var SL=[['Padrões vivos',[['dev','Desvio do padrão',0,100],['spd','Velocidade',0,100],['react','Reação ao cursor',0,100],['sway','Balanço',0,100],['wave','Ondulação orgânica',0,100],['pulse','Pulso',0,100],['bpm','Ritmo do pulso (bpm)',20,140],['depth','Camadas',1,3]]],['Partículas',[['pd','Desvio das partículas',0,100],['pp','Pulso das partículas',0,100],['d','Densidade',20,180],['f','Força do cursor',0,100]]]];
   var nm={calmo:'Calmo',vivo:'Vivo',pulsante:'Pulsante',caos:'Caos',estatico:'Estático'},tg=[['pat','Padrões'],['parts','Partículas'],['force','Animar mesmo com “reduzir movimento” do sistema']];
