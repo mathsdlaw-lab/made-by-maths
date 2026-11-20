@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#E8E0D1">
 <meta name="color-scheme" content="light">
-<meta name="description" content="Laudo de campo sobre racismo ambiental no Brasil: em 10 perguntas e em um mapa de casos reais, observe como desigualdade social e risco ambiental se cruzam no território.">
+<meta name="description" content="Laudo de campo sobre racismo ambiental no Brasil: em 3 perguntas e em um mapa de casos reais, observe como desigualdade social e risco ambiental se cruzam no território.">
 <title>Racismo Ambiental — Território em Debate</title>
 <style>/* Dez paletas de leitura e o seletor de aparência.
    As cores são declaradas uma vez nas hospedeiras; o CSS do quiz deriva
@@ -979,11 +979,19 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
 }
 #quiz .quiz-stat-combo strong{color:var(--quiz-hazard)}
 #quiz .quiz-stat strong,#quiz .quiz-progress-label,#quiz .quiz-scorebig,#quiz .quiz-resultcell strong{font-variant-numeric:tabular-nums}
-#quiz .quiz-stat strong.is-bump{animation:quiz-bump .5s cubic-bezier(.2,.8,.2,1)}
+#quiz .quiz-stat strong.is-bump{animation:quiz-bump .35s cubic-bezier(.2,.8,.2,1)}
 @keyframes quiz-bump{
   0%{transform:scale(1)}
-  35%{transform:scale(1.14);color:var(--quiz-hazard)}
+  35%{transform:scale(1.18);color:var(--quiz-hazard)}
   100%{transform:scale(1)}
+}
+#quiz .quiz-dopa-pop{position:absolute;left:50%;top:-2px;transform:translate(-50%,0) scale(.9);font-family:var(--quiz-mono);font-size:12px;font-weight:700;line-height:1;color:var(--quiz-safe);pointer-events:none;white-space:nowrap;z-index:3;opacity:0;animation:quiz-dopa-pop .62s cubic-bezier(.2,.8,.2,1) forwards}
+#quiz .quiz-dopa-pop.is-bonus{color:var(--quiz-hazard);font-size:13px}
+#quiz .quiz-shell.is-dopa-flash{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--quiz-safe) 38%,transparent),0 0 0 1px color-mix(in srgb,var(--quiz-safe) 18%,transparent),0 22px 60px rgba(31,35,40,.06);transition:box-shadow .12s ease}
+@keyframes quiz-dopa-pop{
+  0%{opacity:0;transform:translate(-50%,4px) scale(.85)}
+  18%{opacity:1;transform:translate(-50%,-8px) scale(1.05)}
+  100%{opacity:0;transform:translate(-50%,-34px) scale(.98)}
 }
 #quiz .quiz-stat-combo strong.is-milestone{animation:quiz-combo .62s cubic-bezier(.2,.8,.2,1)}
 @keyframes quiz-combo{
@@ -2071,10 +2079,10 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     <div class="quiz-eyebrow">Question�rio</div>
     <div class="quiz-head-row">
       <h2 id="quiz-title">A roleta escolhe. <br>Você interpreta.</h2>
-      <p class="quiz-lede">Dez perguntas sorteadas entre trinta e cinco situações sobre racismo ambiental no Brasil. Leia, escolha e veja o que cada leitura revela.</p>
+      <p class="quiz-lede">Três perguntas sorteadas entre trinta e cinco situações sobre racismo ambiental no Brasil. Leia, escolha e veja o que cada leitura revela.</p>
     </div>
     <div class="quiz-controls" role="group" aria-label="Controles da experiência">
-      <button type="button" class="quiz-control" id="quiz-motion" aria-pressed="true"><span class="quiz-control-dot" aria-hidden="true"></span>Animações</button>
+      <button type="button" class="quiz-control" id="quiz-motion" aria-pressed="true" hidden><span class="quiz-control-dot" aria-hidden="true"></span>Animações</button>
       <button type="button" class="quiz-control" id="quiz-sound" aria-pressed="false"><span class="quiz-control-dot" aria-hidden="true"></span>Som</button>
     </div>
   </header>
@@ -2118,8 +2126,8 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
 
     <div class="quiz-screen quiz-screen-center active" id="quiz-welcome">
       <div class="quiz-eyebrow">Antes de começar</div>
-      <h3>Dez perguntas. <br>Trinta e cinco situações.</h3>
-      <p class="quiz-time" id="quiz-time">10 perguntas / 8 minutos</p>
+      <h3>Três perguntas. <br>Trinta e cinco situações.</h3>
+      <p class="quiz-time" id="quiz-time">3 perguntas / 2 minutos</p>
       <p class="quiz-sub">A roleta define o percurso. Leia cada situação, escolha a interpretação mais consistente e veja o que ela revela sobre território, raça e risco.</p>
       <div class="quiz-level" role="group" aria-labelledby="quiz-level-title">
         <p class="quiz-level-title" id="quiz-level-title">Dificuldade</p>
@@ -2235,7 +2243,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     {"id":35,"topic":"Transição energética","level":"dificil","prompt":"Uma região poluente recebe um projeto de energia renovável, mas trabalhadores e moradores ficam fora do planejamento. O que torna a transição mais justa?","answers":["Combinar redução de impactos com diálogo, formação profissional, proteção de renda e participação das comunidades na definição dos benefícios.","Medir o sucesso apenas pela quantidade de energia limpa instalada, pois os efeitos sociais podem ser tratados separadamente.","Priorizar investidores e metas de produção, deixando a adaptação dos trabalhadores para quando as novas vagas estiverem disponíveis."],"correct":0,"explanation":"Uma transição energética justa considera quem ganha, quem perde e como os custos são distribuídos. Formação, proteção social, participação e benefícios locais precisam acompanhar a mudança tecnológica."}
   ];
 
-  var SESSION_SIZE = 10;
+  var SESSION_SIZE = 3;
   var HAND_SIZE = 3;
   var LEVEL_LABEL = { facil: "Fácil", medio: "Médio", dificil: "Difícil" };
   var LEVEL_NOTE = {
@@ -2375,8 +2383,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   }
 
   function motionOn() {
-    if (motionOverride !== null) return motionOverride;
-    return !(reduceQuery && reduceQuery.matches);
+    return true;
   }
 
   function spinSpeed() {
@@ -2421,26 +2428,19 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     if (el.spin) el.spin.hidden = false;
   }
 
-  function setMotion(on) {
-    motionOverride = on;
-    writePreference(MOTION_KEY, on);
+  function setMotion() {
+    motionOverride = true;
+    writePreference(MOTION_KEY, true);
+    root.classList.add(""motion-on"");
     applyMotionUI();
-    if (!on) {
-      stopFx();
-      clearHandTimer();
-      clearAnswersTimer();
-      if (el.hand) el.hand.classList.remove("is-shuffling");
-      if (el.answers) el.answers.classList.remove("is-shuffling");
-    }
-    if (state.phase === "draw" && !state.spinning && !advanceTimer) {
+    if (el.motionNote) el.motionNote.hidden = true;
+    if (el.motionHint) el.motionHint.hidden = true;
+    if (state.phase === ""draw"" && !state.spinning && !advanceTimer) {
       if (reel) reel = buildReel();
-      if (el.note) {
-        el.note.textContent = on ? "Roleta pronta · girando em instantes" : "Roleta pronta · giro econômico em instantes";
-      }
+      if (el.note) el.note.textContent = ""Roleta pronta \u2014 girando em instantes"";
       scheduleAutoSpin(400);
     }
   }
-
   function applySoundUI() {
     if (!el.sound) return;
     el.sound.setAttribute("aria-pressed", soundOverride === true ? "true" : "false");
@@ -2657,6 +2657,26 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       bumpTimer = 0;
       el.score.classList.remove("is-bump");
     }, 540);
+  }
+
+  function dopaminePop(points, bonus) {
+    if (!el.score) return;
+    var container = el.score.closest('.quiz-stat');
+    if (container) {
+      var pop = document.createElement('span');
+      pop.className = 'quiz-dopa-pop' + (bonus ? ' is-bonus' : '');
+      pop.textContent = '+' + points;
+      container.appendChild(pop);
+      window.setTimeout(function () {
+        if (pop.parentNode) pop.parentNode.removeChild(pop);
+      }, 700);
+    }
+    if (el.shell) {
+      el.shell.classList.remove('is-dopa-flash');
+      void el.shell.offsetWidth;
+      el.shell.classList.add('is-dopa-flash');
+      window.setTimeout(function () { if (el.shell) el.shell.classList.remove('is-dopa-flash'); }, 180);
+    }
   }
 
   function stopFx() {
@@ -3351,6 +3371,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     if (ok) {
       bumpScore();
       burstAtScore(26, 4.2);
+      dopaminePop(1 + bonus, bonus > 0);
       playCorrect(state.streak);
     } else {
       playWrong();
@@ -5149,7 +5170,7 @@ vivo:{dev:45,spd:50,pulse:40,bpm:60,react:50,wave:25,depth:3,sway:30,pd:50,pp:45
 pulsante:{dev:35,spd:55,pulse:85,bpm:90,react:55,wave:35,depth:3,sway:35,pd:55,pp:90,d:100,f:60},
 caos:{dev:90,spd:90,pulse:70,bpm:120,react:90,wave:60,depth:3,sway:70,pd:95,pp:70,d:140,f:100},
 estatico:{dev:0,spd:0,pulse:0,bpm:60,react:0,wave:0,depth:2,sway:0,pd:0,pp:0,d:70,f:0}};
-var S={preset:'custom',on:true,force:true,pat:true,parts:true,dev:23,spd:8,react:25,sway:22,wave:21,pulse:0,bpm:20,depth:1,pd:95,pp:70,d:140,f:100};
+var S={preset:'custom',on:true,force:true,pat:true,parts:true,dev:23,spd:8,react:25,sway:10,wave:16,pulse:0,bpm:20,depth:1,pd:95,pp:70,d:140,f:100};
 try{var j=JSON.parse(localStorage.getItem(KEY));if(j)for(var k in S)if(j[k]!=null)S[k]=j[k];}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 var rm=matchMedia('(prefers-reduced-motion: reduce)'),mob=matchMedia('(max-width:700px)').matches;
