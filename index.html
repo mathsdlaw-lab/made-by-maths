@@ -1026,6 +1026,10 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
 }
 #quiz .quiz-hand-card.is-current .quiz-hand-face::before{background:var(--quiz-hazard);opacity:1}
 #quiz .quiz-hand-card.is-complete .quiz-hand-face::before{background:var(--quiz-water);opacity:1}
+#quiz .quiz-hand-face::after{
+  content:"";position:absolute;top:9px;right:8px;width:6px;height:6px;
+  border:1px solid var(--quiz-line);border-radius:50%
+}
 #quiz .quiz-hand-num{font-family:var(--quiz-mono);font-size:7.5px;letter-spacing:.05em;color:var(--quiz-muted)}
 #quiz .quiz-hand-mark{font-family:var(--quiz-mono);font-size:20px;line-height:1;color:var(--quiz-ink-2)}
 #quiz.motion-on .quiz-hand.is-shuffling .quiz-hand-card{animation:quiz-hand-shuffle .45s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i) * 35ms)}
@@ -1081,19 +1085,31 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
 #quiz .quiz-track{display:flex;align-items:center;height:100%;gap:16px;padding:0 18px;will-change:transform;transform:translate3d(0,0,0)}
 #quiz .quiz-tile{
   position:relative;flex:0 0 110px;height:112px;display:grid;place-items:center;
-  border:1px solid var(--quiz-line);border-radius:0;background:var(--quiz-bg);
+  border:1px solid var(--quiz-line);border-radius:0;
+  background:
+    linear-gradient(var(--quiz-ink),var(--quiz-ink)) 13px 13px/9px 1px no-repeat,
+    linear-gradient(var(--quiz-ink),var(--quiz-ink)) 13px 13px/1px 9px no-repeat,
+    linear-gradient(var(--quiz-line),var(--quiz-line)) 50% calc(100% - 27px)/calc(100% - 24px) 1px no-repeat,
+    var(--quiz-panel);
   color:var(--quiz-ink);font-family:var(--quiz-mono);font-size:33px;font-weight:600;
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em;
   box-shadow:none;transform:scale(.94);
   transition:background-color .35s,color .35s,border-color .35s,transform .35s;
   user-select:none
 }
+#quiz .quiz-tile::before{
+  content:"";position:absolute;inset:5px;border:1px solid var(--quiz-line);
+  opacity:.55;pointer-events:none
+}
 #quiz .quiz-tile::after{
-  content:"QUESTÃO";position:absolute;bottom:12px;font-family:var(--quiz-mono);
-  font-size:7px;letter-spacing:.08em;color:var(--quiz-muted)
+  content:"QUESTÃO";position:absolute;bottom:11px;padding:0 4px;
+  background:var(--quiz-panel);font-family:var(--quiz-mono);
+  font-size:7px;letter-spacing:.1em;color:var(--quiz-muted)
 }
 #quiz .quiz-tile.passing{border-color:var(--quiz-hazard);box-shadow:inset 0 0 0 2px var(--quiz-hazard);transform:scale(1.04);transition:none}
 #quiz .quiz-tile.winner{border-color:var(--quiz-ink);background:var(--quiz-ink);color:var(--quiz-bg);box-shadow:none;transform:scale(1.1);animation:quiz-win .44s cubic-bezier(.2,.85,.25,1)}
-#quiz .quiz-tile.winner::after{color:var(--quiz-paper-2)}
+#quiz .quiz-tile.winner::before{border-color:var(--quiz-bg);opacity:.35}
+#quiz .quiz-tile.winner::after{background:var(--quiz-ink);color:var(--quiz-paper-2)}
 #quiz .quiz-pointer{
   position:absolute;z-index:3;left:50%;top:26px;width:2px;height:190px;margin-left:-1px;
   pointer-events:none;background:var(--quiz-hazard);box-shadow:none
@@ -1572,49 +1588,53 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     </div>
     <div class="hero-art">
       <svg viewBox="0 0 560 470" role="img" aria-labelledby="hero-map-title">
-  <title id="hero-map-title">Mapa de um território: floresta de encosta, ocupação urbana com casas de telhado, rio com margens vegetadas, indústria com galpões, tanques, tubulações e chaminés, buffer de um quilômetro, pluma de dispersão e área de risco na várzea.</title>
+  <title id="hero-map-title">Prancha cartográfica de um território: floresta de encosta ao norte, ocupação urbana em quadras regulares, rio com margens vegetadas ao sul, indústria com galpões, tanques, tubulações e chaminés a leste, raio de um quilômetro, pluma de dispersão e área de risco na várzea.</title>
   <defs>
-    <pattern id="hm-grid" width="20" height="20" patternUnits="userSpaceOnUse">
-      <path d="M20 0H0V20" fill="none" stroke="var(--ink)" stroke-opacity=".07" stroke-width="1"/>
+    <pattern id="hm-grid" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r=".7" fill="var(--ink)" fill-opacity=".14"/>
     </pattern>
-    <pattern id="hm-hatch" width="7" height="7" patternUnits="userSpaceOnUse">
-      <path d="M0 7 7 0" fill="none" stroke="var(--ink)" stroke-opacity=".28" stroke-width=".9"/>
+    <pattern id="hm-hatch" width="8" height="8" patternUnits="userSpaceOnUse">
+      <path d="M0 8 8 0" fill="none" stroke="var(--ink)" stroke-opacity=".26" stroke-width=".9"/>
     </pattern>
-    <pattern id="hm-risk" width="6" height="6" patternUnits="userSpaceOnUse">
-      <path d="M0 6 6 0" fill="none" stroke="var(--hazard)" stroke-opacity=".42" stroke-width="1"/>
+    <pattern id="hm-risk" width="7" height="7" patternUnits="userSpaceOnUse">
+      <path d="M0 7 7 0" fill="none" stroke="var(--hazard)" stroke-opacity=".4" stroke-width="1"/>
     </pattern>
-    <pattern id="hm-houses" width="24" height="20" patternUnits="userSpaceOnUse">
-      <path d="M4 10 12 3 20 10V17H4Z" fill="var(--ink)" fill-opacity=".88"/>
-      <path d="M2 10.5 12 1.5 22 10.5" fill="none" stroke="var(--paper-2)" stroke-opacity=".6" stroke-width="1.1"/>
-      <path d="M12 3V10" fill="none" stroke="var(--paper-2)" stroke-opacity=".35" stroke-width=".8"/>
-      <rect x="10" y="12" width="4" height="5" fill="var(--paper-2)" fill-opacity=".4"/>
+    <pattern id="hm-houses" width="26" height="22" patternUnits="userSpaceOnUse">
+      <path d="M5 12 13 5 21 12V19H5Z" fill="var(--ink)" fill-opacity=".9"/>
+      <path d="M3 12.4 13 3.4 23 12.4" fill="none" stroke="var(--paper-2)" stroke-opacity=".7" stroke-width="1.2"/>
+      <path d="M13 5V12" fill="none" stroke="var(--paper-2)" stroke-opacity=".34" stroke-width=".8"/>
+      <rect x="9" y="14" width="3" height="3" fill="var(--paper-2)" fill-opacity=".45"/>
+      <rect x="15" y="14" width="3" height="3" fill="var(--paper-2)" fill-opacity=".45"/>
     </pattern>
-    <pattern id="hm-forest" width="18" height="18" patternUnits="userSpaceOnUse">
-      <path d="M9 2 13 9H5Z" fill="var(--water)" fill-opacity=".2" stroke="var(--water)" stroke-opacity=".6" stroke-width=".8"/>
-      <path d="M9 8 14 15H4Z" fill="var(--water)" fill-opacity=".14" stroke="var(--water)" stroke-opacity=".55" stroke-width=".8"/>
-      <path d="M9 15v2" fill="none" stroke="var(--water)" stroke-opacity=".55" stroke-width=".9"/>
+    <pattern id="hm-forest" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M10 3 14 10H6Z" fill="var(--water)" fill-opacity=".22" stroke="var(--water)" stroke-opacity=".55" stroke-width=".8"/>
+      <path d="M10 9 15 16H5Z" fill="var(--water)" fill-opacity=".15" stroke="var(--water)" stroke-opacity=".5" stroke-width=".8"/>
     </pattern>
-    <linearGradient id="hm-river" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="var(--water)" stop-opacity=".34"/>
-      <stop offset="1" stop-color="var(--water)" stop-opacity=".1"/>
+    <linearGradient id="hm-forest-depth" x1=".2" y1="0" x2=".8" y2="1">
+      <stop offset="0" stop-color="var(--water)" stop-opacity=".2"/>
+      <stop offset="1" stop-color="var(--water)" stop-opacity=".08"/>
     </linearGradient>
-    <linearGradient id="hm-plume" x1=".85" y1=".1" x2="0" y2=".95">
-      <stop offset="0" stop-color="var(--hazard)" stop-opacity=".26"/>
-      <stop offset=".6" stop-color="var(--hazard)" stop-opacity=".12"/>
+    <linearGradient id="hm-river" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="var(--water)" stop-opacity=".38"/>
+      <stop offset="1" stop-color="var(--water)" stop-opacity=".12"/>
+    </linearGradient>
+    <linearGradient id="hm-plume" x1=".9" y1=".1" x2=".05" y2=".95">
+      <stop offset="0" stop-color="var(--hazard)" stop-opacity=".3"/>
+      <stop offset=".55" stop-color="var(--hazard)" stop-opacity=".13"/>
       <stop offset="1" stop-color="var(--hazard)" stop-opacity=".03"/>
     </linearGradient>
     <g id="hm-conifer">
-      <ellipse cx="0" cy="1" rx="11" ry="3" fill="#000" opacity=".16"/>
-      <path d="M0 1V-7" fill="none" stroke="var(--water)" stroke-opacity=".7" stroke-width="1.4"/>
-      <path d="M0-25 9-10H-9Z" fill="var(--water)" fill-opacity=".2" stroke="var(--water)" stroke-opacity=".6" stroke-width=".9"/>
-      <path d="M0-16 11-1H-11Z" fill="var(--water)" fill-opacity=".16" stroke="var(--water)" stroke-opacity=".55" stroke-width=".9"/>
+      <ellipse cx="0" cy="1" rx="10" ry="2.6" fill="#000" opacity=".14"/>
+      <path d="M0 1V-6" fill="none" stroke="var(--water)" stroke-opacity=".75" stroke-width="1.4"/>
+      <path d="M0-24 8-10H-8Z" fill="var(--water)" fill-opacity=".22" stroke="var(--water)" stroke-opacity=".6" stroke-width=".9"/>
+      <path d="M0-15 10-1H-10Z" fill="var(--water)" fill-opacity=".16" stroke="var(--water)" stroke-opacity=".55" stroke-width=".9"/>
     </g>
     <g id="hm-broadleaf">
-      <ellipse cx="0" cy="1" rx="10" ry="3" fill="#000" opacity=".16"/>
-      <path d="M0 1V-8" fill="none" stroke="var(--water)" stroke-opacity=".7" stroke-width="1.4"/>
-      <circle cx="0" cy="-13" r="8.5" fill="var(--water)" fill-opacity=".17" stroke="var(--water)" stroke-opacity=".55" stroke-width=".9"/>
-      <circle cx="-6" cy="-7" r="5.5" fill="var(--water)" fill-opacity=".14" stroke="var(--water)" stroke-opacity=".5" stroke-width=".8"/>
-      <circle cx="6" cy="-7" r="5.5" fill="var(--water)" fill-opacity=".14" stroke="var(--water)" stroke-opacity=".5" stroke-width=".8"/>
+      <ellipse cx="0" cy="1" rx="10" ry="2.6" fill="#000" opacity=".14"/>
+      <path d="M0 1V-8" fill="none" stroke="var(--water)" stroke-opacity=".75" stroke-width="1.4"/>
+      <circle cx="0" cy="-13" r="8" fill="var(--water)" fill-opacity=".19" stroke="var(--water)" stroke-opacity=".55" stroke-width=".9"/>
+      <circle cx="-6" cy="-7" r="5" fill="var(--water)" fill-opacity=".15" stroke="var(--water)" stroke-opacity=".5" stroke-width=".8"/>
+      <circle cx="6" cy="-7" r="5" fill="var(--water)" fill-opacity=".15" stroke="var(--water)" stroke-opacity=".5" stroke-width=".8"/>
     </g>
   </defs>
 
@@ -1623,47 +1643,59 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   <rect x=".5" y=".5" width="559" height="469" fill="none" stroke="var(--ink)"/>
 
   <g font-family="ui-monospace, Consolas, monospace">
-    <text x="24" y="38" font-size="14" letter-spacing="1.6" fill="var(--ink)">PRANCHA 01</text>
-    <text x="24" y="57" font-size="10" letter-spacing="1.2" fill="var(--muted)">TERRITÓRIO E RISCO</text>
+    <text x="26" y="38" font-size="14" letter-spacing="1.6" fill="var(--ink)">PRANCHA 01</text>
+    <text x="26" y="55" font-size="9.5" letter-spacing="1.3" fill="var(--muted)">TERRITÓRIO E RISCO</text>
+  </g>
+  <path d="M26 66H534" stroke="var(--ink)" stroke-opacity=".22"/>
+
+  <g transform="translate(516 26)">
+    <path d="M0 17 8 0 16 17 8 13Z" fill="var(--ink)"/>
+    <text x="8" y="30" text-anchor="middle" font-family="ui-monospace, Consolas, monospace" font-size="9" letter-spacing=".5" fill="var(--ink)">N</text>
   </g>
 
-  <g fill="none" stroke="var(--ink)" stroke-opacity=".13" stroke-width=".8">
-    <path d="M18 236C90 228 160 232 226 242M300 68C356 60 424 62 512 70M236 456C316 450 420 452 540 460"/>
-    <path d="M18 218C88 210 150 214 210 224" stroke-dasharray="3 6"/>
+  <g fill="none" stroke="var(--ink)" stroke-opacity=".11" stroke-width=".8">
+    <path d="M14 232C96 224 168 228 236 238M300 74C360 66 424 68 520 76M232 460C312 454 420 456 546 462"/>
   </g>
 
-  <path d="M24 80 188 68 236 116 198 168 54 160Z" fill="url(#hm-forest)" stroke="var(--ink)" stroke-opacity=".5" stroke-width="1.2"/>
-  <g>
-    <use href="#hm-conifer" x="58" y="102"/>
-    <use href="#hm-broadleaf" x="86" y="118"/>
-    <use href="#hm-conifer" x="112" y="96"/>
-    <use href="#hm-broadleaf" x="140" y="126"/>
-    <use href="#hm-conifer" x="166" y="104"/>
-    <use href="#hm-broadleaf" x="194" y="128"/>
-    <use href="#hm-conifer" x="214" y="112"/>
-    <use href="#hm-broadleaf" x="72" y="142"/>
-    <use href="#hm-conifer" x="102" y="150"/>
-    <use href="#hm-broadleaf" x="132" y="146"/>
-    <use href="#hm-conifer" x="162" y="152"/>
-    <use href="#hm-broadleaf" x="188" y="144"/>
+  <path d="M26 82 178 70 236 114 214 174 58 170 30 128Z" fill="url(#hm-forest-depth)" stroke="var(--ink)" stroke-opacity=".45" stroke-width="1.1"/>
+  <g fill="none" stroke="var(--water)" stroke-opacity=".22" stroke-width=".9">
+    <path d="M36 98 176 88 218 120 204 160 66 158 40 130Z"/>
+    <path d="M46 114 172 106 202 126 192 148 72 148 52 132Z"/>
   </g>
   <g>
-    <use href="#hm-conifer" transform="translate(46 124) scale(.72)"/>
-    <use href="#hm-broadleaf" transform="translate(118 104) scale(.8)"/>
-    <use href="#hm-conifer" transform="translate(202 142) scale(.75)"/>
-    <use href="#hm-broadleaf" transform="translate(152 86) scale(.7)"/>
+    <use href="#hm-conifer" x="60" y="104"/>
+    <use href="#hm-broadleaf" x="88" y="120"/>
+    <use href="#hm-conifer" x="114" y="98"/>
+    <use href="#hm-broadleaf" x="142" y="128"/>
+    <use href="#hm-conifer" x="168" y="106"/>
+    <use href="#hm-broadleaf" x="196" y="130"/>
+    <use href="#hm-conifer" x="214" y="114"/>
+    <use href="#hm-broadleaf" x="74" y="144"/>
+    <use href="#hm-conifer" x="104" y="152"/>
+    <use href="#hm-broadleaf" x="134" y="148"/>
+    <use href="#hm-conifer" x="164" y="154"/>
+    <use href="#hm-broadleaf" x="190" y="146"/>
   </g>
-  <text x="30" y="192" font-family="ui-monospace, Consolas, monospace" font-size="12" letter-spacing="1" fill="var(--ink-2)">VEGETAÇÃO</text>
+  <g>
+    <use href="#hm-conifer" transform="translate(48 126) scale(.72)"/>
+    <use href="#hm-broadleaf" transform="translate(122 106) scale(.8)"/>
+    <use href="#hm-conifer" transform="translate(204 144) scale(.75)"/>
+    <use href="#hm-broadleaf" transform="translate(154 88) scale(.7)"/>
+  </g>
+  <text x="32" y="194" font-family="ui-monospace, Consolas, monospace" font-size="10" letter-spacing="1" fill="var(--ink-2)">VEGETAÇÃO</text>
 
-  <path d="M0 400C140 394 300 392 560 388L560 438C380 436 200 442 0 450Z" fill="url(#hm-river)" stroke="var(--water)" stroke-width="1.5"/>
-  <path d="M0 424C160 416 320 412 560 412" fill="none" stroke="var(--water)" stroke-opacity=".32" stroke-width="1" stroke-dasharray="8 7"/>
-  <g fill="none" stroke="var(--water)" stroke-opacity=".45" stroke-width="1">
-    <path d="M40 408C56 406 68 407 82 410M168 414C184 412 196 413 210 416M296 408C312 406 324 407 338 410M420 404C436 402 448 403 462 406M500 420C516 418 528 419 542 422"/>
+  <path d="M0 400C130 394 292 392 560 386L560 440C380 436 180 444 0 452Z" fill="url(#hm-river)" stroke="var(--water)" stroke-width="1.4"/>
+  <g fill="none" stroke="var(--water)" stroke-opacity=".3" stroke-width="1" stroke-dasharray="9 8">
+    <path d="M0 424C150 416 310 412 560 410"/>
+    <path d="M0 436C170 430 340 426 560 426" stroke-opacity=".2"/>
   </g>
-  <g fill="none" stroke="var(--water)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M150 407 162 415 150 423"/>
-    <path d="M318 403 330 411 318 419"/>
-    <path d="M476 401 488 409 476 417"/>
+  <g fill="none" stroke="var(--water)" stroke-opacity=".45" stroke-width="1" stroke-linecap="round">
+    <path d="M40 408C56 406 68 407 82 410M168 414C184 412 196 413 210 416M296 408C312 406 324 407 338 410M420 404C436 402 448 403 462 406"/>
+  </g>
+  <g fill="none" stroke="var(--water)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M150 407 161 414 150 421"/>
+    <path d="M318 403 329 410 318 417"/>
+    <path d="M476 401 487 408 476 415"/>
   </g>
   <g>
     <use href="#hm-broadleaf" x="24" y="391"/>
@@ -1673,145 +1705,148 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     <use href="#hm-conifer" x="402" y="384"/>
     <use href="#hm-broadleaf" x="446" y="383"/>
     <use href="#hm-conifer" x="492" y="381"/>
-    <use href="#hm-broadleaf" x="532" y="380"/>
   </g>
 
   <g data-hero-layer="ocupacao">
-  <g stroke="var(--paper-2)" stroke-width="13" fill="none">
-    <path d="M104 268V352"/>
-    <path d="M174 264V348"/>
-    <path d="M240 262V346"/>
-    <path d="M32 316H270"/>
-  </g>
-  <g stroke="var(--ink)" stroke-opacity=".13" stroke-width="1" fill="none">
-    <path d="M104 268V352"/>
-    <path d="M174 264V348"/>
-    <path d="M240 262V346"/>
-    <path d="M32 316H270"/>
-  </g>
-  <path d="M32 316H270" fill="none" stroke="var(--ink)" stroke-opacity=".34" stroke-width="1" stroke-dasharray="6 6"/>
-  <g fill="none" stroke="var(--ink)" stroke-opacity=".24" stroke-width="1" stroke-dasharray="4 6">
-    <path d="M104 270V352M174 266V348M240 264V346"/>
-  </g>
+    <g stroke="var(--paper-2)" stroke-width="14" fill="none" stroke-linecap="square">
+      <path d="M104 262V356"/>
+      <path d="M176 258V352"/>
+      <path d="M244 256V350"/>
+      <path d="M30 312H272"/>
+      <path d="M30 344H272"/>
+    </g>
+    <g stroke="var(--ink)" stroke-opacity=".2" stroke-width="1" fill="none">
+      <path d="M104 262V356M176 258V352M244 256V350M30 312H272M30 344H272"/>
+    </g>
+    <path d="M30 312H272" fill="none" stroke="var(--ink)" stroke-opacity=".42" stroke-width="1.2" stroke-dasharray="7 6"/>
+    <g fill="none" stroke="var(--ink)" stroke-opacity=".22" stroke-width="1" stroke-dasharray="3 6">
+      <path d="M104 264V356M176 260V352M244 258V350"/>
+    </g>
 
-  <g transform="translate(4 4)" fill="#000" opacity=".14">
-    <path d="M36 286 100 282 108 316 42 320Z"/>
-    <path d="M116 282 176 278 184 314 122 318Z"/>
-    <path d="M192 278 252 274 260 312 198 316Z"/>
-  </g>
-  <g fill="url(#hm-houses)" stroke="var(--ink)" stroke-opacity=".55" stroke-width="1.1">
-    <path d="M36 286 100 282 108 316 42 320Z"/>
-    <path d="M116 282 176 278 184 314 122 318Z"/>
-    <path d="M192 278 252 274 260 312 198 316Z"/>
-    <path d="M42 328 108 324 114 344 46 348Z"/>
-    <path d="M122 324 184 320 190 340 126 344Z"/>
-    <path d="M198 320 260 316 266 336 202 340Z"/>
-  </g>
-  <g fill="var(--ink)" opacity=".14">
-    <path d="M42 320 108 316V324L46 328ZM122 318 184 314V320L126 324ZM198 316 260 312V316L202 320Z"/>
-  </g>
-  </g>
-
-  <g data-hero-layer="risco">
-  <path d="M48 346C104 342 172 340 266 336L272 384C198 382 118 386 56 392Z" fill="url(#hm-risk)" fill-opacity=".34" stroke="var(--hazard)" stroke-width="1.3" stroke-dasharray="6 4"/>
-  <g fill="var(--hazard)" fill-opacity=".16" stroke="var(--hazard)" stroke-width="1.2">
-    <path d="M152 350 166 349 168 362 154 363Z"/>
-    <path d="M160 349 166 343 172 349Z"/>
-    <path d="M224 346 238 345 240 358 226 359Z"/>
-    <path d="M232 345 238 339 244 345Z"/>
-  </g>
-  <g fill="none" stroke="var(--water)" stroke-opacity=".38" stroke-width=".9" stroke-dasharray="4 5">
-    <path d="M56 366C104 362 170 358 246 354"/>
-    <path d="M54 378C110 374 180 370 262 366"/>
-  </g>
+    <g transform="translate(4 5)" fill="#000" opacity=".13">
+      <path d="M36 280 100 276 108 310 42 314Z"/>
+      <path d="M116 276 176 272 184 308 122 312Z"/>
+      <path d="M192 272 252 268 260 306 198 310Z"/>
+      <path d="M42 322 108 318 114 340 46 344Z"/>
+      <path d="M122 318 184 314 190 336 126 340Z"/>
+      <path d="M198 314 260 310 266 332 202 336Z"/>
+    </g>
+    <g fill="url(#hm-houses)" stroke="var(--ink)" stroke-opacity=".55" stroke-width="1.1">
+      <path d="M36 280 100 276 108 310 42 314Z"/>
+      <path d="M116 276 176 272 184 308 122 312Z"/>
+      <path d="M192 272 252 268 260 306 198 310Z"/>
+      <path d="M42 322 108 318 114 340 46 344Z"/>
+      <path d="M122 318 184 314 190 336 126 340Z"/>
+      <path d="M198 314 260 310 266 332 202 336Z"/>
+    </g>
+    <g fill="var(--ink)" opacity=".12">
+      <path d="M42 314 108 310V318L46 322ZM122 312 184 308V314L126 318ZM198 310 260 306V310L202 314Z"/>
+    </g>
+    <g fill="none" stroke="var(--ink)" stroke-opacity=".35" stroke-width="1.4">
+      <path d="M272 300 286 300 286 356"/>
+    </g>
+    <circle cx="286" cy="300" r="2.4" fill="var(--ink)" fill-opacity=".5"/>
   </g>
 
   <g data-hero-layer="industria">
-  <g transform="translate(4 4)" fill="#000" opacity=".14">
-    <rect x="368" y="196" width="36" height="50"/>
-    <rect x="412" y="180" width="30" height="66"/>
-    <rect x="452" y="206" width="34" height="40"/>
-    <circle cx="496" cy="232" r="11"/>
-    <rect x="382" y="150" width="11" height="46"/>
-    <rect x="424" y="136" width="13" height="44"/>
-  </g>
-  <rect x="356" y="164" width="152" height="94" fill="none" stroke="var(--ink)" stroke-opacity=".45" stroke-width="1.2" stroke-dasharray="6 4"/>
-  <g fill="var(--ink)">
-    <path d="M368 196H404V246H368Z"/>
-    <path d="M365 196 386 185 407 196Z" fill="var(--ink-2)"/>
-    <path d="M412 180H442V246H412Z"/>
-    <path d="M409 180 427 167 445 180Z" fill="var(--ink-2)"/>
-    <path d="M452 206H486V246H452Z"/>
-    <path d="M449 206 469 194 489 206Z" fill="var(--ink-2)"/>
-    <rect x="382" y="150" width="11" height="46"/>
-    <rect x="424" y="136" width="13" height="44"/>
-  </g>
-  <g stroke="var(--paper-2)" stroke-opacity=".45" stroke-width=".9" fill="none">
-    <path d="M368 210H404M368 226H404M368 240H404M412 196H442M412 212H442M412 228H442M452 220H486M452 234H486"/>
-  </g>
-  <g fill="var(--paper-2)" fill-opacity=".32">
-    <rect x="382" y="226" width="9" height="20"/>
-    <rect x="424" y="216" width="10" height="30"/>
-    <rect x="464" y="226" width="12" height="20"/>
-  </g>
-  <g fill="var(--hazard)">
-    <rect x="380" y="146" width="15" height="5"/>
-    <rect x="422" y="132" width="17" height="5"/>
-  </g>
-  <g fill="var(--hazard)" fill-opacity=".12" stroke="var(--hazard)" stroke-opacity=".5" stroke-width=".8">
-    <circle cx="386" cy="132" r="5"/>
-    <circle cx="393" cy="123" r="6.5"/>
-    <circle cx="430" cy="118" r="4.5"/>
-    <circle cx="438" cy="109" r="6"/>
-  </g>
-  <g stroke="var(--ink)" stroke-opacity=".7" stroke-width="1.4" fill="none">
-    <path d="M404 224H412M442 216H452M442 234H452"/>
-    <path d="M386 246V256M427 246V256"/>
-  </g>
-  <g>
-    <circle cx="496" cy="232" r="11" fill="var(--ink)"/>
-    <ellipse cx="496" cy="228" rx="11" ry="3.6" fill="var(--ink-2)"/>
-    <path d="M485 232H507" stroke="var(--paper-2)" stroke-opacity=".45" stroke-width=".9"/>
-  </g>
+    <g transform="translate(4 5)" fill="#000" opacity=".13">
+      <rect x="368" y="192" width="36" height="54"/>
+      <rect x="412" y="176" width="30" height="70"/>
+      <rect x="452" y="202" width="34" height="44"/>
+      <circle cx="498" cy="228" r="11"/>
+      <rect x="382" y="146" width="11" height="46"/>
+      <rect x="424" y="132" width="13" height="44"/>
+    </g>
+    <rect x="352" y="158" width="160" height="100" fill="none" stroke="var(--ink)" stroke-opacity=".48" stroke-width="1.2" stroke-dasharray="7 4"/>
+    <rect x="352" y="158" width="160" height="100" fill="url(#hm-hatch)" fill-opacity=".18"/>
+
+    <g fill="var(--ink)">
+      <path d="M368 192H404V246H368Z"/>
+      <path d="M365 192 386 180 407 192Z" fill="var(--ink-2)"/>
+      <path d="M412 176H442V246H412Z"/>
+      <path d="M409 176 427 162 445 176Z" fill="var(--ink-2)"/>
+      <path d="M452 202H486V246H452Z"/>
+      <path d="M449 202 469 189 489 202Z" fill="var(--ink-2)"/>
+      <rect x="382" y="146" width="11" height="46"/>
+      <rect x="424" y="132" width="13" height="44"/>
+    </g>
+    <g stroke="var(--paper-2)" stroke-opacity=".42" stroke-width=".9" fill="none">
+      <path d="M368 206H404M368 222H404M368 236H404M412 192H442M412 208H442M412 224H442M452 216H486M452 230H486"/>
+    </g>
+    <g fill="var(--paper-2)" fill-opacity=".3">
+      <rect x="382" y="222" width="9" height="24"/>
+      <rect x="424" y="212" width="10" height="34"/>
+      <rect x="464" y="222" width="12" height="24"/>
+    </g>
+    <g fill="var(--hazard)">
+      <rect x="380" y="142" width="15" height="5"/>
+      <rect x="422" y="128" width="17" height="5"/>
+    </g>
+    <g fill="var(--hazard)" fill-opacity=".12" stroke="var(--hazard)" stroke-opacity=".5" stroke-width=".8">
+      <circle cx="386" cy="128" r="5"/>
+      <circle cx="393" cy="119" r="6.6"/>
+      <circle cx="430" cy="114" r="4.5"/>
+      <circle cx="438" cy="105" r="6"/>
+    </g>
+    <g stroke="var(--ink)" stroke-opacity=".68" stroke-width="1.4" fill="none">
+      <path d="M404 220H412M442 212H452M442 230H452"/>
+      <path d="M386 246V258M428 246V258"/>
+    </g>
+    <g>
+      <circle cx="498" cy="228" r="11" fill="var(--ink)"/>
+      <ellipse cx="498" cy="224" rx="11" ry="3.6" fill="var(--ink-2)"/>
+      <path d="M487 228H509" stroke="var(--paper-2)" stroke-opacity=".45" stroke-width=".9"/>
+    </g>
+    <circle cx="462" cy="176" r="7" fill="none" stroke="var(--ink)" stroke-opacity=".55" stroke-width="1.2"/>
+    <path d="M458 176H466M462 172V180" stroke="var(--ink)" stroke-opacity=".55" stroke-width="1.1"/>
   </g>
 
   <g data-hero-layer="risco">
-  <circle cx="436" cy="208" r="98" fill="none" stroke="var(--hazard)" stroke-opacity=".5" stroke-width="1.2" stroke-dasharray="3 5"/>
-  <circle cx="436" cy="208" r="98" fill="none" stroke="var(--hazard)" stroke-opacity=".14" stroke-width="9"/>
+    <circle cx="436" cy="206" r="98" fill="none" stroke="var(--hazard)" stroke-opacity=".5" stroke-width="1.2" stroke-dasharray="3 5"/>
+    <circle cx="436" cy="206" r="98" fill="none" stroke="var(--hazard)" stroke-opacity=".12" stroke-width="9"/>
 
-  <path d="M388 146 435 132 300 300 216 322Z" fill="url(#hm-plume)" stroke="var(--hazard)" stroke-opacity=".55" stroke-width="1.2" stroke-dasharray="5 4"/>
-  <path d="M388 146 435 132 300 300 216 322Z" fill="url(#hm-risk)" fill-opacity=".2"/>
-  <g fill="var(--hazard)" fill-opacity=".26">
-    <circle cx="392" cy="162" r="3.2"/>
-    <circle cx="378" cy="180" r="4.2"/>
-    <circle cx="356" cy="204" r="4.8"/>
-    <circle cx="328" cy="232" r="5.4"/>
-    <circle cx="298" cy="262" r="5.8"/>
-    <circle cx="266" cy="292" r="6"/>
+    <path d="M388 142 435 128 300 300 216 322Z" fill="url(#hm-plume)" stroke="var(--hazard)" stroke-opacity=".55" stroke-width="1.2" stroke-dasharray="5 4"/>
+    <path d="M388 142 435 128 300 300 216 322Z" fill="url(#hm-risk)" fill-opacity=".18"/>
+    <g fill="var(--hazard)" fill-opacity=".24">
+      <circle cx="392" cy="158" r="3.2"/>
+      <circle cx="378" cy="176" r="4.2"/>
+      <circle cx="356" cy="200" r="4.8"/>
+      <circle cx="328" cy="228" r="5.4"/>
+      <circle cx="298" cy="258" r="5.8"/>
+      <circle cx="266" cy="288" r="6"/>
+    </g>
+
+    <path d="M44 348C104 344 174 340 268 334L274 386C198 384 116 388 56 394Z" fill="url(#hm-risk)" fill-opacity=".32" stroke="var(--hazard)" stroke-width="1.3" stroke-dasharray="6 4"/>
+    <g fill="var(--hazard)" fill-opacity=".18" stroke="var(--hazard)" stroke-width="1.3">
+      <path d="M152 350 167 349 169 364 154 365Z"/>
+      <path d="M159 349 168 341 176 349Z"/>
+      <rect x="158" y="356" width="4" height="4" fill="var(--paper-2)" fill-opacity=".55"/>
+      <path d="M224 346 239 345 241 360 226 361Z"/>
+      <path d="M231 345 240 337 248 345Z"/>
+      <rect x="230" y="352" width="4" height="4" fill="var(--paper-2)" fill-opacity=".55"/>
+    </g>
+    <g fill="none" stroke="var(--water)" stroke-opacity=".35" stroke-width=".9" stroke-dasharray="4 5">
+      <path d="M56 370C104 366 170 362 246 358"/>
+      <path d="M54 382C110 378 180 374 262 370"/>
+    </g>
+
+    <g stroke="var(--ink)" stroke-width="1.6" fill="none" stroke-linecap="round">
+      <path d="M506 84 404 106"/>
+      <path d="M404 106 418 98M404 106 417 115"/>
+    </g>
   </g>
 
-  <g stroke="var(--ink)" stroke-width="1.6" fill="none" stroke-linecap="round">
-    <path d="M500 92 408 108"/>
-    <path d="M408 108 422 101M408 108 420 116"/>
-  </g>
-  </g>
-
-  <g font-family="ui-monospace, Consolas, monospace" font-size="12" letter-spacing=".8" paint-order="stroke" stroke="var(--paper-2)" stroke-width="4" stroke-linejoin="round">
+  <g font-family="ui-monospace, Consolas, monospace" font-size="11" letter-spacing=".8" paint-order="stroke" stroke="var(--paper-2)" stroke-width="4" stroke-linejoin="round">
     <text x="40" y="272" fill="var(--ink)" data-hero-layer="ocupacao">OCUPAÇÃO</text>
-    <text x="176" y="380" font-size="11" fill="var(--hazard-ink)" data-hero-layer="risco">ÁREA DE RISCO</text>
-    <text x="356" y="284" fill="var(--ink)" data-hero-layer="industria">INDÚSTRIA</text>
-    <text x="452" y="118" font-size="10" fill="var(--hazard-ink)" data-hero-layer="risco">BUFFER 1 KM</text>
-    <text x="300" y="262" fill="var(--ink-2)" data-hero-layer="risco">PLUMA</text>
-    <text x="440" y="82" font-size="10" fill="var(--ink-2)" data-hero-layer="risco">VENTO</text>
-    <text x="494" y="430" fill="var(--water)">RIO</text>
+    <text x="154" y="380" font-size="10" fill="var(--hazard-ink)" data-hero-layer="risco">ÁREA DE RISCO</text>
+    <text x="360" y="286" fill="var(--ink)" data-hero-layer="industria">INDÚSTRIA</text>
+    <text x="448" y="114" font-size="9.5" fill="var(--hazard-ink)" data-hero-layer="risco">BUFFER 1 KM</text>
+    <text x="298" y="258" fill="var(--ink-2)" data-hero-layer="risco">PLUMA</text>
+    <text x="438" y="74" font-size="9.5" fill="var(--ink-2)" data-hero-layer="risco">VENTO</text>
+    <text x="488" y="430" fill="var(--water)">RIO</text>
   </g>
 
-  <g transform="translate(506 22)">
-    <path d="M0 20 9 0 18 20 9 15Z" fill="var(--ink)"/>
-    <text x="9" y="33" text-anchor="middle" font-family="ui-monospace, Consolas, monospace" font-size="9" fill="var(--ink)">N</text>
-  </g>
-
-  <g transform="translate(440 452)" font-family="ui-monospace, Consolas, monospace" font-size="8" fill="var(--muted)">
+  <g transform="translate(440 448)" font-family="ui-monospace, Consolas, monospace" font-size="8" fill="var(--muted)">
     <path d="M0 0H84M0 -4V4M42 -3V3M84 -4V4" stroke="var(--ink)" stroke-width="1" fill="none"/>
     <text x="0" y="12">0</text>
     <text x="35" y="12">0,5</text>
@@ -2228,6 +2263,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
   var reel = null;
   var motionOverride = readPreference(MOTION_KEY);
   var soundOverride = readPreference(SOUND_KEY);
+  if (soundOverride === null) soundOverride = true;
   var reduceQuery = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
   var audioCtx = null;
   var fx = { ctx: null, dpr: 1, w: 0, h: 0, parts: [], raf: 0, last: 0 };
@@ -2334,6 +2370,59 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     }
   }
 
+  /* Vozes de UI: ruído filtrado para percussão, oscilador para corpo tonal. */
+  function noiseBurst(ctx, seconds) {
+    var length = Math.max(1, Math.round(ctx.sampleRate * seconds));
+    var buffer = ctx.createBuffer(1, length, ctx.sampleRate);
+    var data = buffer.getChannelData(0);
+    for (var i = 0; i < length; i++) data[i] = Math.random() * 2 - 1;
+    var source = ctx.createBufferSource();
+    source.buffer = buffer;
+    return source;
+  }
+
+  function clickSound(freq, q, seconds, volume, delay) {
+    var ctx = ensureAudio();
+    if (!ctx) return;
+    try {
+      var start = ctx.currentTime + (delay || 0);
+      var source = noiseBurst(ctx, seconds);
+      var filter = ctx.createBiquadFilter();
+      var gain = ctx.createGain();
+      filter.type = "bandpass";
+      filter.frequency.value = freq;
+      filter.Q.value = q;
+      gain.gain.setValueAtTime(Math.max(0.001, volume), start);
+      gain.gain.exponentialRampToValueAtTime(0.001, start + seconds);
+      source.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      source.start(start, 0, seconds);
+    } catch (error) {}
+  }
+
+  function whooshSound(from, to, seconds, volume) {
+    var ctx = ensureAudio();
+    if (!ctx) return;
+    try {
+      var start = ctx.currentTime;
+      var source = noiseBurst(ctx, seconds);
+      var filter = ctx.createBiquadFilter();
+      var gain = ctx.createGain();
+      filter.type = "bandpass";
+      filter.Q.value = 1.1;
+      filter.frequency.setValueAtTime(from, start);
+      filter.frequency.exponentialRampToValueAtTime(to, start + seconds);
+      gain.gain.setValueAtTime(0.001, start);
+      gain.gain.exponentialRampToValueAtTime(volume, start + seconds * 0.32);
+      gain.gain.exponentialRampToValueAtTime(0.001, start + seconds);
+      source.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      source.start(start, 0, seconds);
+    } catch (error) {}
+  }
+
   function tone(freq, delay, duration, volume, type) {
     var ctx = ensureAudio();
     if (!ctx) return;
@@ -2350,6 +2439,35 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       osc.start(start);
       osc.stop(start + duration + 0.03);
     } catch (error) {}
+  }
+
+  function playClick() {
+    if (!soundOverride) return;
+    clickSound(2400, 3.2, 0.045, 0.05);
+    tone(1180, 0, 0.032, 0.016, "sine");
+  }
+
+  var lastTick = 0;
+
+  function playTick() {
+    if (!soundOverride) return;
+    var ctx = ensureAudio();
+    if (!ctx || ctx.currentTime - lastTick < 0.05) return;
+    lastTick = ctx.currentTime;
+    clickSound(1600, 7, 0.028, 0.03);
+  }
+
+  function playSpin() {
+    if (!soundOverride) return;
+    whooshSound(300, 2400, 0.4, 0.09);
+    tone(146.83, 0.02, 0.38, 0.025, "triangle");
+  }
+
+  function playLand() {
+    if (!soundOverride) return;
+    tone(392, 0, 0.12, 0.045, "triangle");
+    tone(587.33, 0.06, 0.22, 0.038, "triangle");
+    clickSound(900, 2, 0.05, 0.05);
   }
 
   function playCorrect(streak) {
@@ -2380,8 +2498,9 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     writePreference(SOUND_KEY, on);
     applySoundUI();
     if (on) {
-      tone(660, 0, 0.09, 0.03, "sine");
-      tone(880, 0.09, 0.12, 0.028, "sine");
+      clickSound(2400, 3, 0.04, 0.05);
+      tone(660, 0.05, 0.09, 0.028, "sine");
+      tone(880, 0.13, 0.12, 0.026, "sine");
     }
   }
 
@@ -2895,6 +3014,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     void reel.pointer.offsetWidth;
     reel.pointer.classList.add("tick");
     reel.lastIndex = index;
+    playTick();
   }
 
   function markPassingAt(x, pitch) {
@@ -2914,6 +3034,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     active.pointer.classList.remove("tick");
     active.place(active.centerX());
     active.targetCard.classList.add("winner");
+    playLand();
     shuffleHand();
     revealHand(handPos());
     recenter = function () {
@@ -2946,6 +3067,7 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
     var start = end + runway * step;
 
     state.spinning = true;
+    playSpin();
     el.spin.disabled = true;
     el.spin.textContent = "Girando…";
     el.note.textContent = "Sorteando questão…";
@@ -3355,6 +3477,13 @@ body.is-quiz-focus #quiz .quiz-exit:focus-visible{outline:3px solid var(--quiz-h
       prepareDraw();
     }
   });
+
+  root.addEventListener("click", function (event) {
+    var target = event.target && event.target.closest ? event.target.closest("button") : null;
+    if (!target || !root.contains(target)) return;
+    if (target.classList.contains("quiz-answer") || target.id === "quiz-sound") return;
+    playClick();
+  }, true);
 
   root.addEventListener("quiz:start", function () {
     if (state.phase === "idle") showWelcome();
